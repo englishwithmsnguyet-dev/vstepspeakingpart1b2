@@ -620,11 +620,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (target === 'flower-garden' && window.FlowerGarden) {
             window.FlowerGarden.render();
         }
+        if (target === 'benefits' && typeof window.initBenefitsFavoriteCards === 'function') {
+            window.initBenefitsFavoriteCards();
+        }
+        if (target === 'activities' && typeof window.initActivitiesFavoriteCards === 'function') {
+            window.initActivitiesFavoriteCards();
+        }
         if (target === 'topics') {
             const activeBtn = document.querySelector('.sub-tab-btn.active') || document.querySelector('.sub-tab-btn');
             if (activeBtn) {
                 const match = activeBtn.getAttribute('onclick')?.match(/switchSubTab\('([^']+)'/);
-                const subId = match ? match[1] : 'books';
+                const subId = match ? match[1] : 'hobbies';
                 window.switchSubTab(subId, activeBtn);
             }
         }
@@ -1960,6 +1966,8 @@ document.addEventListener('DOMContentLoaded', () => {
         lastUpdated: new Date().toISOString(),
         completedTopics: [],
         favoriteBenefits: [],
+        favoriteActivities: [],
+        favoriteTopicWords: [],
         topicDetails: {},
         theoryDetails: {
             yesNo: {},
@@ -2030,6 +2038,8 @@ document.addEventListener('DOMContentLoaded', () => {
                         studentClass: studentClass || parsed.studentClass,
                         completedTopics: Array.isArray(parsed.completedTopics) ? parsed.completedTopics : [],
                         favoriteBenefits: Array.isArray(parsed.favoriteBenefits) ? parsed.favoriteBenefits : (window._studentProgress.favoriteBenefits || []),
+                        favoriteActivities: Array.isArray(parsed.favoriteActivities) ? parsed.favoriteActivities : (window._studentProgress.favoriteActivities || []),
+                        favoriteTopicWords: Array.isArray(parsed.favoriteTopicWords) ? parsed.favoriteTopicWords : (window._studentProgress.favoriteTopicWords || []),
                         topicDetails: parsed.topicDetails || {},
                         theoryDetails: parsed.theoryDetails || { yesNo: {}, choice: {}, wh: {}, wheels: { yn: 0, choice: 0, wh: 0 } },
                         stats: parsed.stats || { totalRecordings: 0, totalExams: 0 }
@@ -2815,6 +2825,360 @@ document.addEventListener('DOMContentLoaded', () => {
             </div>
         `;
     };
+
+    
+    // =========================================================
+    // ACTIVITIES FAVORITES & REVIEW SYSTEM (BẢNG HOẠT ĐỘNG)
+    // =========================================================
+    window._activitiesFilter = 'all';
+
+    window.getFavoriteActivities = () => {
+        if (!window._studentProgress || !Array.isArray(window._studentProgress.favoriteActivities)) {
+            if (window._studentProgress) window._studentProgress.favoriteActivities = [];
+            return [];
+        }
+        return window._studentProgress.favoriteActivities.map(item => {
+            const en = (typeof item === 'string' ? item : (item?.en || '')).replace(/\s+/g, ' ').trim();
+            const vn = (typeof item === 'string' ? '' : (item?.vn || '')).replace(/\s+/g, ' ').trim();
+            return { en, vn };
+        }).filter(item => item.en);
+    };
+
+    window.isActivityFavorite = (en) => {
+        if (!en) return false;
+        const clean = en.trim().toLowerCase();
+        const favs = window.getFavoriteActivities();
+        return favs.some(item => (typeof item === 'string' ? item : item.en).trim().toLowerCase() === clean);
+    };
+
+    window.toggleActivityFavorite = (en, vn) => {
+        if (!en) return;
+        const cleanEn = en.trim();
+        const cleanVn = (vn || '').trim();
+        if (!Array.isArray(window._studentProgress.favoriteActivities)) {
+            window._studentProgress.favoriteActivities = [];
+        }
+
+        const favs = window._studentProgress.favoriteActivities;
+        const idx = favs.findIndex(item => (typeof item === 'string' ? item : item.en).trim().toLowerCase() === cleanEn.toLowerCase());
+
+        let isNowFav = false;
+        if (idx === -1) {
+            favs.push({ en: cleanEn, vn: cleanVn });
+            isNowFav = true;
+            window.showProgressToast(`⭐ Đã thêm cụm hoạt động vào danh sách trả bài: "${cleanEn}"`);
+        } else {
+            favs.splice(idx, 1);
+            isNowFav = false;
+            window.showProgressToast(`Đã bỏ chọn cụm hoạt động: "${cleanEn}"`);
+        }
+
+        window.saveStudentProgress(true);
+        window.updateActivitiesFavoriteUI();
+    };
+
+    window.updateActivitiesFavoriteUI = () => {
+        const favs = window.getFavoriteActivities();
+        const count = favs.length;
+
+        const countNum = document.getElementById('fav-activities-count');
+        const btnCountFav = document.getElementById('btn-act-count-fav');
+        if (countNum) countNum.textContent = String(count);
+        if (btnCountFav) btnCountFav.textContent = String(count);
+
+        const activitiesTab = document.getElementById('activities');
+        if (!activitiesTab) return;
+
+        const cards = activitiesTab.querySelectorAll('.benefit-card');
+        cards.forEach(card => {
+            const en = card.dataset.en || '';
+            const isFav = window.isActivityFavorite(en);
+            card.classList.toggle('is-favorite', isFav);
+
+            const starBtn = card.querySelector('.benefit-star-btn');
+            if (starBtn) {
+                starBtn.classList.toggle('active', isFav);
+                starBtn.innerHTML = isFav ? '<i class="fa-solid fa-star" style="color: #f59e0b;"></i>' : '<i class="fa-regular fa-star"></i>';
+            }
+
+            if (window._activitiesFilter === 'favorites') {
+                card.style.display = isFav ? 'flex' : 'none';
+            } else {
+                card.style.display = 'flex';
+            }
+        });
+    };
+
+    window.setActivitiesFilter = (filter) => {
+        window._activitiesFilter = filter;
+        const btnAll = document.getElementById('btn-act-filter-all');
+        const btnFav = document.getElementById('btn-act-filter-fav');
+        if (btnAll) btnAll.classList.toggle('active', filter === 'all');
+        if (btnFav) btnFav.classList.toggle('active', filter === 'favorites');
+        window.updateActivitiesFavoriteUI();
+    };
+
+    window.scrollToActivitiesReview = () => {
+        const actTab = document.getElementById('activities');
+        const rev = actTab ? actTab.querySelector('.review-section') : null;
+        if (rev) rev.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    window.initActivitiesFavoriteCards = () => {
+        const activitiesTab = document.getElementById('activities');
+        if (!activitiesTab) return;
+
+        const grids = activitiesTab.querySelectorAll('div[style*="display:grid"], div[style*="display: grid"]');
+        grids.forEach(grid => {
+            Array.from(grid.children).forEach(card => {
+                const strong = card.querySelector('.vocab-en') || card.querySelector('strong');
+                const speakerBtn = card.querySelector('.icon-btn');
+                if (!strong || !speakerBtn) return;
+
+                const en = strong.textContent.replace(/\s+/g, ' ').trim();
+                const vnEl = card.querySelector('.vocab-vn') || (strong.nextElementSibling && !strong.nextElementSibling.classList.contains('benefit-fav-tag') ? strong.nextElementSibling : null);
+                const vn = vnEl ? vnEl.textContent.replace(/Đã chọn để trả bài/gi, '').replace(/\s+/g, ' ').trim() : '';
+
+                card.classList.add('benefit-card');
+                card.dataset.en = en;
+                card.dataset.vn = vn;
+
+                speakerBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    window.speakText(en);
+                };
+
+                if (!card.querySelector('.benefit-star-btn')) {
+                    const actionsDiv = document.createElement('div');
+                    actionsDiv.className = 'benefit-card-actions';
+
+                    const starBtn = document.createElement('button');
+                    starBtn.type = 'button';
+                    starBtn.className = 'benefit-star-btn';
+                    starBtn.title = 'Chọn cụm hoạt động để trả bài';
+                    starBtn.innerHTML = '<i class="fa-regular fa-star"></i>';
+                    starBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        window.toggleActivityFavorite(en, vn);
+                    };
+
+                    speakerBtn.parentNode.insertBefore(actionsDiv, speakerBtn);
+                    actionsDiv.appendChild(starBtn);
+                    actionsDiv.appendChild(speakerBtn);
+
+                    const contentDiv = card.firstElementChild;
+                    if (contentDiv && contentDiv !== actionsDiv) {
+                        contentDiv.classList.add('benefit-card-content');
+                        const tag = document.createElement('span');
+                        tag.className = 'benefit-fav-tag';
+                        tag.innerHTML = '<i class="fa-solid fa-circle-check"></i> Đã chọn để trả bài';
+                        contentDiv.appendChild(tag);
+                    }
+
+                    card.onclick = (e) => {
+                        window.toggleActivityFavorite(en, vn);
+                    };
+                }
+            });
+        });
+
+        window.updateActivitiesFavoriteUI();
+    };
+
+    // =========================================================
+    // TOPICS VOCABULARY FAVORITES & REVIEW SYSTEM (TỪ VỰNG THEO CHỦ ĐỀ)
+    // =========================================================
+    window._topicsFilter = 'all';
+
+    window.getFavoriteTopicWords = (subtabId) => {
+        if (!window._studentProgress || !Array.isArray(window._studentProgress.favoriteTopicWords)) {
+            if (window._studentProgress) window._studentProgress.favoriteTopicWords = [];
+            return [];
+        }
+        const sid = (subtabId || '').startsWith('subtab-') ? subtabId : ('subtab-' + (subtabId || ''));
+        return window._studentProgress.favoriteTopicWords
+            .filter(item => !subtabId || subtabId === 'topics' || !item.subtab || item.subtab === sid || item.subtab === subtabId)
+            .map(item => {
+                const en = (typeof item === 'string' ? item : (item?.en || '')).replace(/\s+/g, ' ').trim();
+                const vn = (typeof item === 'string' ? '' : (item?.vn || '')).replace(/\s+/g, ' ').trim();
+                return { en, vn };
+            }).filter(item => item.en);
+    };
+
+    window.isTopicFavorite = (en, subtabId) => {
+        if (!en) return false;
+        const clean = en.trim().toLowerCase();
+        const favs = window.getFavoriteTopicWords(subtabId);
+        return favs.some(item => (typeof item === 'string' ? item : item.en).trim().toLowerCase() === clean);
+    };
+
+    window.toggleTopicFavorite = (en, vn, subtabId) => {
+        if (!en) return;
+        const cleanEn = en.trim();
+        const cleanVn = (vn || '').trim();
+        const sid = (subtabId || '').startsWith('subtab-') ? subtabId : ('subtab-' + (subtabId || ''));
+
+        if (!Array.isArray(window._studentProgress.favoriteTopicWords)) {
+            window._studentProgress.favoriteTopicWords = [];
+        }
+
+        const favs = window._studentProgress.favoriteTopicWords;
+        const idx = favs.findIndex(item => 
+            (typeof item === 'string' ? item : item.en).trim().toLowerCase() === cleanEn.toLowerCase() &&
+            (!item.subtab || item.subtab === sid)
+        );
+
+        let isNowFav = false;
+        if (idx === -1) {
+            favs.push({ en: cleanEn, vn: cleanVn, subtab: sid });
+            isNowFav = true;
+            window.showProgressToast(`⭐ Đã thêm từ vựng vào danh sách trả bài: "${cleanEn}"`);
+        } else {
+            favs.splice(idx, 1);
+            isNowFav = false;
+            window.showProgressToast(`Đã bỏ chọn từ vựng: "${cleanEn}"`);
+        }
+
+        window.saveStudentProgress(true);
+        window.updateTopicsFavoriteUI(sid);
+    };
+
+    window.updateTopicsFavoriteUI = (subtabId) => {
+        const topicsTab = document.getElementById('topics');
+        if (!topicsTab) return;
+
+        const activeSubtab = subtabId 
+            ? document.getElementById(subtabId.startsWith('subtab-') ? subtabId : ('subtab-' + subtabId))
+            : (topicsTab.querySelector('.subtab-pane.active') || topicsTab.querySelector('.subtab-pane:not(.hidden)'));
+        
+        const curSid = activeSubtab ? activeSubtab.id : 'subtab-hobbies';
+        const favs = window.getFavoriteTopicWords(curSid);
+        const count = favs.length;
+
+        const countNum = document.getElementById('fav-topics-count');
+        const btnCountFav = document.getElementById('btn-topic-count-fav');
+        const btnCountAll = document.getElementById('btn-topic-count-all');
+        const totalTopicsCount = document.getElementById('total-topics-count');
+
+        if (countNum) countNum.textContent = String(count);
+        if (btnCountFav) btnCountFav.textContent = String(count);
+
+        if (activeSubtab) {
+            const cards = activeSubtab.querySelectorAll('.benefit-card');
+            if (btnCountAll) btnCountAll.textContent = String(cards.length);
+            if (totalTopicsCount) totalTopicsCount.textContent = String(cards.length);
+
+            cards.forEach(card => {
+                const en = card.dataset.en || '';
+                const isFav = window.isTopicFavorite(en, curSid);
+                card.classList.toggle('is-favorite', isFav);
+
+                const starBtn = card.querySelector('.benefit-star-btn');
+                if (starBtn) {
+                    starBtn.classList.toggle('active', isFav);
+                    starBtn.innerHTML = isFav ? '<i class="fa-solid fa-star" style="color: #f59e0b;"></i>' : '<i class="fa-regular fa-star"></i>';
+                }
+
+                if (window._topicsFilter === 'favorites') {
+                    card.style.display = isFav ? 'flex' : 'none';
+                } else {
+                    card.style.display = 'flex';
+                }
+            });
+        }
+    };
+
+    window.setTopicsFilter = (filter) => {
+        window._topicsFilter = filter;
+        const btnAll = document.getElementById('btn-topic-filter-all');
+        const btnFav = document.getElementById('btn-topic-filter-fav');
+        if (btnAll) btnAll.classList.toggle('active', filter === 'all');
+        if (btnFav) btnFav.classList.toggle('active', filter === 'favorites');
+        window.updateTopicsFavoriteUI();
+    };
+
+    window.scrollToTopicsReview = () => {
+        const topicsTab = document.getElementById('topics');
+        const activeSubtab = topicsTab ? topicsTab.querySelector('.subtab-pane.active') : null;
+        const rev = activeSubtab ? activeSubtab.querySelector('.review-section') : null;
+        if (rev) rev.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    };
+
+    window.initTopicsFavoriteCards = (specificSubtab) => {
+        const topicsTab = document.getElementById('topics');
+        if (!topicsTab) return;
+
+        let subtabs = [];
+        if (specificSubtab) {
+            const sid = specificSubtab.startsWith('subtab-') ? specificSubtab : ('subtab-' + specificSubtab);
+            const targetEl = document.getElementById(sid);
+            if (targetEl) subtabs.push(targetEl);
+        } else {
+            subtabs = Array.from(topicsTab.querySelectorAll('.subtab-pane'));
+        }
+
+        subtabs.forEach(subtabEl => {
+            if (!subtabEl) return;
+            const subtabId = subtabEl.id;
+            const grids = subtabEl.querySelectorAll('div[style*="display:grid"], div[style*="display: grid"]');
+            grids.forEach(grid => {
+                Array.from(grid.children).forEach(card => {
+                    const strong = card.querySelector('.vocab-en') || card.querySelector('strong');
+                    const speakerBtn = card.querySelector('.icon-btn');
+                    if (!strong || !speakerBtn) return;
+
+                    const en = strong.textContent.replace(/\s+/g, ' ').trim();
+                    const vnEl = card.querySelector('.vocab-vn') || (strong.nextElementSibling && !strong.nextElementSibling.classList.contains('benefit-fav-tag') ? strong.nextElementSibling : null);
+                    const vn = vnEl ? vnEl.textContent.replace(/Đã chọn để trả bài/gi, '').replace(/\s+/g, ' ').trim() : '';
+
+                    card.classList.add('benefit-card');
+                    card.dataset.en = en;
+                    card.dataset.vn = vn;
+                    card.dataset.subtab = subtabId;
+
+                    speakerBtn.onclick = (e) => {
+                        e.stopPropagation();
+                        window.speakText(en);
+                    };
+
+                    if (!card.querySelector('.benefit-star-btn')) {
+                        const actionsDiv = document.createElement('div');
+                        actionsDiv.className = 'benefit-card-actions';
+
+                        const starBtn = document.createElement('button');
+                        starBtn.type = 'button';
+                        starBtn.className = 'benefit-star-btn';
+                        starBtn.title = 'Chọn từ vựng để trả bài';
+                        starBtn.innerHTML = '<i class="fa-regular fa-star"></i>';
+                        starBtn.onclick = (e) => {
+                            e.stopPropagation();
+                            window.toggleTopicFavorite(en, vn, subtabId);
+                        };
+
+                        speakerBtn.parentNode.insertBefore(actionsDiv, speakerBtn);
+                        actionsDiv.appendChild(starBtn);
+                        actionsDiv.appendChild(speakerBtn);
+
+                        const contentDiv = card.firstElementChild;
+                        if (contentDiv && contentDiv !== actionsDiv) {
+                            contentDiv.classList.add('benefit-card-content');
+                            const tag = document.createElement('span');
+                            tag.className = 'benefit-fav-tag';
+                            tag.innerHTML = '<i class="fa-solid fa-circle-check"></i> Đã chọn để trả bài';
+                            contentDiv.appendChild(tag);
+                        }
+
+                        card.onclick = (e) => {
+                            window.toggleTopicFavorite(en, vn, subtabId);
+                        };
+                    }
+                });
+            });
+        });
+
+        window.updateTopicsFavoriteUI(specificSubtab);
+    };
+
 
     window._timedPracticeState = {};
     window._timedPracticeActiveId = null;
@@ -6509,6 +6873,24 @@ const whShowcase = document.getElementById('wh-showcase');
                 window.setReviewDatasetMode('all');
             }
         }
+        if (tabId === 'activities') {
+            const favs = (window.getFavoriteActivities ? window.getFavoriteActivities() : []).filter(b => b.en && b.vn);
+            if (favs && favs.length > 0) {
+                window.showProgressToast(`🎯 Trả bài ${favs.length} cụm hoạt động bạn đã chọn!`);
+                return [...favs];
+            } else {
+                window.showProgressToast('💡 Bạn chưa chọn cụm hoạt động nào, hệ thống tạm ôn tập toàn bộ.');
+            }
+        }
+        if (tabId && (tabId.startsWith('subtab-') || tabId === 'topics')) {
+            const favs = (window.getFavoriteTopicWords ? window.getFavoriteTopicWords(tabId) : []).filter(b => b.en && b.vn);
+            if (favs && favs.length > 0) {
+                window.showProgressToast(`🎯 Trả bài ${favs.length} từ vựng bạn đã chọn trong chủ đề này!`);
+                return [...favs];
+            } else {
+                window.showProgressToast('💡 Bạn chưa chọn từ vựng nào trong chủ đề này, hệ thống tạm ôn tập toàn bộ.');
+            }
+        }
         let currentWords = [];
         const seen = new Set();
         const cards = document.querySelectorAll('#' + tabId + ' .icon-btn');
@@ -6568,7 +6950,7 @@ const whShowcase = document.getElementById('wh-showcase');
             if (currentIndex >= words.length) {
                 sfx.win();
                 shootConfetti();
-                const isFavMode = tabId === 'benefits' && window._reviewDatasetMode === 'favorites';
+                const isFavMode = (tabId === 'benefits' && window._reviewDatasetMode === 'favorites') || (tabId === 'activities' && (window.getFavoriteActivities ? window.getFavoriteActivities().length > 0 : false)) || ((tabId && (tabId.startsWith('subtab-') || tabId === 'topics')) && (window.getFavoriteTopicWords ? window.getFavoriteTopicWords(tabId).length > 0 : false));
                 const successTitle = isFavMode ? `🎉 Xuất sắc! Bạn đã trả bài xong ${words.length} cụm từ yêu thích của mình!` : `Tuyệt vời! Bạn đã ôn xong tất cả các từ.`;
                 container.innerHTML = `
                     <div class="fade-in" style="text-align:center; padding: 2rem;">
@@ -6667,7 +7049,7 @@ const whShowcase = document.getElementById('wh-showcase');
                             if (matchedCount === pool.length) {
                                 sfx.win();
                                 shootConfetti();
-                                const isFavMode = tabId === 'benefits' && window._reviewDatasetMode === 'favorites';
+                                const isFavMode = (tabId === 'benefits' && window._reviewDatasetMode === 'favorites') || (tabId === 'activities' && (window.getFavoriteActivities ? window.getFavoriteActivities().length > 0 : false)) || ((tabId && (tabId.startsWith('subtab-') || tabId === 'topics')) && (window.getFavoriteTopicWords ? window.getFavoriteTopicWords(tabId).length > 0 : false));
                                 const successTitle = isFavMode ? `🎉 Xuất sắc! Bạn đã trả bài xong ${pool.length} cặp từ yêu thích của mình!` : `Hoàn thành xuất sắc!`;
                                 setTimeout(() => {
                                     container.innerHTML = `
@@ -6708,7 +7090,7 @@ const whShowcase = document.getElementById('wh-showcase');
             if (currentIndex >= words.length) {
                 sfx.win();
                 shootConfetti();
-                const isFavMode = tabId === 'benefits' && window._reviewDatasetMode === 'favorites';
+                const isFavMode = (tabId === 'benefits' && window._reviewDatasetMode === 'favorites') || (tabId === 'activities' && (window.getFavoriteActivities ? window.getFavoriteActivities().length > 0 : false)) || ((tabId && (tabId.startsWith('subtab-') || tabId === 'topics')) && (window.getFavoriteTopicWords ? window.getFavoriteTopicWords(tabId).length > 0 : false));
                 const successTitle = isFavMode ? `🎉 Xuất sắc! Bạn đã trả bài xong ${words.length} cụm từ yêu thích của mình!` : `Hoàn thành Quiz!`;
                 container.innerHTML = `
                     <div class="fade-in" style="text-align:center; padding: 2rem;">
@@ -6784,7 +7166,7 @@ const whShowcase = document.getElementById('wh-showcase');
             if (currentIndex >= words.length) {
                 sfx.win();
                 shootConfetti();
-                const isFavMode = tabId === 'benefits' && window._reviewDatasetMode === 'favorites';
+                const isFavMode = (tabId === 'benefits' && window._reviewDatasetMode === 'favorites') || (tabId === 'activities' && (window.getFavoriteActivities ? window.getFavoriteActivities().length > 0 : false)) || ((tabId && (tabId.startsWith('subtab-') || tabId === 'topics')) && (window.getFavoriteTopicWords ? window.getFavoriteTopicWords(tabId).length > 0 : false));
                 const successTitle = isFavMode ? `🎉 Xuất sắc! Bạn đã trả bài xong ${words.length} cụm từ yêu thích của mình!` : `Hoàn thành Thử Thách Gõ Từ!`;
                 container.innerHTML = `
                     <div class="fade-in" style="text-align:center; padding: 2rem;">
@@ -6902,6 +7284,11 @@ window.switchSubTab = function(tabId, btnElement) {
         activeBtn.style.background = 'var(--primary)';
         activeBtn.style.color = '#ffffff';
         activeBtn.style.boxShadow = '0 4px 12px rgba(67, 97, 238, 0.3)';
+    }
+
+    if (typeof window.initTopicsFavoriteCards === 'function') {
+        window.initTopicsFavoriteCards(tabId);
+        window.updateTopicsFavoriteUI(tabId);
     }
 };
 
@@ -38578,10 +38965,14 @@ if (document.readyState === 'loading') {
         if (typeof updateTopicSelectDropdowns === 'function') updateTopicSelectDropdowns();
         if (typeof renderPracticeTopic === 'function') renderPracticeTopic(1);
         if (typeof initBenefitsFavoriteCards === 'function') initBenefitsFavoriteCards();
+        if (typeof initActivitiesFavoriteCards === 'function') initActivitiesFavoriteCards();
+        if (typeof initTopicsFavoriteCards === 'function') initTopicsFavoriteCards();
     });
 } else {
     if (typeof updateTopicSelectDropdowns === 'function') updateTopicSelectDropdowns();
     if (typeof renderPracticeTopic === 'function') renderPracticeTopic(1);
     if (typeof initBenefitsFavoriteCards === 'function') initBenefitsFavoriteCards();
+        if (typeof initActivitiesFavoriteCards === 'function') initActivitiesFavoriteCards();
+        if (typeof initTopicsFavoriteCards === 'function') initTopicsFavoriteCards();
 }
 

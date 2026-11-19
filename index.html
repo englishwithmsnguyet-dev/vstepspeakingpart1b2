@@ -1774,6 +1774,35 @@
 <h2>BẢNG HOẠT ĐỘNG</h2>
 <p>Danh sách các cụm từ chỉ hoạt động thường ngày được phân loại theo chủ đề. Nhấp vào loa để nghe phát âm.</p>
 </div>
+
+<!-- STICKY TOOLBAR: CHỌN CỤM HOẠT ĐỘNG YÊU THÍCH & TRẢ BÀI -->
+<div class="benefits-sticky-toolbar" id="activities-sticky-toolbar">
+  <div class="benefits-toolbar-content">
+    <div class="benefits-toolbar-left">
+      <div class="fav-count-badge">
+        <i class="fa-solid fa-star" style="color:#f59e0b; font-size:1.15rem;"></i>
+        <span class="fav-label">CỤM HOẠT ĐỘNG ĐÃ CHỌN ĐỂ TRẢ BÀI:</span>
+        <strong id="fav-activities-count" class="fav-count-num">0</strong>
+        <span class="fav-count-total">/ <span id="total-activities-count">46</span> cụm</span>
+      </div>
+    </div>
+    <div class="benefits-toolbar-center">
+      <div class="filter-btn-group">
+        <button type="button" class="btn-filter-fav active" id="btn-act-filter-all" onclick="setActivitiesFilter('all')">
+          <i class="fa-solid fa-list-ul"></i> Tất cả (<span id="btn-act-count-all">46</span>)
+        </button>
+        <button type="button" class="btn-filter-fav" id="btn-act-filter-fav" onclick="setActivitiesFilter('favorites')">
+          <i class="fa-solid fa-star"></i> Chỉ xem đã chọn (<span id="btn-act-count-fav">0</span>)
+        </button>
+      </div>
+    </div>
+    <div class="benefits-toolbar-right">
+      <button type="button" class="btn-quick-practice" onclick="scrollToActivitiesReview()" title="Cuộn nhanh xuống Góc Trả Bài">
+        <i class="fa-solid fa-graduation-cap"></i> TRẢ BÀI NGAY <i class="fa-solid fa-arrow-down"></i>
+      </button>
+    </div>
+  </div>
+</div>
 <div style="padding-bottom: 2rem;">
 <h3 style="margin-top: 2rem; margin-bottom: 1rem; color: #3b82f6; border-bottom: 2px solid #3b82f6; padding-bottom: 0.5rem; display: inline-block;">🏠 INDOOR ACTIVITIES</h3>
 <div style="display:grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
@@ -2253,6 +2282,35 @@
                             <button class="sub-tab-btn" onclick="switchSubTab('shopping', this)" style="padding: 0.6rem 1.4rem; border-radius: 50px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; white-space: nowrap; font-weight: 700; font-size: 0.95rem; transition: all 0.25s ease;">SHOPPING</button>
                             <button class="sub-tab-btn" onclick="switchSubTab('community', this)" style="padding: 0.6rem 1.4rem; border-radius: 50px; border: 1.5px solid var(--primary); background: transparent; color: var(--primary); cursor: pointer; white-space: nowrap; font-weight: 700; font-size: 0.95rem; transition: all 0.25s ease;">COMMUNITY SERVICE</button>
                             <!-- Thêm các chủ đề khác ở đây -->
+</div>
+
+<!-- STICKY TOOLBAR: CHỌN TỪ VỰNG THEO CHỦ ĐỀ ĐỂ TRẢ BÀI -->
+<div class="benefits-sticky-toolbar" id="topics-sticky-toolbar">
+  <div class="benefits-toolbar-content">
+    <div class="benefits-toolbar-left">
+      <div class="fav-count-badge">
+        <i class="fa-solid fa-star" style="color:#f59e0b; font-size:1.15rem;"></i>
+        <span class="fav-label">TỪ VỰNG ĐÃ CHỌN ĐỂ TRẢ BÀI:</span>
+        <strong id="fav-topics-count" class="fav-count-num">0</strong>
+        <span class="fav-count-total">/ <span id="total-topics-count">0</span> từ</span>
+      </div>
+    </div>
+    <div class="benefits-toolbar-center">
+      <div class="filter-btn-group">
+        <button type="button" class="btn-filter-fav active" id="btn-topic-filter-all" onclick="setTopicsFilter('all')">
+          <i class="fa-solid fa-list-ul"></i> Tất cả (<span id="btn-topic-count-all">0</span>)
+        </button>
+        <button type="button" class="btn-filter-fav" id="btn-topic-filter-fav" onclick="setTopicsFilter('favorites')">
+          <i class="fa-solid fa-star"></i> Chỉ xem đã chọn (<span id="btn-topic-count-fav">0</span>)
+        </button>
+      </div>
+    </div>
+    <div class="benefits-toolbar-right">
+      <button type="button" class="btn-quick-practice" onclick="scrollToTopicsReview()" title="Cuộn nhanh xuống Góc Trả Bài">
+        <i class="fa-solid fa-graduation-cap"></i> TRẢ BÀI NGAY <i class="fa-solid fa-arrow-down"></i>
+      </button>
+    </div>
+  </div>
 </div>
                         <!-- Sub-tab content cho Hobbies & Interests -->
                         <div class="subtab-pane fade-in active" id="subtab-hobbies" style="display: block;">

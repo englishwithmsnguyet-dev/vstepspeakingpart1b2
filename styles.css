@@ -1780,21 +1780,21 @@ body.dark-theme .fav-count-num {
     position: relative;
     user-select: none;
 }
-#benefits .benefit-card:hover {
+#benefits .benefit-card:hover, #activities .benefit-card:hover, #topics .benefit-card:hover, .benefit-card:hover {
     border-color: rgba(245, 158, 11, 0.55);
     transform: translateY(-2px);
     box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
 }
-#benefits .benefit-card.is-favorite {
+#benefits .benefit-card.is-favorite, #activities .benefit-card.is-favorite, #topics .benefit-card.is-favorite, .benefit-card.is-favorite {
     border: 2px solid #f59e0b !important;
     background: linear-gradient(135deg, rgba(245, 158, 11, 0.09), rgba(234, 179, 8, 0.04)) !important;
     box-shadow: 0 6px 20px rgba(245, 158, 11, 0.22) !important;
 }
-body.dark-theme #benefits .benefit-card.is-favorite {
+body.dark-theme #benefits .benefit-card.is-favorite, body.dark-theme #activities .benefit-card.is-favorite, body.dark-theme #topics .benefit-card.is-favorite, body.dark-theme .benefit-card.is-favorite, #activities .benefit-card.is-favorite, #topics .benefit-card.is-favorite, .benefit-card.is-favorite {
     background: linear-gradient(135deg, rgba(245, 158, 11, 0.18), rgba(234, 179, 8, 0.08)) !important;
     border-color: #f59e0b !important;
 }
-#benefits .benefit-card-content {
+#benefits .benefit-card-content, #activities .benefit-card-content, #topics .benefit-card-content, .benefit-card-content {
     flex: 1;
     width: 100%;
     min-width: 0;
@@ -1805,20 +1805,20 @@ body.dark-theme #benefits .benefit-card.is-favorite {
     justify-content: center;
     text-align: center !important;
 }
-#benefits .benefit-card-content strong,
-#benefits .benefit-card-content > div {
+#benefits .benefit-card-content, #activities .benefit-card-content, #topics .benefit-card-content, .benefit-card-content strong,
+#benefits .benefit-card-content, #activities .benefit-card-content, #topics .benefit-card-content, .benefit-card-content > div {
     width: 100%;
     text-align: center !important;
     line-height: 1.45;
 }
-#benefits .benefit-card-actions {
+#benefits .benefit-card-actions, #activities .benefit-card-actions, #topics .benefit-card-actions, .benefit-card-actions {
     display: flex;
     align-items: center;
     justify-content: center;
     gap: 0.65rem;
     flex-shrink: 0;
 }
-#benefits .benefit-card-actions .icon-btn {
+#benefits .benefit-card-actions, #activities .benefit-card-actions, #topics .benefit-card-actions, .benefit-card-actions .icon-btn {
     margin-left: 0 !important;
 }
 .benefit-star-btn {
