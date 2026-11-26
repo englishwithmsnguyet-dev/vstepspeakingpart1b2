@@ -420,10 +420,7 @@ document.addEventListener('DOMContentLoaded', () => {
         "Nguyễn Thị Chúc Yến"
     ];
 
-    const validStudentsB2 = [
-        "Gia Tuệ",
-        "Gia Tuê"
-    ];
+    const validStudentsB2 = [];
 
     const normalizeStr = (str) => {
         return (str || '')
@@ -490,6 +487,17 @@ document.addEventListener('DOMContentLoaded', () => {
         let formattedClass = classVal.toUpperCase().replace(/\s+/g, '').replace(/^(LỚP|LOP|CLASS)/i, '');
         const normName = normalizeStr(nameVal);
 
+        const isGiaTue = normName.includes('gia tue') || 
+                        normName.includes('gia tuê') || 
+                        normName.includes('gia tuệ') ||
+                        normName.replace(/\s+/g, '').includes('giatue');
+        if (isGiaTue || formattedClass === 'B2') {
+            loginError.textContent = 'Tài khoản học viên "Gia Tuệ" hiện đã bị KHÓA! Vui lòng liên hệ Giáo viên (Cô Nguyệt).';
+            loginError.style.display = 'block';
+            if (studentInput) studentInput.focus();
+            return;
+        }
+
         // Check Teacher access
         const isTeacher = (formattedClass === 'GV' || formattedClass === 'GV2026') && 
                           (normName === 'ptmn' || normName === 'pham thi minh nguyet' || normName === 'minh nguyet');
@@ -524,24 +532,6 @@ document.addEventListener('DOMContentLoaded', () => {
             state.accessLevel = 'B212';
             window._currentUserRole = 'student';
             window._currentClass = 'B212';
-        } else if (formattedClass === 'B2') {
-            // Cấp quyền trực tiếp cho học viên Gia Tuệ / Gia Tuê theo chỉ định của giáo viên
-            const isGiaTue = normName.includes('gia tue') || 
-                            normName.includes('gia tuê') || 
-                            normName.includes('gia tuệ') ||
-                            normName.replace(/\s+/g, '').includes('giatue');
-
-            if (!isGiaTue) {
-                loginError.textContent = 'Họ và tên không thuộc danh sách lớp B2. Vui lòng kiểm tra lại!';
-                loginError.style.display = 'block';
-                return;
-            }
-            state.studentName = nameVal.trim() || 'Gia Tuệ';
-            state.studentClass = 'B2';
-            state.userRole = 'student';
-            state.accessLevel = 'B2';
-            window._currentUserRole = 'student';
-            window._currentClass = 'B2';
         } else {
             loginError.textContent = 'Mã lớp không hợp lệ. Vui lòng kiểm tra lại!';
             loginError.style.display = 'block';
@@ -8168,7 +8158,7 @@ const practiceTopicsData = [
                                 "vn": "lắp ráp mô hình LEGO"
                             },
                             {
-                                "en": "foster boundless imagination",
+                                "en": "spark great imagination",
                                 "vn": "nuôi dưỡng trí tưởng tượng vô hạn"
                             }
                         ]
@@ -8341,7 +8331,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "Do you like reading books?",
                 "qType": "Yes/No Question: Do you like [V-ing]?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Đam mê đọc sách để bồi dưỡng tri thức và tư duy):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely! <u>I'm an avid reader because I find books remarkably</u> <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. Reading allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (NO - Thích tiếp nhận kiến thức qua video/podcast ngắn):</div>\n                    <div class=\"topic-formula-text\">\n                        → To be honest, <u>I'm not particularly fond of reading printed books because I find it hard to</u> <span class=\"formula-bracket-hl\">[khó khăn]</span>. Instead, <u>I prefer listening to educational podcasts or watching documentary videos because they allow me to</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Đam mê đọc sách để bồi dưỡng tri thức và tư duy):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely! <u>I'm a big book lover because I find books really</u> <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. Reading allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (NO - Thích tiếp nhận kiến thức qua video/podcast ngắn):</div>\n                    <div class=\"topic-formula-text\">\n                        → To be honest, <u>I'm not particularly fond of reading printed books because I find it hard to</u> <span class=\"formula-bracket-hl\">[khó khăn]</span>. Instead, <u>I prefer listening to educational podcasts or watching documentary videos because they allow me to</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -8352,7 +8342,7 @@ const practiceTopicsData = [
                         "title": "📚 [Đọc sách & Thói quen tiếp cận thông tin]:",
                         "items": [
                             {
-                                "en": "an avid and passionate reader",
+                                "en": "a big book lover",
                                 "vn": "một độc giả đam mê và đọc nhiều"
                             },
                             {
@@ -8377,8 +8367,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (YES - Đọc sách để mở mang trí tuệ và bình ổn tâm hồn)",
-                        "text": "Yes, absolutely! I'm an avid reader because I find books remarkably enlightening and peaceful. Reading allows me to broaden my horizons and gives me a chance to cultivate deeper focus in this digital age.",
-                        "formatted": "→ Yes, absolutely! <u>I'm an avid reader because I find books remarkably</u> <span class=\"sub-hl\">enlightening and peaceful</span>. Reading allows me to <span class=\"sub-hl\">broaden my horizons</span> and gives me a chance to <span class=\"sub-hl\">cultivate deeper focus in this digital age</span>."
+                        "text": "Yes, absolutely! I'm a big book lover because I find books really inspiring and peaceful. Reading allows me to broaden my horizons and gives me a chance to build deeper focus in this digital age.",
+                        "formatted": "→ Yes, absolutely! <u>I'm a big book lover because I find books really</u> <span class=\"sub-hl\">enlightening and peaceful</span>. Reading allows me to <span class=\"sub-hl\">broaden my horizons</span> and gives me a chance to <span class=\"sub-hl\">build deeper focus in this digital age</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (NO - Nghe podcast để tiếp thu thông tin nhanh gọn hơn)",
@@ -8427,8 +8417,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Sách phát triển bản thân và kỹ năng quản lý thời gian)",
-                        "text": "I'm particularly drawn to self-help and behavioral psychology books because they provide practical life lessons. These books allow me to optimize my daily habits and enhance my emotional resilience.",
-                        "formatted": "→ <u>I'm particularly drawn to</u> <span class=\"sub-hl\">self-help and behavioral psychology books</span> <u>because they provide</u> <span class=\"sub-hl\">practical life lessons</span>. These books allow me to <span class=\"sub-hl\">optimize my daily habits and enhance my emotional resilience</span>."
+                        "text": "I'm particularly drawn to self-help and behavioral psychology books because they provide practical life lessons. These books allow me to optimize my daily habits and stay emotionally strong.",
+                        "formatted": "→ <u>I'm particularly drawn to</u> <span class=\"sub-hl\">self-help and behavioral psychology books</span> <u>because they provide</u> <span class=\"sub-hl\">practical life lessons</span>. These books allow me to <span class=\"sub-hl\">optimize my daily habits and stay emotionally strong</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Tiểu thuyết trinh thám ly kỳ giúp thư giãn đầu óc)",
@@ -8929,7 +8919,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "Where do you often go for a walk?",
                 "qType": "Wh-question: Where do you often [Vo]?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Công viên công cộng gần nhà - Nhiều bóng cây xanh và đường tản bộ an toàn, thoáng mát):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My go-to spot is a public park located right near my house</u> because it features <span class=\"formula-bracket-hl\">[đặc điểm nổi bật]</span>. Strolling there allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> in a <span class=\"formula-bracket-hl\">[tính từ không gian]</span> environment.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Khu phố yên tĩnh quanh nơi ở - Tiện lợi, không tốn thời gian di chuyển trong khói bụi):</div>\n                    <div class=\"topic-formula-text\">\n                        → Most of the time, <u>I simply walk around my quiet neighborhood</u> because it's exceptionally <span class=\"formula-bracket-hl\">[tính từ]</span>. It allows me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> without having to <span class=\"formula-bracket-hl\">[hành động phiền toái - V-ing]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Công viên công cộng gần nhà - Nhiều bóng cây xanh và đường tản bộ an toàn, thoáng mát):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My go-to spot is a public park located right near my house</u> because it features <span class=\"formula-bracket-hl\">[đặc điểm nổi bật]</span>. Strolling there allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> in a <span class=\"formula-bracket-hl\">[tính từ không gian]</span> environment.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Khu phố yên tĩnh quanh nơi ở - Tiện lợi, không tốn thời gian di chuyển trong khói bụi):</div>\n                    <div class=\"topic-formula-text\">\n                        → Most of the time, <u>I simply walk around my quiet neighborhood</u> because it's very <span class=\"formula-bracket-hl\">[tính từ]</span>. It allows me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> without having to <span class=\"formula-bracket-hl\">[hành động phiền toái - V-ing]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🌳 [Địa điểm đi bộ & Khu vực]:",
@@ -9044,11 +9034,11 @@ const practiceTopicsData = [
                                 "vn": "những hàng cây xanh rợp bóng và đường đi bộ lát gạch"
                             },
                             {
-                                "en": "well-lit pathways and tranquil surroundings",
+                                "en": "well-lit paths and peaceful surroundings",
                                 "vn": "những lối đi sáng sủa và không gian xung quanh tĩnh lặng"
                             },
                             {
-                                "en": "exceptionally convenient and peaceful",
+                                "en": "super convenient and peaceful",
                                 "vn": "cực kỳ thuận tiện và thanh bình"
                             },
                             {
@@ -9092,8 +9082,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Khu phố yên tĩnh quanh nhà - Cực kỳ tiện lợi, giãn cơ bắp mà không cần đi xa)",
-                        "text": "Most of the time, I simply walk around my quiet neighborhood because it's exceptionally convenient. It allows me to stretch my legs and relax without having to ride a motorbike through busy traffic.",
-                        "formatted": "→ Most of the time, <u>I simply walk around my quiet neighborhood</u> because it's <span class=\"sub-hl\">exceptionally convenient</span>. It allows me to <span class=\"sub-hl\">stretch my legs and relax</span> without having to <span class=\"sub-hl\">ride a motorbike through busy traffic</span>."
+                        "text": "Most of the time, I simply walk around my quiet neighborhood because it's super convenient. It allows me to stretch my legs and relax without having to ride a motorbike through busy traffic.",
+                        "formatted": "→ Most of the time, <u>I simply walk around my quiet neighborhood</u> because it's <span class=\"sub-hl\">very convenient</span>. It allows me to <span class=\"sub-hl\">stretch my legs and relax</span> without having to <span class=\"sub-hl\">ride a motorbike through busy traffic</span>."
                     }
                 ]
             },
@@ -9186,7 +9176,7 @@ const practiceTopicsData = [
                                 "vn": "đốt cháy calo dư thừa và tăng cường trao đổi chất"
                             },
                             {
-                                "en": "improve cardiovascular health and blood circulation",
+                                "en": "improve heart health and blood circulation",
                                 "vn": "cải thiện tim mạch và lưu thông máu"
                             },
                             {
@@ -9208,7 +9198,7 @@ const practiceTopicsData = [
                         "title": "🌟 [Lợi ích ngoài Bảng - Vo]:",
                         "items": [
                             {
-                                "en": "alleviate back and joint stiffness",
+                                "en": "ease back and joint pain",
                                 "vn": "làm dịu chứng đau mỏi lưng và cứng khớp"
                             },
                             {
@@ -9220,7 +9210,7 @@ const practiceTopicsData = [
                                 "vn": "khôi phục sự minh mẫn giúp sáng tạo tốt hơn"
                             },
                             {
-                                "en": "foster a sense of inner tranquility",
+                                "en": "bring a sense of inner peace",
                                 "vn": "nuôi dưỡng cảm giác thanh thản, an yên từ bên trong"
                             }
                         ]
@@ -9430,7 +9420,7 @@ const practiceTopicsData = [
                                 "vn": "kết nối với những người cùng đam mê trực tuyến"
                             },
                             {
-                                "en": "appreciate fine craftsmanship and history",
+                                "en": "appreciate fine handmade details and history",
                                 "vn": "trân trọng tay nghề tinh xảo và giá trị lịch sử"
                             }
                         ]
@@ -9506,7 +9496,7 @@ const practiceTopicsData = [
                         "title": "✨ [Tính từ mô tả]:",
                         "items": [
                             {
-                                "en": "timeless and sophisticated",
+                                "en": "timeless and stylish",
                                 "vn": "vượt thời gian và tinh tế"
                             },
                             {
@@ -9548,8 +9538,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Sưu tầm tranh gốc của họa sĩ trẻ)",
-                        "text": "If I had plenty of money, I'd love to collect original paintings by emerging Vietnamese artists because I find them timeless and sophisticated. It would allow me to support talented local creators and widen my knowledge.",
-                        "formatted": "→ <u>If I had plenty of money, I'd love to collect</u> <span class=\"sub-hl\">original paintings by emerging Vietnamese artists</span> because I find them <span class=\"sub-hl\">timeless and sophisticated</span>. It would allow me to <span class=\"sub-hl\">support talented local creators</span> and <span class=\"sub-hl\">widen my knowledge</span>."
+                        "text": "If I had plenty of money, I'd love to collect original paintings by emerging Vietnamese artists because I find them timeless and stylish. It would allow me to support talented local creators and widen my knowledge.",
+                        "formatted": "→ <u>If I had plenty of money, I'd love to collect</u> <span class=\"sub-hl\">original paintings by emerging Vietnamese artists</span> because I find them <span class=\"sub-hl\">timeless and stylish</span>. It would allow me to <span class=\"sub-hl\">support talented local creators</span> and <span class=\"sub-hl\">widen my knowledge</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Sưu tầm cốc gốm thủ công từ các chuyến du lịch)",
@@ -9788,7 +9778,7 @@ const practiceTopicsData = [
                                 "vn": "tăng cường khả năng tập trung"
                             },
                             {
-                                "en": "foster my creativity",
+                                "en": "boost my creativity",
                                 "vn": "nuôi dưỡng trí tưởng tượng sáng tạo"
                             },
                             {
@@ -9806,8 +9796,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Minecraft trên laptop - Thúc đẩy sáng tạo & Giảm stress)",
-                        "text": "Whenever I want to unwind, I tend to play Minecraft on my laptop. It offers an engaging experience because it allows me to foster my creativity and escape from daily stress.",
-                        "formatted": "→ Whenever I want to unwind, I tend to play <span class=\"sub-hl\">Minecraft on my laptop</span>. It offers <span class=\"sub-hl\">an engaging experience</span> because it allows me to <span class=\"sub-hl\">foster my creativity</span> and <span class=\"sub-hl\">escape from daily stress</span>."
+                        "text": "Whenever I want to unwind, I tend to play Minecraft on my laptop. It offers an engaging experience because it allows me to boost my creativity and escape from daily stress.",
+                        "formatted": "→ Whenever I want to unwind, I tend to play <span class=\"sub-hl\">Minecraft on my laptop</span>. It offers <span class=\"sub-hl\">an engaging experience</span> because it allows me to <span class=\"sub-hl\">boost my creativity</span> and <span class=\"sub-hl\">escape from daily stress</span>."
                     }
                 ]
             },
@@ -10504,7 +10494,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "What is your favorite book?",
                 "qType": "Wh-question: What is your favorite book?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Nêu cuốn sách yêu thích nhất & 2 tính từ học thuật B2):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>One of my all-time favorite books is</u> <span class=\"formula-bracket-hl\">[tên cuốn sách]</span> because I find it both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. It allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Khẳng định đam mê với thể loại sách, rồi nêu tác phẩm tâm đắc):</div>\n                    <div class=\"topic-formula-text\">\n                        → Well, <u>I have a strong passion for reading</u> <span class=\"formula-bracket-hl\">[thể loại sách]</span>, and the book that impresses me the most is <span class=\"formula-bracket-hl\">[tên cuốn sách]</span>. It offers profound insights and helps me <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Nêu cuốn sách yêu thích nhất & 2 tính từ học thuật B2):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>One of my all-time favorite books is</u> <span class=\"formula-bracket-hl\">[tên cuốn sách]</span> because I find it both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. It allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Khẳng định đam mê với thể loại sách, rồi nêu tác phẩm tâm đắc):</div>\n                    <div class=\"topic-formula-text\">\n                        → Well, <u>I have a strong passion for reading</u> <span class=\"formula-bracket-hl\">[thể loại sách]</span>, and the book that impresses me the most is <span class=\"formula-bracket-hl\">[tên cuốn sách]</span>. It gives deep and useful lessons and helps me <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "📖 [Tên quyển sách phổ biến]:",
@@ -10710,11 +10700,11 @@ const practiceTopicsData = [
                                 "vn": "mở rộng tầm nhìn và sự hiểu biết"
                             },
                             {
-                                "en": "gain profound life lessons",
+                                "en": "learn meaningful life lessons",
                                 "vn": "thu nhận những bài học nhân sinh sâu sắc"
                             },
                             {
-                                "en": "cultivate positive habits",
+                                "en": "build positive habits",
                                 "vn": "nuôi dưỡng những thói quen tích cực"
                             },
                             {
@@ -10732,8 +10722,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Atomic Habits - Sách phát triển bản thân & Xây dựng thói quen tốt)",
-                        "text": "Well, I have a strong passion for reading self-help books, and the book that impresses me the most is Atomic Habits. It offers profound insights and helps me cultivate good habits while breaking harmful ones.",
-                        "formatted": "→ Well, <u>I have a strong passion for reading</u> <span class=\"sub-hl\">self-help books</span>, and the book that impresses me the most is <span class=\"sub-hl\">Atomic Habits</span>. It offers profound insights and helps me <span class=\"sub-hl\">cultivate good habits while breaking harmful ones</span>."
+                        "text": "Well, I have a strong passion for reading self-help books, and the book that impresses me the most is Atomic Habits. It gives deep and useful lessons and helps me build good habits while breaking harmful ones.",
+                        "formatted": "→ Well, <u>I have a strong passion for reading</u> <span class=\"sub-hl\">self-help books</span>, and the book that impresses me the most is <span class=\"sub-hl\">Atomic Habits</span>. It gives deep and useful lessons and helps me <span class=\"sub-hl\">build good habits while breaking harmful ones</span>."
                     }
                 ]
             },
@@ -11041,7 +11031,7 @@ const practiceTopicsData = [
                                 "vn": "giải tỏa áp lực bài vở học hành"
                             },
                             {
-                                "en": "foster their creative imagination",
+                                "en": "develop their imagination",
                                 "vn": "nuôi dưỡng trí tưởng tượng sáng tạo"
                             },
                             {
@@ -11049,7 +11039,7 @@ const practiceTopicsData = [
                                 "vn": "tiếp thu các kỹ năng mềm quan trọng"
                             },
                             {
-                                "en": "cultivate a positive mindset",
+                                "en": "build a positive mindset",
                                 "vn": "xây dựng tư duy và lối sống tích cực"
                             }
                         ]
@@ -11058,13 +11048,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Truyện tranh & Tiểu thuyết giả tưởng - Giải tỏa áp lực & Phát huy sáng tạo)",
-                        "text": "I believe most teenagers in my country are big fans of comic books and fantasy novels because they find them highly entertaining. These genres allow them to relieve study pressure and give them an opportunity to foster their imagination.",
-                        "formatted": "→ I believe most teenagers in my country are big fans of <span class=\"sub-hl\">comic books and fantasy novels</span> because they find them <span class=\"sub-hl\">highly entertaining</span>. These genres allow them to <span class=\"sub-hl\">relieve study pressure</span> and give them an opportunity to <span class=\"sub-hl\">foster their imagination</span>."
+                        "text": "I believe most teenagers in my country are big fans of comic books and fantasy novels because they find them highly entertaining. These genres allow them to relieve study pressure and give them an opportunity to develop their imagination.",
+                        "formatted": "→ I believe most teenagers in my country are big fans of <span class=\"sub-hl\">comic books and fantasy novels</span> because they find them <span class=\"sub-hl\">highly entertaining</span>. These genres allow them to <span class=\"sub-hl\">relieve study pressure</span> and give them an opportunity to <span class=\"sub-hl\">develop their imagination</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Xu hướng đọc sách phát triển bản thân để rèn kỹ năng mềm)",
-                        "text": "From my perspective, while many teenagers read fiction books to relax, an increasing number also read personal development books. These books allow them to acquire vital soft skills and cultivate a positive mindset.",
-                        "formatted": "→ From my perspective, while many teenagers read <span class=\"sub-hl\">fiction books to relax</span>, an increasing number also read <span class=\"sub-hl\">personal development books</span>. These books allow them to <span class=\"sub-hl\">acquire vital soft skills</span> and <span class=\"sub-hl\">cultivate a positive mindset</span>."
+                        "text": "From my perspective, while many teenagers read fiction books to relax, an increasing number also read personal development books. These books allow them to acquire vital soft skills and build a positive mindset.",
+                        "formatted": "→ From my perspective, while many teenagers read <span class=\"sub-hl\">fiction books to relax</span>, an increasing number also read <span class=\"sub-hl\">personal development books</span>. These books allow them to <span class=\"sub-hl\">acquire vital soft skills</span> and <span class=\"sub-hl\">build a positive mindset</span>."
                     }
                 ]
             }
@@ -11615,7 +11605,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "How do you feel when you are in the library?",
                 "qType": "Wh-question: How do you feel when you are in the library?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Cảm giác bình yên, tập trung cao độ và có động lực học tập):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Whenever I step into the library, I immediately experience a sense of</u> <span class=\"formula-bracket-hl\">[sự tĩnh lặng và tập trung]</span>. Seeing everyone immersed in books motivates me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and eliminates <span class=\"formula-bracket-hl\">[sự lười biếng / xao nhãng]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Cảm giác được bao bọc bởi tri thức và bình ổn cảm xúc):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I feel very</u> <span class=\"formula-bracket-hl\">[tính từ cảm xúc 1]</span> and <span class=\"formula-bracket-hl\">[tính từ cảm xúc 2]</span>. The absolute quietude serves as a sanctuary that allows me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> away from the noisy outside world.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Cảm giác bình yên, tập trung cao độ và có động lực học tập):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Whenever I step into the library, I immediately experience a sense of</u> <span class=\"formula-bracket-hl\">[sự tĩnh lặng và tập trung]</span>. Seeing everyone immersed in books motivates me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and eliminates <span class=\"formula-bracket-hl\">[sự lười biếng / xao nhãng]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Cảm giác được bao bọc bởi tri thức và bình ổn cảm xúc):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I feel very</u> <span class=\"formula-bracket-hl\">[tính từ cảm xúc 1]</span> and <span class=\"formula-bracket-hl\">[tính từ cảm xúc 2]</span>. The absolute quiet atmosphere serves as a sanctuary that allows me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> away from the noisy outside world.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -11626,11 +11616,11 @@ const practiceTopicsData = [
                         "title": "🧘 [Cảm xúc & Tâm lý trong thư viện]:",
                         "items": [
                             {
-                                "en": "profound focus and academic momentum",
+                                "en": "deep focus and strong study motivation",
                                 "vn": "sự tập trung cao độ và động lực học tập mạnh mẽ"
                             },
                             {
-                                "en": "serene quietude and mental clarity",
+                                "en": "peaceful silence and a clear mind",
                                 "vn": "sự tĩnh lặng thanh bình và tinh thần sáng suốt"
                             },
                             {
@@ -11647,13 +11637,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Tràn đầy động lực và tập trung cao độ khi thấy mọi người nỗ lực)",
-                        "text": "Whenever I step into the library, I immediately experience a sense of serene focus and academic momentum. Seeing hundreds of diligent peers engrossed in their studies motivates me to overcome procrastination and study with maximum efficiency.",
-                        "formatted": "→ <u>Whenever I step into the library, I immediately experience a sense of</u> <span class=\"sub-hl\">serene focus and academic momentum</span>. Seeing everyone immersed in books motivates me to <span class=\"sub-hl\">overcome procrastination</span> and eliminates <span class=\"sub-hl\">my urge to check social media</span>."
+                        "text": "Whenever I step into the library, I immediately experience a feeling of calm focus and study motivation. Seeing many hard-working students focused on their studies motivates me to overcome procrastination and study with maximum efficiency.",
+                        "formatted": "→ <u>Whenever I step into the library, I immediately experience a sense of</u> <span class=\"sub-hl\">calm focus and academic momentum</span>. Seeing everyone immersed in books motivates me to <span class=\"sub-hl\">overcome procrastination</span> and eliminates <span class=\"sub-hl\">my urge to check social media</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Cảm giác bình an và trân trọng kho tàng tri thức vô giá)",
-                        "text": "I feel very calm and relaxed and intellectually inspired. Surrounded by towering bookshelves, the respectful silence serves as a peaceful haven where I can clear my mind, reflect deeply, and appreciate the immense wisdom of human civilization.",
-                        "formatted": "→ <u>I feel very</u> <span class=\"sub-hl\">calm and intellectually inspired</span>. The absolute quietude serves as a sanctuary that allows me to <span class=\"sub-hl\">clear my mind, reflect deeply, and appreciate the immense wisdom of humanity</span> away from the noisy outside world."
+                        "text": "I feel very calm and relaxed and intellectually inspired. Surrounded by towering bookshelves, the respectful silence serves as a peaceful haven where I can clear my mind, reflect deeply, and enjoy learning from so many great books.",
+                        "formatted": "→ <u>I feel very</u> <span class=\"sub-hl\">calm and intellectually inspired</span>. The absolute quiet atmosphere serves as a sanctuary that allows me to <span class=\"sub-hl\">clear my mind, reflect deeply, and appreciate the huge wisdom of humanity</span> away from the noisy outside world."
                     }
                 ]
             }
@@ -12294,11 +12284,11 @@ const practiceTopicsData = [
                                 "vn": "tránh các cung đường kẹt xe giờ cao điểm"
                             },
                             {
-                                "en": "hone my English listening skills",
+                                "en": "improve my English listening skills",
                                 "vn": "mài giũa kỹ năng nghe tiếng Anh"
                             },
                             {
-                                "en": "keep abreast of global news",
+                                "en": "keep up with world news",
                                 "vn": "bắt kịp các tin tức quốc tế"
                             }
                         ]
@@ -12312,8 +12302,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Kênh BBC World Service - Nâng cao kỹ năng nghe tiếng Anh & Tin tức quốc tế)",
-                        "text": "Well, I regularly tune in to BBC World Service because it's extremely educational. It allows me to hone my English listening skills and gives me an opportunity to keep abreast of global news.",
-                        "formatted": "→ Well, I regularly tune in to <span class=\"sub-hl\">BBC World Service</span> because it's extremely <span class=\"sub-hl\">educational</span>. It allows me to <span class=\"sub-hl\">hone my English listening skills</span> and gives me an opportunity to <span class=\"sub-hl\">keep abreast of global news</span>."
+                        "text": "Well, I regularly tune in to BBC World Service because it's extremely educational. It allows me to improve my English listening skills and gives me an opportunity to keep up with world news.",
+                        "formatted": "→ Well, I regularly tune in to <span class=\"sub-hl\">BBC World Service</span> because it's extremely <span class=\"sub-hl\">educational</span>. It allows me to <span class=\"sub-hl\">improve my English listening skills</span> and gives me an opportunity to <span class=\"sub-hl\">keep up with world news</span>."
                     }
                 ]
             },
@@ -12808,7 +12798,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "Is music important to you? Why?",
                 "qType": "Yes/No Question: Is music important to you? Why?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Khẳng định vai trò thiết yếu không thể thiếu - plays an indispensable role):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely. <u>Music plays an indispensable role in my daily life</u> because it's both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. It allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Cấu trúc giả định giàu cảm xúc - I can't imagine my life without music):</div>\n                    <div class=\"topic-formula-text\">\n                        → Without a doubt, <u>I can't imagine my life without music</u>. It acts as an incredible emotional therapy that allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Khẳng định vai trò thiết yếu không thể thiếu - plays an essential role):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely. <u>Music plays an essential role in my daily life</u> because it's both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. It allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Cấu trúc giả định giàu cảm xúc - I can't imagine my life without music):</div>\n                    <div class=\"topic-formula-text\">\n                        → Without a doubt, <u>I can't imagine my life without music</u>. It acts as an incredible emotional therapy that allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -12907,7 +12897,7 @@ const practiceTopicsData = [
                         "title": "✨ [Tính từ khẳng định giá trị]:",
                         "items": [
                             {
-                                "en": "indispensable",
+                                "en": "essential",
                                 "vn": "không thể thiếu / tối quan trọng"
                             },
                             {
@@ -12940,7 +12930,7 @@ const practiceTopicsData = [
                                 "vn": "giữ vững động lực trong những hoàn cảnh khó khăn"
                             },
                             {
-                                "en": "foster creative imagination and reflection",
+                                "en": "spark creativity and deep thoughts",
                                 "vn": "nuôi dưỡng trí tưởng tượng sáng tạo và sự chiêm nghiệm"
                             },
                             {
@@ -12953,8 +12943,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Vai trò thiết yếu - Trị liệu tinh thần & Giữ vững động lực)",
-                        "text": "Yes, absolutely. Music plays an indispensable role in my daily life because it's both therapeutic and uplifting. It allows me to heal emotional exhaustion and gives me a chance to stay motivated in demanding situations.",
-                        "formatted": "→ Yes, absolutely. <u>Music plays an indispensable role in my daily life</u> because it's both <span class=\"sub-hl\">therapeutic and uplifting</span>. It allows me to <span class=\"sub-hl\">heal emotional exhaustion</span> and gives me a chance to <span class=\"sub-hl\">stay motivated in demanding situations</span>."
+                        "text": "Yes, absolutely. Music plays an essential role in my daily life because it's both therapeutic and uplifting. It allows me to heal emotional exhaustion and gives me a chance to stay motivated in demanding situations.",
+                        "formatted": "→ Yes, absolutely. <u>Music plays an essential role in my daily life</u> because it's both <span class=\"sub-hl\">therapeutic and uplifting</span>. It allows me to <span class=\"sub-hl\">heal emotional exhaustion</span> and gives me a chance to <span class=\"sub-hl\">stay motivated in demanding situations</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Không thể tưởng tượng cuộc sống thiếu âm nhạc - Trị liệu cảm xúc)",
@@ -12999,7 +12989,7 @@ const practiceTopicsData = [
                                 "vn": "đa dạng vô tận"
                             },
                             {
-                                "en": "remarkably uplifting",
+                                "en": "really uplifting",
                                 "vn": "nâng cao tinh thần rõ rệt"
                             }
                         ]
@@ -13154,7 +13144,7 @@ const practiceTopicsData = [
                                 "vn": "khám phá các danh sách nhạc tuyển chọn để học bài"
                             },
                             {
-                                "en": "switch effortlessly between podcasts and songs",
+                                "en": "switch easily between podcasts and songs",
                                 "vn": "chuyển đổi mượt mà giữa podcast và bài hát"
                             },
                             {
@@ -13238,7 +13228,7 @@ const practiceTopicsData = [
                         "title": "🌟 [Lợi ích nền tảng nhạc ngoài Bảng - Vo]:",
                         "items": [
                             {
-                                "en": "uncover fresh genres effortlessly",
+                                "en": "uncover fresh genres easily",
                                 "vn": "khám phá các thể loại nhạc mới thật nhẹ nhàng"
                             },
                             {
@@ -13259,8 +13249,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Nhấn mạnh thuật toán gợi ý & kho nhạc khổng lồ)",
-                        "text": "What I love most about it is its spot-on recommendation algorithm, which makes the experience really personalized. On top of that, it offers an extensive library of international tracks, allowing me to uncover fresh genres effortlessly.",
-                        "formatted": "→ <u>What I love most about it is</u> <span class=\"sub-hl\">its spot-on recommendation algorithm</span>, which makes the experience really <span class=\"sub-hl\">personalized</span>. On top of that, it offers <span class=\"sub-hl\">an extensive library of international tracks</span>, allowing me to <span class=\"sub-hl\">uncover fresh genres effortlessly</span>."
+                        "text": "What I love most about it is its spot-on recommendation algorithm, which makes the experience really personalized. On top of that, it offers an extensive library of international tracks, allowing me to uncover fresh genres easily.",
+                        "formatted": "→ <u>What I love most about it is</u> <span class=\"sub-hl\">its spot-on recommendation algorithm</span>, which makes the experience really <span class=\"sub-hl\">personalized</span>. On top of that, it offers <span class=\"sub-hl\">an extensive library of international tracks</span>, allowing me to <span class=\"sub-hl\">uncover fresh genres easily</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (So sánh sự nổi trội về chất lượng & tiện ích)",
@@ -13429,7 +13419,7 @@ const practiceTopicsData = [
                                 "vn": "hiểu rõ truyền thống đa dạng giữa các vùng miền Việt Nam"
                             },
                             {
-                                "en": "witness centuries-old artistry preserved intact",
+                                "en": "enjoy traditional art that has been kept alive for centuries",
                                 "vn": "chiêm ngưỡng tinh hoa nghệ thuật hàng trăm năm được gìn giữ nguyên vẹn"
                             }
                         ]
@@ -13443,8 +13433,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Giới thiệu Ca trù, Nhã nhạc và nhạc cụ dân tộc)",
-                        "text": "Besides regional folk songs, my country is famous for Ca Tru ceremonial singing and Hue royal court music, renowned for unique instruments like the monochord and bamboo flute. Experiencing these live gives people a chance to witness centuries-old artistry preserved intact.",
-                        "formatted": "→ <u>Besides regional folk songs, my country is famous for</u> <span class=\"sub-hl\">Ca Tru ceremonial singing and Hue royal court music</span>, renowned for <span class=\"sub-hl\">unique instruments like the monochord and bamboo flute</span>. Experiencing these live gives people a chance to <span class=\"sub-hl\">witness centuries-old artistry preserved intact</span>."
+                        "text": "Besides regional folk songs, my country is famous for Ca Tru ceremonial singing and Hue royal court music, renowned for unique instruments like the monochord and bamboo flute. Experiencing these live gives people a chance to enjoy traditional art that has been kept alive for centuries.",
+                        "formatted": "→ <u>Besides regional folk songs, my country is famous for</u> <span class=\"sub-hl\">Ca Tru ceremonial singing and Hue royal court music</span>, renowned for <span class=\"sub-hl\">unique instruments like the monochord and bamboo flute</span>. Experiencing these live gives people a chance to <span class=\"sub-hl\">enjoy traditional art that has been kept alive for centuries</span>."
                     }
                 ]
             },
@@ -13452,7 +13442,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "How important is traditional music to your culture?",
                 "qType": "Wh-question: How important is [X] to [Y]?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Vô cùng quan trọng - Bảo tồn bản sắc và lịch sử dân tộc):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Traditional music is undeniably vital to Vietnamese culture because</u> it allows us to <span class=\"formula-bracket-hl\">[lợi ích văn hóa ngoài Bảng - Vo 1]</span>. It also gives younger generations a chance to <span class=\"formula-bracket-hl\">[lợi ích văn hóa ngoài Bảng - Vo 2]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Đóng vai trò cầu nối thế hệ và quảng bá du lịch):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>It plays an irreplaceable role in our society, not only because it helps people</u> <span class=\"formula-bracket-hl\">[lợi ích văn hóa ngoài Bảng - Vo 1]</span>, but also because it allows us to <span class=\"formula-bracket-hl\">[lợi ích văn hóa ngoài Bảng - Vo 2]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Vô cùng quan trọng - Bảo tồn bản sắc và lịch sử dân tộc):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Traditional music is truly important to Vietnamese culture because</u> it allows us to <span class=\"formula-bracket-hl\">[lợi ích văn hóa ngoài Bảng - Vo 1]</span>. It also gives younger generations a chance to <span class=\"formula-bracket-hl\">[lợi ích văn hóa ngoài Bảng - Vo 2]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Đóng vai trò cầu nối thế hệ và quảng bá du lịch):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>It plays an irreplaceable role in our society, not only because it helps people</u> <span class=\"formula-bracket-hl\">[lợi ích văn hóa ngoài Bảng - Vo 1]</span>, but also because it allows us to <span class=\"formula-bracket-hl\">[lợi ích văn hóa ngoài Bảng - Vo 2]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🌟 [Lợi ích văn hóa ngoài Bảng - Vo]:",
@@ -13483,8 +13473,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Giữ gìn bản sắc dân tộc và kết nối cội nguồn)",
-                        "text": "Traditional music is undeniably vital to Vietnamese culture because it allows us to preserve our national identity in a rapidly globalizing world. It also gives younger generations a chance to stay connected to our ancestors' stories and core values.",
-                        "formatted": "→ <u>Traditional music is undeniably vital to Vietnamese culture because</u> it allows us to <span class=\"sub-hl\">preserve our national identity in a rapidly globalizing world</span>. It also gives younger generations a chance to <span class=\"sub-hl\">stay connected to our ancestors' stories and core values</span>."
+                        "text": "Traditional music is truly important to Vietnamese culture because it allows us to preserve our national identity in a rapidly globalizing world. It also gives younger generations a chance to stay connected to our ancestors' stories and core values.",
+                        "formatted": "→ <u>Traditional music is truly important to Vietnamese culture because</u> it allows us to <span class=\"sub-hl\">preserve our national identity in a rapidly globalizing world</span>. It also gives younger generations a chance to <span class=\"sub-hl\">stay connected to our ancestors' stories and core values</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Cầu nối thế hệ và quảng bá văn hóa ra thế giới)",
@@ -13811,7 +13801,7 @@ const practiceTopicsData = [
                                 "vn": "kết nối cảm xúc với những hòa âm tuyệt đẹp"
                             },
                             {
-                                "en": "appreciate fine musical craftsmanship",
+                                "en": "enjoy the beauty and quality of live music",
                                 "vn": "cảm nhận chiều sâu nghệ thuật âm nhạc tinh tế"
                             }
                         ]
@@ -13834,7 +13824,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "Do you think children should learn to play musical instruments?",
                 "qType": "Do you think question: Do you think children should learn to play musical instruments?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Khẳng định tuyệt đối nên học & đưa ra 2 lợi ích phát triển nhân cách):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, wholeheartedly. <u>I strongly advocate that children should learn to play a musical instrument</u> because it's both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span> for their development. It allows them to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives them a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Cấu trúc đảo ngữ nhấn mạnh lợi ích kép - Not only does it allow children to... but it also...):</div>\n                    <div class=\"topic-formula-text\">\n                        → From my perspective, learning an instrument is extremely beneficial for kids. <u>Not only does it allow children to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span>, <u>but it also gives them an opportunity to</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Khẳng định tuyệt đối nên học & đưa ra 2 lợi ích phát triển nhân cách):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, definitely. <u>I strongly believe that children should learn to play a musical instrument</u> because it's both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span> for their development. It allows them to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives them a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Cấu trúc đảo ngữ nhấn mạnh lợi ích kép - Not only does it allow children to... but it also...):</div>\n                    <div class=\"topic-formula-text\">\n                        → From my perspective, learning an instrument is extremely beneficial for kids. <u>Not only does it allow children to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span>, <u>but it also gives them an opportunity to</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "👶 [Lợi ích cho trẻ em khi học nhạc cụ]:",
@@ -13882,11 +13872,11 @@ const practiceTopicsData = [
                                 "vn": "vô cùng có ích và làm giàu đời sống tâm hồn"
                             },
                             {
-                                "en": "character-building",
+                                "en": "great for building character",
                                 "vn": "rèn luyện tính cách và nhân phẩm"
                             },
                             {
-                                "en": "crucial for cognitive development",
+                                "en": "great for brain development",
                                 "vn": "thiết yếu cho sự phát triển nhận thức"
                             },
                             {
@@ -13899,15 +13889,15 @@ const practiceTopicsData = [
                         "title": "🌟 [Lợi ích ngoài Bảng - Vo]:",
                         "items": [
                             {
-                                "en": "cultivate self-discipline and perseverance",
+                                "en": "build self-discipline and patience",
                                 "vn": "rèn luyện tính kỷ luật tự giác và sự kiên trì"
                             },
                             {
-                                "en": "boost cognitive brain development and memory",
+                                "en": "boost brain development and memory",
                                 "vn": "thúc đẩy sự phát triển nhận thức và trí nhớ của não bộ"
                             },
                             {
-                                "en": "foster creative imagination and aesthetic appreciation",
+                                "en": "develop creativity and a love for music",
                                 "vn": "nuôi dưỡng trí tưởng tượng sáng tạo và khả năng cảm thụ cái đẹp"
                             },
                             {
@@ -13925,8 +13915,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Cấu trúc đảo ngữ: Vừa nuôi dưỡng sáng tạo vừa rèn sự kiên nhẫn)",
-                        "text": "From my perspective, learning an instrument is extremely beneficial for kids. Not only does it allow children to foster creative imagination, but it also gives them a great opportunity to build patience and a lifelong love for music.",
-                        "formatted": "→ From my perspective, learning an instrument is extremely beneficial for kids. <u>Not only does it allow children to</u> <span class=\"sub-hl\">foster creative imagination</span>, <u>but it also gives them a great opportunity to</u> <span class=\"sub-hl\">build patience and a lifelong love for music</span>."
+                        "text": "From my perspective, learning an instrument is extremely beneficial for kids. Not only does it allow children to develop creativity, but it also gives them a great opportunity to build patience and a lifelong love for music.",
+                        "formatted": "→ From my perspective, learning an instrument is extremely beneficial for kids. <u>Not only does it allow children to</u> <span class=\"sub-hl\">develop creativity</span>, <u>but it also gives them a great opportunity to</u> <span class=\"sub-hl\">build patience and a lifelong love for music</span>."
                     }
                 ]
             }
@@ -13962,7 +13952,7 @@ const practiceTopicsData = [
                                 "vn": "biểu tượng nhạc pop được tôn vinh toàn cầu"
                             },
                             {
-                                "en": "profound songwriting ability",
+                                "en": "deep and meaningful songwriting talent",
                                 "vn": "khả năng sáng tác nhạc sâu sắc"
                             },
                             {
@@ -13980,8 +13970,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Taylor Swift với tài năng sáng tác nhạc đỉnh cao)",
-                        "text": "When it comes to my music idol, I'm a massive fan of Taylor Swift. She is globally celebrated for her brilliant songwriting and captivating performances, which gives me immense motivation and emotional inspiration.",
-                        "formatted": "→ <u>When it comes to my music idol, I'm a massive fan of</u> <span class=\"sub-hl\">Taylor Swift</span>. She is globally celebrated for <span class=\"sub-hl\">her brilliant songwriting and captivating performances</span>, which gives me <span class=\"sub-hl\">immense motivation and emotional inspiration</span>."
+                        "text": "When it comes to my music idol, I'm a massive fan of Taylor Swift. She is globally celebrated for her brilliant songwriting and captivating performances, which gives me huge motivation and inspiration.",
+                        "formatted": "→ <u>When it comes to my music idol, I'm a massive fan of</u> <span class=\"sub-hl\">Taylor Swift</span>. She is globally celebrated for <span class=\"sub-hl\">her brilliant songwriting and captivating performances</span>, which gives me <span class=\"sub-hl\">huge motivation and emotional inspiration</span>."
                     }
                 ]
             },
@@ -13989,7 +13979,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "Why do you like him/her?",
                 "qType": "Wh-question: Why do you like him/her?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Giọng hát đầy cảm xúc và ca từ sâu sắc, chạm tới trái tim):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>The primary reason I adore him/her is his/her exceptionally</u> <span class=\"formula-bracket-hl\">[giọng hát / phong cách]</span>. Not only do the melodies <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span>, but the meaningful lyrics also give me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Nhân cách giản dị, lối sống tích cực và tận tâm với cộng đồng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Beyond musical talent, what inspires me most is his/her</u> <span class=\"formula-bracket-hl\">[nhân cách / hoạt động xã hội]</span>. He/She consistently uses fame to <span class=\"formula-bracket-hl\">[hành động ý nghĩa]</span>, which motivates me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Giọng hát đầy cảm xúc và ca từ sâu sắc, chạm tới trái tim):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>The primary reason I adore him/her is his/her wonderfully</u> <span class=\"formula-bracket-hl\">[giọng hát / phong cách]</span>. Not only do the melodies <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span>, but the meaningful lyrics also give me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Nhân cách giản dị, lối sống tích cực và tận tâm với cộng đồng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Beyond musical talent, what inspires me most is his/her</u> <span class=\"formula-bracket-hl\">[nhân cách / hoạt động xã hội]</span>. He/She consistently uses fame to <span class=\"formula-bracket-hl\">[hành động ý nghĩa]</span>, which motivates me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -14008,7 +13998,7 @@ const practiceTopicsData = [
                                 "vn": "chạm sâu đến cảm xúc của người nghe"
                             },
                             {
-                                "en": "generous philanthropic contributions",
+                                "en": "generous charity work",
                                 "vn": "những đóng góp từ thiện hào phóng"
                             },
                             {
@@ -14021,13 +14011,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Giọng hát truyền cảm chạm tới tâm hồn người nghe)",
-                        "text": "The primary reason I adore him is his exceptionally soothing voice and emotional authenticity. Not only do his gentle melodies heal my mental fatigue, but his meaningful lyrics also give me a chance to reflect on my personal relationships.",
-                        "formatted": "→ <u>The primary reason I adore him is his exceptionally</u> <span class=\"sub-hl\">soothing voice and emotional authenticity</span>. Not only do his gentle melodies <span class=\"sub-hl\">heal my mental fatigue</span>, but his meaningful lyrics also give me a chance to <span class=\"sub-hl\">reflect on my personal relationships</span>."
+                        "text": "The primary reason I adore him is his wonderfully warm and soothing voice and emotional authenticity. Not only do his gentle melodies heal my mental fatigue, but his meaningful lyrics also give me a chance to reflect on my personal relationships.",
+                        "formatted": "→ <u>The primary reason I adore him is his very</u> <span class=\"sub-hl\">soothing voice and emotional authenticity</span>. Not only do his gentle melodies <span class=\"sub-hl\">heal my mental fatigue</span>, but his meaningful lyrics also give me a chance to <span class=\"sub-hl\">reflect on my personal relationships</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Tấm lòng thiện nguyện và lối sống truyền cảm hứng)",
-                        "text": "Beyond musical talent, what inspires me most is her relentless hard work and philanthropic heart. She frequently donates to charity funds and supports young students, which motivates me to become a more compassionate individual.",
-                        "formatted": "→ <u>Beyond musical talent, what inspires me most is her</u> <span class=\"sub-hl\">relentless hard work and philanthropic heart</span>. She frequently donates to charity funds and supports young students, which motivates me to <span class=\"sub-hl\">become a more compassionate individual</span>."
+                        "text": "Beyond musical talent, what inspires me most is her nonstop hard work and generous heart. She frequently donates to charity funds and supports young students, which motivates me to become a more compassionate individual.",
+                        "formatted": "→ <u>Beyond musical talent, what inspires me most is her</u> <span class=\"sub-hl\">constant hard work and philanthropic heart</span>. She frequently donates to charity funds and supports young students, which motivates me to <span class=\"sub-hl\">become a more compassionate individual</span>."
                     }
                 ]
             },
@@ -14677,7 +14667,7 @@ const practiceTopicsData = [
                         "title": "✨ [Tính từ mô tả]:",
                         "items": [
                             {
-                                "en": "remarkably calming and therapeutic",
+                                "en": "really calming and therapeutic",
                                 "vn": "cực kỳ êm dịu và có tính chữa lành"
                             },
                             {
@@ -14740,8 +14730,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Thích vì tính chữa lành, giảm căng thẳng và diễn tả cảm xúc)",
-                        "text": "I'm really into art because I find it remarkably calming and therapeutic. Not only does it allow me to escape from daily stress, but it also gives me a chance to express emotions without using words.",
-                        "formatted": "→ <u>I'm really into art because I find it</u> <span class=\"sub-hl\">remarkably calming and therapeutic</span>. <u>Not only does it allow me to</u> <span class=\"sub-hl\">escape from daily stress</span>, <u>but it also gives me a chance to</u> <span class=\"sub-hl\">express emotions without using words</span>."
+                        "text": "I'm really into art because I find it really calming and therapeutic. Not only does it allow me to escape from daily stress, but it also gives me a chance to express emotions without using words.",
+                        "formatted": "→ <u>I'm really into art because I find it</u> <span class=\"sub-hl\">really calming and therapeutic</span>. <u>Not only does it allow me to</u> <span class=\"sub-hl\">escape from daily stress</span>, <u>but it also gives me a chance to</u> <span class=\"sub-hl\">express emotions without using words</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Thích vì giàu văn hóa, mở rộng sáng tạo và đem lại cảm giác bình yên)",
@@ -14772,7 +14762,7 @@ const practiceTopicsData = [
                                 "vn": "gặp gỡ những người cùng chung đam mê"
                             },
                             {
-                                "en": "cultivate patience and attention to detail",
+                                "en": "build patience and carefulness",
                                 "vn": "rèn luyện sự kiên nhẫn và tỉ mỉ"
                             },
                             {
@@ -14832,8 +14822,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Không bắt buộc vì tốn kém, người bận rộn có thể học qua video miễn phí)",
-                        "text": "Not necessarily. While painting classes can cultivate patience and attention to detail, they aren't for everyone since tuition fees and art supplies can be costly. People with busy lives can simply follow free online painting tutorials at home instead.",
-                        "formatted": "→ <u>Not necessarily. While painting classes can</u> <span class=\"sub-hl\">cultivate patience and attention to detail</span>, <u>they aren't for everyone since</u> <span class=\"sub-hl\">tuition fees and art supplies can be costly</span>. <u>People with busy lives can simply</u> <span class=\"sub-hl\">follow free online painting tutorials at home</span> <u>instead</u>."
+                        "text": "Not necessarily. While painting classes can build patience and carefulness, they aren't for everyone since tuition fees and art supplies can be costly. People with busy lives can simply follow free online painting tutorials at home instead.",
+                        "formatted": "→ <u>Not necessarily. While painting classes can</u> <span class=\"sub-hl\">build patience and carefulness</span>, <u>they aren't for everyone since</u> <span class=\"sub-hl\">tuition fees and art supplies can be costly</span>. <u>People with busy lives can simply</u> <span class=\"sub-hl\">follow free online painting tutorials at home</span> <u>instead</u>."
                     }
                 ]
             }
@@ -14879,7 +14869,7 @@ const practiceTopicsData = [
                                 "vn": "văn hóa địa phương phong phú"
                             },
                             {
-                                "en": "skilled traditional craftsmanship",
+                                "en": "skilled handmade work",
                                 "vn": "tay nghề thủ công truyền thống khéo léo"
                             },
                             {
@@ -15013,7 +15003,7 @@ const practiceTopicsData = [
                                 "vn": "chọn các món đồ sản xuất công nghiệp hiện đại"
                             },
                             {
-                                "en": "admire intricate artworks at exhibitions",
+                                "en": "admire detailed artworks at exhibitions",
                                 "vn": "ngưỡng mộ các tác phẩm tinh xảo tại triển lãm"
                             }
                         ]
@@ -16059,7 +16049,7 @@ const practiceTopicsData = [
                                 "vn": "kích thích trí tưởng tượng phong phú của trẻ"
                             },
                             {
-                                "en": "teach basic moral values effortlessly",
+                                "en": "teach basic moral values easily",
                                 "vn": "dạy các giá trị đạo đức cơ bản một cách tự nhiên"
                             },
                             {
@@ -16080,8 +16070,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Trẻ thích vì màu sắc rực rỡ, nhân vật vui và kích thích trí tưởng tượng)",
-                        "text": "I think children are drawn to cartoons mainly because of their vibrant colors and funny characters. Not only do cartoons stimulate their wild imagination, but they also teach basic moral values effortlessly.",
-                        "formatted": "→ <u>I think children are drawn to cartoons mainly because of</u> <span class=\"sub-hl\">their vibrant colors and funny characters</span>. <u>Not only do cartoons</u> <span class=\"sub-hl\">stimulate their wild imagination</span>, <u>but they also</u> <span class=\"sub-hl\">teach basic moral values effortlessly</span>."
+                        "text": "I think children are drawn to cartoons mainly because of their vibrant colors and funny characters. Not only do cartoons stimulate their wild imagination, but they also teach basic moral values easily.",
+                        "formatted": "→ <u>I think children are drawn to cartoons mainly because of</u> <span class=\"sub-hl\">their vibrant colors and funny characters</span>. <u>Not only do cartoons</u> <span class=\"sub-hl\">stimulate their wild imagination</span>, <u>but they also</u> <span class=\"sub-hl\">teach basic moral values easily</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trẻ thích vì vui nhộn, dễ hiểu, vừa giải trí vừa học từ mới tự nhiên)",
@@ -16180,8 +16170,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Xem cùng gia đình để tạo bầu không khí ấm áp, vui nhộn)",
-                        "text": "Personally, I much prefer watching game shows with my family members because it creates a lively and cheerful atmosphere. It allows us to guess the answers together and strengthens our bond over wholesome entertainment.",
-                        "formatted": "→ <u>Personally, I much prefer watching game shows with</u> <span class=\"sub-hl\">my family members because it creates a lively and cheerful atmosphere</span>. It allows us to <span class=\"sub-hl\">guess the answers together</span> and <span class=\"sub-hl\">strengthens our bond over wholesome entertainment</span>."
+                        "text": "Personally, I much prefer watching game shows with my family members because it creates a lively and cheerful atmosphere. It allows us to guess the answers together and strengthens our bond over healthy, fun entertainment.",
+                        "formatted": "→ <u>Personally, I much prefer watching game shows with</u> <span class=\"sub-hl\">my family members because it creates a lively and cheerful atmosphere</span>. It allows us to <span class=\"sub-hl\">guess the answers together</span> and <span class=\"sub-hl\">strengthens our bond over healthy, fun entertainment</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Xem một mình để tập trung suy nghĩ câu hỏi hóc búa)",
@@ -16205,7 +16195,7 @@ const practiceTopicsData = [
                         "title": "💡 [Lợi ích đa chiều của Gameshow]:",
                         "items": [
                             {
-                                "en": "acquire cross-disciplinary knowledge",
+                                "en": "learn interesting facts about many subjects",
                                 "vn": "tiếp thu kiến thức liên ngành đa dạng"
                             },
                             {
@@ -16213,7 +16203,7 @@ const practiceTopicsData = [
                                 "vn": "mài giũa tư duy phản biện và phản xạ nhanh nhạy"
                             },
                             {
-                                "en": "wholesome entertainment and laughter",
+                                "en": "healthy, fun entertainment and laughter",
                                 "vn": "sự giải trí lành mạnh và tiếng cười sảng khoái"
                             },
                             {
@@ -16248,7 +16238,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "Who is your favorite actor in Vietnam? Why do you like them?",
                 "qType": "Wh-question: Who is your favorite actor in Vietnam? Why?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Nêu diễn viên điện ảnh kỳ cựu với diễn xuất thực lực):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My all-time favorite actor in Vietnam is undeniably</u> <span class=\"formula-bracket-hl\">[tên diễn viên]</span>. <u>I admire him/her because of his/her versatile</u> <span class=\"formula-bracket-hl\">[kỹ năng diễn xuất]</span>, which allows him/her to <span class=\"formula-bracket-hl\">[thành tựu nghệ thuật]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Nêu gương mặt trẻ tài năng đem lại nhiều tiếng cười và cảm xúc):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>When it comes to the Vietnamese cinema scene, I have great admiration for</u> <span class=\"formula-bracket-hl\">[tên diễn viên]</span>. His/Her natural charisma and dedication allow viewers to <span class=\"formula-bracket-hl\">[cảm xúc khán giả]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Nêu diễn viên điện ảnh kỳ cựu với diễn xuất thực lực):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My all-time favorite actor in Vietnam is definitely</u> <span class=\"formula-bracket-hl\">[tên diễn viên]</span>. <u>I admire him/her because of his/her versatile</u> <span class=\"formula-bracket-hl\">[kỹ năng diễn xuất]</span>, which allows him/her to <span class=\"formula-bracket-hl\">[thành tựu nghệ thuật]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Nêu gương mặt trẻ tài năng đem lại nhiều tiếng cười và cảm xúc):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>When it comes to the Vietnamese cinema scene, I have great admiration for</u> <span class=\"formula-bracket-hl\">[tên diễn viên]</span>. His/Her natural charisma and dedication allow viewers to <span class=\"formula-bracket-hl\">[cảm xúc khán giả]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -16259,7 +16249,7 @@ const practiceTopicsData = [
                         "title": "🎬 [Diễn viên & Khả năng diễn xuất]:",
                         "items": [
                             {
-                                "en": "versatile acting prowess and depth",
+                                "en": "strong and flexible acting skills",
                                 "vn": "tài năng diễn xuất biến hóa và có chiều sâu"
                             },
                             {
@@ -16280,8 +16270,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Diễn viên Thái Hòa - Bậc thầy biến hóa nhân vật)",
-                        "text": "My all-time favorite actor in Vietnam is undeniably Thai Hoa. I admire him deeply because of his versatile acting prowess, which allows him to breathe authentic life into both hilarious comedies and emotionally intense dramas.",
-                        "formatted": "→ <u>My all-time favorite actor in Vietnam is undeniably</u> <span class=\"sub-hl\">Thai Hoa</span>. <u>I admire him deeply because of his versatile</u> <span class=\"sub-hl\">acting prowess</span>, which allows him to <span class=\"sub-hl\">breathe authentic life into both hilarious comedies and emotionally intense dramas</span>."
+                        "text": "My all-time favorite actor in Vietnam is definitely Thai Hoa. I admire him deeply because of his strong and flexible acting skills, which allows him to breathe authentic life into both hilarious comedies and emotionally intense dramas.",
+                        "formatted": "→ <u>My all-time favorite actor in Vietnam is definitely</u> <span class=\"sub-hl\">Thai Hoa</span>. <u>I admire him deeply because of his versatile</u> <span class=\"sub-hl\">acting skill</span>, which allows him to <span class=\"sub-hl\">breathe authentic life into both hilarious comedies and emotionally intense dramas</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Diễn viên Ninh Dương Lan Ngọc - Năng động và cuốn hút)",
@@ -16309,7 +16299,7 @@ const practiceTopicsData = [
                                 "vn": "sự hóa thân hoàn hảo vào các vai diễn đa dạng"
                             },
                             {
-                                "en": "relentless work ethic and professionalism",
+                                "en": "hard-working attitude and professionalism",
                                 "vn": "tinh thần làm việc bền bỉ và tính chuyên nghiệp"
                             },
                             {
@@ -16326,8 +16316,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Thực lực diễn xuất và sự cống hiến hết mình cho vai diễn)",
-                        "text": "In my view, the most important factor that makes an actor renowned is their genuine acting capability. Without dedicated training and the ability to convey profound emotions convincingly, an actor cannot sustain a long-term artistic career.",
-                        "formatted": "→ <u>In my view, the most important factor that makes an actor renowned is</u> <span class=\"sub-hl\">their genuine acting capability</span>. Without <span class=\"sub-hl\">dedicated training and the ability to convey profound emotions convincingly</span>, an actor cannot sustain a long-term artistic career."
+                        "text": "In my view, the most important factor that makes an actor renowned is their genuine acting capability. Without dedicated training and the ability to express deep emotions naturally, an actor cannot sustain a long-term artistic career.",
+                        "formatted": "→ <u>In my view, the most important factor that makes an actor renowned is</u> <span class=\"sub-hl\">their genuine acting capability</span>. Without <span class=\"sub-hl\">dedicated training and the ability to express deep emotions naturally</span>, an actor cannot sustain a long-term artistic career."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Hình tượng công chúng tích cực và ngoại hình sáng sân khấu)",
@@ -16917,11 +16907,11 @@ const practiceTopicsData = [
                                 "vn": "rộng rãi và thoải mái"
                             },
                             {
-                                "en": "cozy and tranquil",
+                                "en": "cozy and peaceful",
                                 "vn": "ấm cúng và yên bình"
                             },
                             {
-                                "en": "scrumptious and wholesome",
+                                "en": "delicious and healthy",
                                 "vn": "thơm ngon hảo hạng và lành mạnh"
                             },
                             {
@@ -16939,7 +16929,7 @@ const practiceTopicsData = [
                         "title": "🌟 [Lợi ích ngoài Bảng - Vo]:",
                         "items": [
                             {
-                                "en": "savor mouth-watering culinary delights",
+                                "en": "enjoy delicious local dishes",
                                 "vn": "thưởng thức những món ăn ngon miệng tuyệt hảo"
                             },
                             {
@@ -16951,7 +16941,7 @@ const practiceTopicsData = [
                                 "vn": "thắt chặt sự gắn kết gia đình qua bữa ăn"
                             },
                             {
-                                "en": "explore diverse gastronomic specialties",
+                                "en": "try diverse local dishes",
                                 "vn": "khám phá nhiều món ngon đặc sản phong phú"
                             }
                         ]
@@ -16960,13 +16950,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Quán ăn Việt ấm cúng gần nhà - Món ăn ngon & Gắn kết gia đình)",
-                        "text": "Whenever I have the opportunity to dine out, I tend to visit a cozy Vietnamese restaurant near my residence because I find its ambience both welcoming and elegant. Dining there allows me to savor mouth-watering culinary delights and gives me a chance to strengthen family bonding over delicious meals.",
-                        "formatted": "→ <u>Whenever I have the opportunity to dine out, I tend to visit</u> <span class=\"sub-hl\">a cozy Vietnamese restaurant near my residence</span> because I find its ambience both <span class=\"sub-hl\">welcoming and elegant</span>. Dining there allows me to <span class=\"sub-hl\">savor mouth-watering culinary delights</span> and gives me a chance to <span class=\"sub-hl\">strengthen family bonding over delicious meals</span>."
+                        "text": "Whenever I have the opportunity to dine out, I tend to visit a cozy Vietnamese restaurant near my residence because I find its ambience both welcoming and elegant. Dining there allows me to enjoy delicious local dishes and gives me a chance to strengthen family bonding over delicious meals.",
+                        "formatted": "→ <u>Whenever I have the opportunity to dine out, I tend to visit</u> <span class=\"sub-hl\">a cozy Vietnamese restaurant near my residence</span> because I find its ambience both <span class=\"sub-hl\">welcoming and elegant</span>. Dining there allows me to <span class=\"sub-hl\">enjoy delicious local dishes</span> and gives me a chance to <span class=\"sub-hl\">strengthen family bonding over delicious meals</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Quán hải sản gần nơi làm việc - Thực đơn đa dạng & Giao lưu đồng nghiệp)",
-                        "text": "One of my all-time favorite restaurants is a local seafood eatery located near my workplace. It offers a remarkably diverse menu at affordable prices, which allows me to unwind after an exhausting workday and gives me an opportunity to socialize with my colleagues.",
-                        "formatted": "→ <u>One of my all-time favorite restaurants is</u> <span class=\"sub-hl\">a local seafood eatery located near my workplace</span>. It offers <span class=\"sub-hl\">a remarkably diverse menu at affordable prices</span>, which allows me to <span class=\"sub-hl\">unwind after an exhausting workday</span> and gives me an opportunity to <span class=\"sub-hl\">socialize with my colleagues</span>."
+                        "text": "One of my all-time favorite restaurants is a local seafood eatery located near my workplace. It offers a really diverse menu at affordable prices, which allows me to unwind after an exhausting workday and gives me an opportunity to socialize with my colleagues.",
+                        "formatted": "→ <u>One of my all-time favorite restaurants is</u> <span class=\"sub-hl\">a local seafood eatery located near my workplace</span>. It offers <span class=\"sub-hl\">a really diverse menu at affordable prices</span>, which allows me to <span class=\"sub-hl\">unwind after an exhausting workday</span> and gives me an opportunity to <span class=\"sub-hl\">socialize with my colleagues</span>."
                     }
                 ]
             },
@@ -16974,7 +16964,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "What types of food are served at that restaurant?",
                 "qType": "Wh-question: What types of food are served at that restaurant?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Đặc sản truyền thống Việt Nam với hương vị đậm đà):</div>\n                    <div class=\"topic-formula-text\">\n                        → That restaurant specializes in <span class=\"formula-bracket-hl\">[loại hình ẩm thực]</span>, featuring iconic specialties such as <span class=\"formula-bracket-hl\">[món 1]</span> and <span class=\"formula-bracket-hl\">[món 2]</span>. All the dishes are exceptionally <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Thực đơn hải sản tươi sống và phương pháp chế biến tinh tế):</div>\n                    <div class=\"topic-formula-text\">\n                        → They offer an extensive selection of <span class=\"formula-bracket-hl\">[loại món ăn]</span>, including <span class=\"formula-bracket-hl\">[món 1]</span> and <span class=\"formula-bracket-hl\">[món 2]</span>. What impresses me most is that every ingredient is <span class=\"formula-bracket-hl\">[tính từ]</span>, which guarantees <span class=\"formula-bracket-hl\">[giá trị mang lại]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Đặc sản truyền thống Việt Nam với hương vị đậm đà):</div>\n                    <div class=\"topic-formula-text\">\n                        → That restaurant specializes in <span class=\"formula-bracket-hl\">[loại hình ẩm thực]</span>, featuring iconic specialties such as <span class=\"formula-bracket-hl\">[món 1]</span> and <span class=\"formula-bracket-hl\">[món 2]</span>. All the dishes are very <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Thực đơn hải sản tươi sống và phương pháp chế biến tinh tế):</div>\n                    <div class=\"topic-formula-text\">\n                        → They offer an extensive selection of <span class=\"formula-bracket-hl\">[loại món ăn]</span>, including <span class=\"formula-bracket-hl\">[món 1]</span> and <span class=\"formula-bracket-hl\">[món 2]</span>. What impresses me most is that every ingredient is <span class=\"formula-bracket-hl\">[tính từ]</span>, which guarantees <span class=\"formula-bracket-hl\">[giá trị mang lại]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🍽️ [Loại đồ ăn]:",
@@ -17109,7 +17099,7 @@ const practiceTopicsData = [
                                 "vn": "đảm bảo an toàn thực phẩm và độ tươi ngon"
                             },
                             {
-                                "en": "offers a memorable gastronomic experience",
+                                "en": "offers a wonderful dining experience",
                                 "vn": "mang đến trải nghiệm ẩm thực đáng nhớ"
                             },
                             {
@@ -17122,8 +17112,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Món ăn truyền thống - Phở bò và nem rán chuẩn vị)",
-                        "text": "That restaurant specializes in traditional Vietnamese delicacies, featuring iconic specialties such as fragrant beef noodle soup and crispy spring rolls. All the dishes are exceptionally flavorful and authentic, which offers diners a memorable gastronomic experience.",
-                        "formatted": "→ That restaurant specializes in <span class=\"sub-hl\">traditional Vietnamese delicacies</span>, featuring iconic specialties such as <span class=\"sub-hl\">fragrant beef noodle soup and crispy spring rolls</span>. All the dishes are exceptionally <span class=\"sub-hl\">flavorful and authentic</span>, which offers diners <span class=\"sub-hl\">a memorable gastronomic experience</span>."
+                        "text": "That restaurant specializes in traditional Vietnamese delicacies, featuring iconic specialties such as fragrant beef noodle soup and crispy spring rolls. All the dishes are very flavorful and authentic, which offers diners a wonderful dining experience.",
+                        "formatted": "→ That restaurant specializes in <span class=\"sub-hl\">traditional Vietnamese delicacies</span>, featuring iconic specialties such as <span class=\"sub-hl\">fragrant beef noodle soup and crispy spring rolls</span>. All the dishes are very <span class=\"sub-hl\">flavorful and authentic</span>, which offers diners <span class=\"sub-hl\">a wonderful dining experience</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Hải sản tươi sống - Tôm hấp sả và cá kho tộ đậm đà)",
@@ -17136,7 +17126,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "Do you like all the dishes there?",
                 "qType": "Choice question: Do you like all the dishes there?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Hài lòng với hầu hết các món - Hương vị hợp khẩu vị tuyệt đối):</div>\n                    <div class=\"topic-formula-text\">\n                        → Generally speaking, <u>I relish almost every dish on their menu</u> because the seasoning caters perfectly to my palate, particularly <span class=\"formula-bracket-hl\">[món yêu thích nhất]</span>. However, I tend to avoid <span class=\"formula-bracket-hl\">[món không hợp]</span> because it's slightly <span class=\"formula-bracket-hl\">[tính từ]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Khen ngợi chất lượng chung nhưng ưu tiên món thanh đạm dễ tiêu):</div>\n                    <div class=\"topic-formula-text\">\n                        → While the vast majority of their offerings are outstanding, <u>I have a selective preference</u>. I consistently opt for <span class=\"formula-bracket-hl\">[món thanh nhẹ]</span>, as it allows me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> without feeling <span class=\"formula-bracket-hl\">[cảm giác tiêu cực]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Hài lòng với hầu hết các món - Hương vị hợp khẩu vị tuyệt đối):</div>\n                    <div class=\"topic-formula-text\">\n                        → Generally speaking, <u>I love almost every dish on their menu</u> because the seasoning caters perfectly to my palate, particularly <span class=\"formula-bracket-hl\">[món yêu thích nhất]</span>. However, I tend to avoid <span class=\"formula-bracket-hl\">[món không hợp]</span> because it's slightly <span class=\"formula-bracket-hl\">[tính từ]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Khen ngợi chất lượng chung nhưng ưu tiên món thanh đạm dễ tiêu):</div>\n                    <div class=\"topic-formula-text\">\n                        → While the vast majority of their offerings are outstanding, <u>I have a selective preference</u>. I consistently opt for <span class=\"formula-bracket-hl\">[món thanh nhẹ]</span>, as it allows me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> without feeling <span class=\"formula-bracket-hl\">[cảm giác tiêu cực]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🍜 [Món yêu thích nhất] (Cách 1):",
@@ -17209,7 +17199,7 @@ const practiceTopicsData = [
                         "title": "🌟 [Cấu trúc diễn đạt khẩu vị & sự chọn lọc]:",
                         "items": [
                             {
-                                "en": "I relish almost every dish on their menu",
+                                "en": "I love almost every dish on their menu",
                                 "vn": "Tôi thưởng thức ngon lành hầu hết các món trên menu"
                             },
                             {
@@ -17238,7 +17228,7 @@ const practiceTopicsData = [
                                 "vn": "quá cay hoặc quá nhiều dầu mỡ"
                             },
                             {
-                                "en": "wholesome and light",
+                                "en": "healthy and light",
                                 "vn": "thanh đạm và nhẹ nhàng cho cơ thể"
                             },
                             {
@@ -17277,13 +17267,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Hợp khẩu vị hầu hết mọi món - Tránh món quá cay)",
-                        "text": "Generally speaking, I relish almost every dish on their menu because the culinary seasoning caters perfectly to my palate, particularly their signature beef noodles. However, I usually avoid overly spicy dishes because they can be slightly harsh on my stomach.",
-                        "formatted": "→ Generally speaking, <u>I relish almost every dish on their menu</u> because the culinary seasoning <span class=\"sub-hl\">caters perfectly to my palate</span>, particularly their signature <span class=\"sub-hl\">beef noodles</span>. However, I usually avoid <span class=\"sub-hl\">overly spicy dishes</span> because they can be slightly harsh on my stomach."
+                        "text": "Generally speaking, I love almost every dish on their menu because the rich flavors suit my taste perfectly, particularly their signature beef noodles. However, I usually avoid overly spicy dishes because they can be slightly harsh on my stomach.",
+                        "formatted": "→ Generally speaking, <u>I love almost every dish on their menu</u> because the culinary seasoning <span class=\"sub-hl\">caters perfectly to my palate</span>, particularly their signature <span class=\"sub-hl\">beef noodles</span>. However, I usually avoid <span class=\"sub-hl\">overly spicy dishes</span> because they can be slightly harsh on my stomach."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Ưu tiên món thanh nhẹ - Rau hấp và súp gà dễ tiêu)",
-                        "text": "While the vast majority of their offerings are outstanding, I have a selective preference. I consistently opt for lighter options like steamed vegetables and chicken soup, as it allows me to enjoy a wholesome meal without feeling excessively bloated.",
-                        "formatted": "→ While the vast majority of their offerings are outstanding, <u>I have a selective preference</u>. I consistently opt for <span class=\"sub-hl\">lighter options like steamed vegetables and chicken soup</span>, as it allows me to <span class=\"sub-hl\">enjoy a wholesome meal without feeling excessively bloated</span>."
+                        "text": "While the vast majority of their offerings are outstanding, I have a selective preference. I consistently opt for lighter options like steamed vegetables and chicken soup, as it allows me to enjoy a healthy, light meal without feeling too full.",
+                        "formatted": "→ While the vast majority of their offerings are outstanding, <u>I have a selective preference</u>. I consistently opt for <span class=\"sub-hl\">lighter options like steamed vegetables and chicken soup</span>, as it allows me to <span class=\"sub-hl\">enjoy a healthy, light meal without feeling too full</span>."
                     }
                 ]
             }
@@ -17457,7 +17447,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "Have you ever been to a fast food restaurant?",
                 "qType": "Have you ever question: Have you ever been to a fast food restaurant?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Đã từng đến - Thỉnh thoảng tụ tập bạn bè vì tiện lợi & nhanh chóng):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, occasionally. <u>Whenever I'm pressed for time or hanging out with my friends</u>, I drop by <span class=\"formula-bracket-hl\">[tên chuỗi cửa hàng]</span> because it's both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. It allows us to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives us a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Hiếm khi - Ưu tiên cơm nhà vì sức khỏe và tiết kiệm):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, but only once in a blue moon. Nowadays, <u>I consciously prioritize wholesome home-cooked meals</u> because they're far more <span class=\"formula-bracket-hl\">[tính từ]</span>. Preparing food at home allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Đã từng đến - Thỉnh thoảng tụ tập bạn bè vì tiện lợi & nhanh chóng):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, occasionally. <u>Whenever I'm pressed for time or hanging out with my friends</u>, I drop by <span class=\"formula-bracket-hl\">[tên chuỗi cửa hàng]</span> because it's both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. It allows us to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives us a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Hiếm khi - Ưu tiên cơm nhà vì sức khỏe và tiết kiệm):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, but only once in a blue moon. Nowadays, <u>I actively choose healthy home-cooked meals</u> because they're far more <span class=\"formula-bracket-hl\">[tính từ]</span>. Preparing food at home allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🍟 [Tên quán fast food] (Cách 1):",
@@ -17563,7 +17553,7 @@ const practiceTopicsData = [
                                 "vn": "cực kỳ hiếm khi / năm thì mười họa"
                             },
                             {
-                                "en": "I consciously prioritize wholesome home-cooked meals",
+                                "en": "I actively choose healthy home-cooked meals",
                                 "vn": "Tôi chủ động ưu tiên các bữa cơm nhà lành mạnh"
                             },
                             {
@@ -17605,7 +17595,7 @@ const practiceTopicsData = [
                                 "vn": "bổ dưỡng và đảm bảo vệ sinh (cơm nhà)"
                             },
                             {
-                                "en": "wholesome",
+                                "en": "healthy",
                                 "vn": "lành mạnh và tốt cho sức khỏe"
                             }
                         ]
@@ -17645,8 +17635,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Hiếm khi đi - Ưu tiên cơm nhà dinh dưỡng & Tiết kiệm chi phí)",
-                        "text": "Yes, but only once in a blue moon. Nowadays, I consciously prioritize wholesome home-cooked meals because they're far more nutritious and hygienic. Preparing food at home allows me to control calories and gives me an opportunity to save substantial expenses.",
-                        "formatted": "→ Yes, but <u>only once in a blue moon</u>. Nowadays, <u>I consciously prioritize wholesome home-cooked meals</u> because they're far more <span class=\"sub-hl\">nutritious and hygienic</span>. Preparing food at home allows me to <span class=\"sub-hl\">control calories</span> and gives me an opportunity to <span class=\"sub-hl\">save substantial expenses</span>."
+                        "text": "Yes, but only once in a blue moon. Nowadays, I actively choose healthy home-cooked meals because they're far more nutritious and hygienic. Preparing food at home allows me to control calories and gives me an opportunity to save substantial expenses.",
+                        "formatted": "→ Yes, but <u>only once in a blue moon</u>. Nowadays, <u>I actively choose healthy home-cooked meals</u> because they're far more <span class=\"sub-hl\">nutritious and hygienic</span>. Preparing food at home allows me to <span class=\"sub-hl\">control calories</span> and gives me an opportunity to <span class=\"sub-hl\">save substantial expenses</span>."
                     }
                 ]
             },
@@ -17654,7 +17644,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "What is your favorite fast food?",
                 "qType": "Wh-question: What is your favorite fast food?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Món khoái khẩu - Hương vị giòn rụm & giải tỏa căng thẳng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I'm a big fan of</u> <span class=\"formula-bracket-hl\">[tên món ăn]</span> because I find its texture both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. Savoring it allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Món ăn lý tưởng để chia sẻ cùng bạn bè dịp tụ họp):</div>\n                    <div class=\"topic-formula-text\">\n                        → Without hesitation, <u>my top pick would be</u> <span class=\"formula-bracket-hl\">[tên món ăn]</span>. It's exceptionally <span class=\"formula-bracket-hl\">[tính từ]</span>, which makes it ideal for sharing with friends to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Món khoái khẩu - Hương vị giòn rụm & giải tỏa căng thẳng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I'm a big fan of</u> <span class=\"formula-bracket-hl\">[tên món ăn]</span> because I find its texture both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. Eating it allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Món ăn lý tưởng để chia sẻ cùng bạn bè dịp tụ họp):</div>\n                    <div class=\"topic-formula-text\">\n                        → Without hesitation, <u>my top pick would be</u> <span class=\"formula-bracket-hl\">[tên món ăn]</span>. It's very <span class=\"formula-bracket-hl\">[tính từ]</span>, which makes it ideal for sharing with friends to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🍗 [Tên món ăn nhanh]:",
@@ -17812,11 +17802,11 @@ const practiceTopicsData = [
                         "title": "✨ [Tính từ mô tả hương vị & độ ngon B2]:",
                         "items": [
                             {
-                                "en": "crunchy and delightfully juicy",
+                                "en": "crispy and wonderfully juicy",
                                 "vn": "giòn tan và mọng nước đầy mê hoặc"
                             },
                             {
-                                "en": "scrumptious and richly seasoned",
+                                "en": "delicious and well-seasoned",
                                 "vn": "thơm ngon hảo hạng và tẩm ướp đậm đà"
                             },
                             {
@@ -17841,7 +17831,7 @@ const practiceTopicsData = [
                                 "vn": "ngay lập tức vực dậy tinh thần sau các kỳ thi căng thẳng"
                             },
                             {
-                                "en": "foster joyful bonding moments with friends",
+                                "en": "create fun bonding moments with friends",
                                 "vn": "tạo nên những giây phút gắn kết vui tươi bên bạn bè"
                             },
                             {
@@ -17854,13 +17844,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Gà rán giòn rụm - Thỏa mãn cơn thèm & Vực dậy tinh thần)",
-                        "text": "I'm a big fan of crispy golden fried chicken because I find its texture both crunchy and delightfully juicy. Savoring it allows me to satisfy my comfort food cravings and gives me a chance to instantly uplift my spirits after stressful exams.",
-                        "formatted": "→ <u>I'm a big fan of</u> <span class=\"sub-hl\">crispy golden fried chicken</span> because I find its texture both <span class=\"sub-hl\">crunchy and delightfully juicy</span>. Savoring it allows me to <span class=\"sub-hl\">satisfy my comfort food cravings</span> and gives me a chance to <span class=\"sub-hl\">instantly uplift my spirits after stressful exams</span>."
+                        "text": "I'm a big fan of crispy golden fried chicken because I find its texture both crispy and wonderfully juicy. Eating it allows me to satisfy my comfort food cravings and gives me a chance to instantly uplift my spirits after stressful exams.",
+                        "formatted": "→ <u>I'm a big fan of</u> <span class=\"sub-hl\">crispy golden fried chicken</span> because I find its texture both <span class=\"sub-hl\">crispy and wonderfully juicy</span>. Eating it allows me to <span class=\"sub-hl\">satisfy my comfort food cravings</span> and gives me a chance to <span class=\"sub-hl\">instantly uplift my spirits after stressful exams</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Pizza phô mai - Đậm đà thơm ngậy & Gắn kết bạn bè)",
-                        "text": "Without hesitation, my top pick would be hot cheese pizza. It's exceptionally scrumptious and richly seasoned, which makes it ideal for sharing with friends to foster bonding moments and celebrate pleasant weekend gatherings.",
-                        "formatted": "→ Without hesitation, <u>my top pick would be</u> <span class=\"sub-hl\">hot cheese pizza</span>. It's exceptionally <span class=\"sub-hl\">scrumptious and richly seasoned</span>, which makes it ideal for sharing with friends to <span class=\"sub-hl\">foster bonding moments and celebrate pleasant weekend gatherings</span>."
+                        "text": "Without hesitation, my top pick would be hot cheese pizza. It's super delicious and flavorful, which makes it ideal for sharing with friends to enjoy fun moments and celebrate pleasant weekend gatherings.",
+                        "formatted": "→ Without hesitation, <u>my top pick would be</u> <span class=\"sub-hl\">hot cheese pizza</span>. It's very <span class=\"sub-hl\">delicious and well-seasoned</span>, which makes it ideal for sharing with friends to <span class=\"sub-hl\">build bonding moments and celebrate pleasant weekend gatherings</span>."
                     }
                 ]
             },
@@ -17868,7 +17858,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "Is it healthy to eat fast food?",
                 "qType": "Is it healthy question: Is it healthy to eat fast food?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Khẳng định tác hại lớn đến sức khỏe - Nhiều chất béo xấu & calo rỗng):</div>\n                    <div class=\"topic-formula-text\">\n                        → Definitely not. From a nutritional standpoint, <u>eating fast food too often is very bad for our health</u> because it's laden with <span class=\"formula-bracket-hl\">[chất béo / phụ gia độc hại]</span>. It can lead to <span class=\"formula-bracket-hl\">[tác hại 1]</span> and significantly increases the risk of <span class=\"formula-bracket-hl\">[tác hại 2]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Cấu trúc nhượng bộ tương phản - Tiện lợi tức thì nhưng hại lâu dài):</div>\n                    <div class=\"topic-formula-text\">\n                        → Although fast food is undeniably convenient and tasty, <u>it is harmful to our health in the long run</u>. Therefore, it's advisable to <span class=\"formula-bracket-hl\">[biện pháp lành mạnh]</span> in order to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Khẳng định tác hại lớn đến sức khỏe - Nhiều chất béo xấu & calo rỗng):</div>\n                    <div class=\"topic-formula-text\">\n                        → Definitely not. From a health point of view, <u>eating fast food too often is very bad for our health</u> because it's full of <span class=\"formula-bracket-hl\">[chất béo / phụ gia độc hại]</span>. It can lead to <span class=\"formula-bracket-hl\">[tác hại 1]</span> and significantly increases the risk of <span class=\"formula-bracket-hl\">[tác hại 2]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Cấu trúc nhượng bộ tương phản - Tiện lợi tức thì nhưng hại lâu dài):</div>\n                    <div class=\"topic-formula-text\">\n                        → Although fast food is certainly convenient and tasty, <u>it is harmful to our health in the long run</u>. Therefore, it's advisable to <span class=\"formula-bracket-hl\">[biện pháp lành mạnh]</span> in order to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "⚠️ [Chất không tốt trong fast food] (Cách 1):",
@@ -17963,7 +17953,7 @@ const practiceTopicsData = [
                         "title": "⚠️ [Thành phần có hại trong fast food]:",
                         "items": [
                             {
-                                "en": "saturated fats and excessive sodium",
+                                "en": "unhealthy fats and too much salt",
                                 "vn": "chất béo bão hòa và lượng muối natri dư thừa"
                             },
                             {
@@ -17988,7 +17978,7 @@ const practiceTopicsData = [
                                 "vn": "tăng cân nhanh chóng và béo phì"
                             },
                             {
-                                "en": "cardiovascular diseases and hypertension",
+                                "en": "heart disease and high blood pressure",
                                 "vn": "các bệnh tim mạch và cao huyết áp"
                             },
                             {
@@ -18005,11 +17995,11 @@ const practiceTopicsData = [
                         "title": "🥦 [Biện pháp & Lối sống lành mạnh B2]:",
                         "items": [
                             {
-                                "en": "prioritize nutrient-rich home-cooked meals",
+                                "en": "choose healthy, balanced home-cooked meals",
                                 "vn": "ưu tiên các bữa cơm nhà tự nấu giàu dưỡng chất"
                             },
                             {
-                                "en": "maintain optimal metabolic health",
+                                "en": "maintain good overall health",
                                 "vn": "duy trì sức khỏe trao đổi chất ở trạng thái tối ưu"
                             },
                             {
@@ -18017,7 +18007,7 @@ const practiceTopicsData = [
                                 "vn": "phòng ngừa các bệnh lý mãn tính do lối sống"
                             },
                             {
-                                "en": "embrace a wholesome Mediterranean-style diet",
+                                "en": "follow a balanced diet with plenty of vegetables",
                                 "vn": "áp dụng chế độ ăn uống lành mạnh phong phú rau xanh"
                             }
                         ]
@@ -18031,8 +18021,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Cấu trúc tương phản Although - Ưu tiên cơm nhà để duy trì sức khỏe)",
-                        "text": "Although fast food is undeniably convenient and tasty, it is harmful to our health in the long run. Therefore, it's advisable to prioritize home-cooked meals in order to maintain good fitness and prevent serious health problems.",
-                        "formatted": "→ Although fast food is undeniably convenient and tasty, <u>it is harmful to our health in the long run</u>. Therefore, it's advisable to <span class=\"sub-hl\">prioritize home-cooked meals</span> in order to <span class=\"sub-hl\">maintain good fitness and prevent serious health problems</span>."
+                        "text": "Although fast food is certainly convenient and tasty, it is harmful to our health in the long run. Therefore, it's advisable to prioritize home-cooked meals in order to maintain good fitness and prevent serious health problems.",
+                        "formatted": "→ Although fast food is certainly convenient and tasty, <u>it is harmful to our health in the long run</u>. Therefore, it's advisable to <span class=\"sub-hl\">prioritize home-cooked meals</span> in order to <span class=\"sub-hl\">maintain good fitness and prevent serious health problems</span>."
                     }
                 ]
             }
@@ -18112,7 +18102,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "What are some famous street foods?",
                 "qType": "Wh-question: What are some famous street foods?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Nêu các món truyền thống nổi tiếng thế giới):</div>\n                    <div class=\"topic-formula-text\">\n                        → When it comes to Vietnamese street food, <u>dishes like</u> <span class=\"formula-bracket-hl\">[món ăn 1]</span> and <span class=\"formula-bracket-hl\">[món ăn 2]</span> <u>are undeniably the most famous</u>. Not only are they <span class=\"formula-bracket-hl\">[tính từ 1]</span>, but they also offer <span class=\"formula-bracket-hl\">[lợi ích / trải nghiệm]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Nêu các món ăn vặt hiện đại được giới trẻ săn đón):</div>\n                    <div class=\"topic-formula-text\">\n                        → In my opinion, <u>popular street snacks such as</u> <span class=\"formula-bracket-hl\">[món ăn vặt 1]</span> and <span class=\"formula-bracket-hl\">[món ăn vặt 2]</span> <u>are exceptionally well-known among</u> <span class=\"formula-bracket-hl\">[đối tượng]</span> because they are <span class=\"formula-bracket-hl\">[đặc điểm]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Nêu các món truyền thống nổi tiếng thế giới):</div>\n                    <div class=\"topic-formula-text\">\n                        → When it comes to Vietnamese street food, <u>dishes like</u> <span class=\"formula-bracket-hl\">[món ăn 1]</span> and <span class=\"formula-bracket-hl\">[món ăn 2]</span> <u>are definitely the most famous</u>. Not only are they <span class=\"formula-bracket-hl\">[tính từ 1]</span>, but they also offer <span class=\"formula-bracket-hl\">[lợi ích / trải nghiệm]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Nêu các món ăn vặt hiện đại được giới trẻ săn đón):</div>\n                    <div class=\"topic-formula-text\">\n                        → In my opinion, <u>popular street snacks such as</u> <span class=\"formula-bracket-hl\">[món ăn vặt 1]</span> and <span class=\"formula-bracket-hl\">[món ăn vặt 2]</span> <u>are very well-known among</u> <span class=\"formula-bracket-hl\">[đối tượng]</span> because they are <span class=\"formula-bracket-hl\">[đặc điểm]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -18148,13 +18138,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Bánh mì giòn và gỏi cuốn nổi tiếng thế giới)",
-                        "text": "When it comes to Vietnamese street food, dishes like crispy Vietnamese baguettes and fresh spring rolls are undeniably the most famous. Not only are they mouth-watering and widely accessible, but they also offer a fantastic culinary experience without costing a fortune.",
-                        "formatted": "→ When it comes to Vietnamese street food, <u>dishes like</u> <span class=\"sub-hl\">crispy Vietnamese baguettes and fresh spring rolls are undeniably the most famous</span>. Not only are they <span class=\"sub-hl\">mouth-watering and widely accessible</span>, but they also offer <span class=\"sub-hl\">a fantastic culinary experience without costing a fortune</span>."
+                        "text": "When it comes to Vietnamese street food, dishes like crispy Vietnamese baguettes and fresh spring rolls are definitely the most famous. Not only are they mouth-watering and widely accessible, but they also offer a fantastic culinary experience without costing a fortune.",
+                        "formatted": "→ When it comes to Vietnamese street food, <u>dishes like</u> <span class=\"sub-hl\">crispy Vietnamese baguettes and fresh spring rolls are definitely the most famous</span>. Not only are they <span class=\"sub-hl\">mouth-watering and widely accessible</span>, but they also offer <span class=\"sub-hl\">a fantastic culinary experience without costing a fortune</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Bánh tráng trộn và trà sữa được giới trẻ yêu thích)",
-                        "text": "In my opinion, popular street snacks such as seasoned mixed rice paper and sweet bubble tea are exceptionally well-known among students and young adults. People tend to enjoy them after school because they are tasty, convenient, and perfect for catching up with peers.",
-                        "formatted": "→ In my opinion, <u>popular street snacks such as</u> <span class=\"sub-hl\">seasoned mixed rice paper and sweet bubble tea are exceptionally well-known among</span> <span class=\"sub-hl\">students and young adults</span> because they are <span class=\"sub-hl\">tasty, convenient, and perfect for catching up with peers</span>."
+                        "text": "In my opinion, popular street snacks such as seasoned mixed rice paper and sweet bubble tea are very well-known among students and young adults. People tend to enjoy them after school because they are tasty, convenient, and perfect for catching up with peers.",
+                        "formatted": "→ In my opinion, <u>popular street snacks such as</u> <span class=\"sub-hl\">seasoned mixed rice paper and sweet bubble tea are very well-known among</span> <span class=\"sub-hl\">students and young adults</span> because they are <span class=\"sub-hl\">tasty, convenient, and perfect for catching up with peers</span>."
                     }
                 ]
             },
@@ -18162,7 +18152,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "What are the benefits of eating street food?",
                 "qType": "Wh-question: What are the benefits of [V-ing]?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Tiết kiệm thời gian và ngân sách cho người bận rộn):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>One major benefit of street food is that it is remarkably</u> <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. It allows <span class=\"formula-bracket-hl\">[đối tượng]</span> to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> without <span class=\"formula-bracket-hl\">[lợi ích 2 - V-ing]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trải nghiệm văn hóa & gắn kết bạn bè trong không gian ấm cúng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Without a doubt, street food offers a wonderful</u> <span class=\"formula-bracket-hl\">[trải nghiệm]</span>. It gives people a great opportunity to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> while <span class=\"formula-bracket-hl\">[lợi ích 2 - V-ing]</span> in an informal atmosphere.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Tiết kiệm thời gian và ngân sách cho người bận rộn):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>One major benefit of street food is that it is really</u> <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. It allows <span class=\"formula-bracket-hl\">[đối tượng]</span> to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> without <span class=\"formula-bracket-hl\">[lợi ích 2 - V-ing]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trải nghiệm văn hóa & gắn kết bạn bè trong không gian ấm cúng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Without a doubt, street food offers a wonderful</u> <span class=\"formula-bracket-hl\">[trải nghiệm]</span>. It gives people a great opportunity to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> while <span class=\"formula-bracket-hl\">[lợi ích 2 - V-ing]</span> in an informal atmosphere.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -18173,7 +18163,7 @@ const practiceTopicsData = [
                         "title": "💡 [Lợi ích nổi bật của thức ăn đường phố]:",
                         "items": [
                             {
-                                "en": "remarkably budget-friendly and time-saving",
+                                "en": "really budget-friendly and time-saving",
                                 "vn": "rất hợp túi tiền và tiết kiệm thời gian"
                             },
                             {
@@ -18198,8 +18188,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Tiết kiệm chi phí và tiện lợi cho người có lịch bận rộn)",
-                        "text": "One major benefit of street food is that it is remarkably budget-friendly and time-saving. It allows busy students and office workers to grab a satisfying meal on the go without breaking the bank.",
-                        "formatted": "→ <u>One major benefit of street food is that it is remarkably</u> <span class=\"sub-hl\">budget-friendly and time-saving</span>. It allows <span class=\"sub-hl\">busy students and office workers</span> to <span class=\"sub-hl\">grab a satisfying meal on the go</span> without <span class=\"sub-hl\">breaking the bank</span>."
+                        "text": "One major benefit of street food is that it is really budget-friendly and time-saving. It allows busy students and office workers to grab a satisfying meal on the go without breaking the bank.",
+                        "formatted": "→ <u>One major benefit of street food is that it is really</u> <span class=\"sub-hl\">budget-friendly and time-saving</span>. It allows <span class=\"sub-hl\">busy students and office workers</span> to <span class=\"sub-hl\">grab a satisfying meal on the go</span> without <span class=\"sub-hl\">breaking the bank</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Khám phá văn hóa ẩm thực và giao lưu bạn bè)",
@@ -18661,7 +18651,7 @@ const practiceTopicsData = [
                         "title": "✨ [Tính từ mô tả đồ ăn Việt]:",
                         "items": [
                             {
-                                "en": "wholesome and comforting",
+                                "en": "healthy and comforting",
                                 "vn": "lành mạnh và ấm lòng"
                             },
                             {
@@ -18837,7 +18827,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "Do you like cooking?",
                 "qType": "Do you like question: Do you like cooking?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Rất thích nấu ăn - Sáng tạo và giải tỏa áp lực sau ngày làm việc):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, definitely. <u>I'm really into cooking</u> because I find it both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. Preparing homemade meals allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Hiếm khi nấu do lịch trình bận rộn - Thường ăn cơm do người thân nấu):</div>\n                    <div class=\"topic-formula-text\">\n                        → To be honest, <u>I rarely have time to cook</u> because of my demanding schedule. However, I often enjoy wholesome meals prepared by my <span class=\"formula-bracket-hl\">[người thân]</span>, which gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Rất thích nấu ăn - Sáng tạo và giải tỏa áp lực sau ngày làm việc):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, definitely. <u>I'm really into cooking</u> because I find it both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>. Preparing homemade meals allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Hiếm khi nấu do lịch trình bận rộn - Thường ăn cơm do người thân nấu):</div>\n                    <div class=\"topic-formula-text\">\n                        → To be honest, <u>I rarely have time to cook</u> because of my demanding schedule. However, I often enjoy healthy meals prepared by my <span class=\"formula-bracket-hl\">[người thân]</span>, which gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "✨ [Tính từ mô tả nấu ăn] (Cách 1):",
@@ -19000,8 +18990,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Hiếm khi nấu vì bận học - Ăn cơm mẹ nấu & Duy trì sức khỏe)",
-                        "text": "To be honest, I rarely have time to cook because of my demanding study schedule. However, I often enjoy wholesome meals prepared by my mother, which allows me to maintain good health and gives me an opportunity to cherish warm family moments.",
-                        "formatted": "→ To be honest, <u>I rarely have time to cook</u> because of my <span class=\"sub-hl\">demanding study schedule</span>. However, I often enjoy wholesome meals <span class=\"sub-hl\">prepared by my mother</span>, which allows me to <span class=\"sub-hl\">maintain good health</span> and gives me an opportunity to <span class=\"sub-hl\">cherish warm family moments</span>."
+                        "text": "To be honest, I rarely have time to cook because of my demanding study schedule. However, I often enjoy healthy meals prepared by my mother, which allows me to maintain good health and gives me an opportunity to cherish warm family moments.",
+                        "formatted": "→ To be honest, <u>I rarely have time to cook</u> because of my <span class=\"sub-hl\">demanding study schedule</span>. However, I often enjoy healthy meals <span class=\"sub-hl\">prepared by my mother</span>, which allows me to <span class=\"sub-hl\">maintain good health</span> and gives me an opportunity to <span class=\"sub-hl\">cherish warm family moments</span>."
                     }
                 ]
             },
@@ -19009,7 +18999,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "What is the most popular food in your country?",
                 "qType": "Wh-question: What is the most popular food in your country?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Phở bò truyền thống - Hương vị tinh tế & biểu tượng ẩm thực):</div>\n                    <div class=\"topic-formula-text\">\n                        → In Vietnam, <u>one of the most iconic and popular dishes is</u> <span class=\"formula-bracket-hl\">[tên món ăn]</span>. It's famous for its <span class=\"formula-bracket-hl\">[đặc trưng món ăn]</span>, which allows diners to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives them a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Bánh mì Việt Nam - Tiện lợi, giòn rụm và đậm đà bản sắc):</div>\n                    <div class=\"topic-formula-text\">\n                        → Without a doubt, <u>Vietnamese baguette (bánh mì) is exceptionally popular across the country</u>. It's both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>, making it an ideal choice for <span class=\"formula-bracket-hl\">[đối tượng / hoàn cảnh]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Phở bò truyền thống - Hương vị tinh tế & biểu tượng ẩm thực):</div>\n                    <div class=\"topic-formula-text\">\n                        → In Vietnam, <u>one of the most iconic and popular dishes is</u> <span class=\"formula-bracket-hl\">[tên món ăn]</span>. It's famous for its <span class=\"formula-bracket-hl\">[đặc trưng món ăn]</span>, which allows diners to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives them a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Bánh mì Việt Nam - Tiện lợi, giòn rụm và đậm đà bản sắc):</div>\n                    <div class=\"topic-formula-text\">\n                        → Without a doubt, <u>Vietnamese baguette (bánh mì) is very popular across the country</u>. It's both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>, making it an ideal choice for <span class=\"formula-bracket-hl\">[đối tượng / hoàn cảnh]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🍲 [Món ăn nổi tiếng]:",
@@ -19132,7 +19122,7 @@ const practiceTopicsData = [
                                 "vn": "vỏ ngoài giòn rụm, nhân bên trong thơm béo"
                             },
                             {
-                                "en": "wholesome and nutritious",
+                                "en": "healthy and nutritious",
                                 "vn": "thanh lành và giàu giá trị dinh dưỡng"
                             },
                             {
@@ -19145,7 +19135,7 @@ const practiceTopicsData = [
                         "title": "🌿 [Giá trị ẩm thực]:",
                         "items": [
                             {
-                                "en": "savor the essence of Vietnamese culinary culture",
+                                "en": "enjoy the best of Vietnamese food culture",
                                 "vn": "thưởng thức tinh hoa văn hóa ẩm thực Việt Nam"
                             },
                             {
@@ -19167,13 +19157,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Phở bò truyền thống - Tinh hoa ẩm thực & Nước dùng thơm nức)",
-                        "text": "In Vietnam, one of the most iconic and popular dishes is traditional beef noodle soup. It's famous for its fragrant, slow-cooked broth and fresh herbs, which allows diners to savor the essence of Vietnamese culinary culture and enjoy a fulfilling breakfast.",
-                        "formatted": "→ In Vietnam, <u>one of the most iconic and popular dishes is</u> <span class=\"sub-hl\">traditional beef noodle soup</span>. It's famous for its <span class=\"sub-hl\">fragrant, slow-cooked broth and fresh herbs</span>, which allows diners to <span class=\"sub-hl\">savor the essence of Vietnamese culinary culture</span> and enjoy a fulfilling breakfast."
+                        "text": "In Vietnam, one of the most iconic and popular dishes is traditional beef noodle soup. It's famous for its fragrant, slow-cooked broth and fresh herbs, which allows diners to enjoy the best of Vietnamese food culture and enjoy a fulfilling breakfast.",
+                        "formatted": "→ In Vietnam, <u>one of the most iconic and popular dishes is</u> <span class=\"sub-hl\">traditional beef noodle soup</span>. It's famous for its <span class=\"sub-hl\">fragrant, slow-cooked broth and fresh herbs</span>, which allows diners to <span class=\"sub-hl\">enjoy the best of Vietnamese food culture</span> and enjoy a fulfilling breakfast."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Bánh mì Việt Nam - Tiện lợi, giòn rụm & Phù hợp mọi người)",
-                        "text": "Without a doubt, Vietnamese baguette (bánh mì) is exceptionally popular across the country. It's both convenient and budget-friendly, with a crispy crust and savory fillings, making it an ideal choice for students and busy workers on the go.",
-                        "formatted": "→ Without a doubt, <u>Vietnamese baguette (bánh mì) is exceptionally popular across the country</u>. It's both <span class=\"sub-hl\">convenient and budget-friendly</span>, with a <span class=\"sub-hl\">crispy crust and savory fillings</span>, making it an ideal choice for <span class=\"sub-hl\">students and busy workers on the go</span>."
+                        "text": "Without a doubt, Vietnamese baguette (bánh mì) is very popular across the country. It's both convenient and budget-friendly, with a crispy crust and savory fillings, making it an ideal choice for students and busy workers on the go.",
+                        "formatted": "→ Without a doubt, <u>Vietnamese baguette (bánh mì) is very popular across the country</u>. It's both <span class=\"sub-hl\">convenient and budget-friendly</span>, with a <span class=\"sub-hl\">crispy crust and savory fillings</span>, making it an ideal choice for <span class=\"sub-hl\">students and busy workers on the go</span>."
                     }
                 ]
             },
@@ -19301,7 +19291,7 @@ const practiceTopicsData = [
                                 "vn": "giàu dinh dưỡng và đảm bảo vệ sinh an toàn"
                             },
                             {
-                                "en": "cost-effective and wholesome",
+                                "en": "affordable and healthy",
                                 "vn": "tiết kiệm chi phí và tốt cho sức khỏe"
                             },
                             {
@@ -19523,7 +19513,7 @@ const practiceTopicsData = [
                                 "vn": "học cách nêm nếm và cân bằng hương vị món ăn"
                             },
                             {
-                                "en": "gain confidence in preparing wholesome meals",
+                                "en": "gain confidence in preparing healthy meals",
                                 "vn": "tự tin hơn khi tự tay chuẩn bị các bữa ăn bổ dưỡng"
                             },
                             {
@@ -19731,7 +19721,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "How important is a cooking class?",
                 "qType": "Wh-question: How important is a cooking class?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Rất quan trọng - Cung cấp kỹ năng sống thiết yếu & lối sống lành mạnh):</div>\n                    <div class=\"topic-formula-text\">\n                        → From my perspective, <u>a cooking class is of great importance</u> because it equips people with <span class=\"formula-bracket-hl\">[kỹ năng / kiến thức]</span>. It allows learners to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives them an opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Hữu ích nhưng không bắt buộc - Có thể tự học qua Internet tiết kiệm):</div>\n                    <div class=\"topic-formula-text\">\n                        → While a cooking class is undoubtedly beneficial, <u>I don't consider it absolutely indispensable</u>. Thanks to the internet, people can easily learn from <span class=\"formula-bracket-hl\">[kênh tự học]</span>, which allows them to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> while <span class=\"formula-bracket-hl\">[lợi ích 2 - V-ing]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Rất quan trọng - Cung cấp kỹ năng sống thiết yếu & lối sống lành mạnh):</div>\n                    <div class=\"topic-formula-text\">\n                        → From my perspective, <u>a cooking class is of great importance</u> because it equips people with <span class=\"formula-bracket-hl\">[kỹ năng / kiến thức]</span>. It allows learners to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives them an opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Hữu ích nhưng không bắt buộc - Có thể tự học qua Internet tiết kiệm):</div>\n                    <div class=\"topic-formula-text\">\n                        → While a cooking class is undoubtedly beneficial, <u>I don't think it is completely necessary</u>. Thanks to the internet, people can easily learn from <span class=\"formula-bracket-hl\">[kênh tự học]</span>, which allows them to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> while <span class=\"formula-bracket-hl\">[lợi ích 2 - V-ing]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🌟 [Kỹ năng học được] (Cách 1):",
@@ -19817,7 +19807,7 @@ const practiceTopicsData = [
                                 "vn": "không nghi ngờ gì là rất có ích"
                             },
                             {
-                                "en": "I don't consider it absolutely indispensable",
+                                "en": "I don't think it is completely necessary",
                                 "vn": "Tôi không xem nó là điều hoàn toàn bắt buộc"
                             }
                         ]
@@ -19873,8 +19863,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Hữu ích nhưng không bắt buộc - Tự học video mạng linh hoạt & tiết kiệm)",
-                        "text": "While a cooking class is undoubtedly beneficial, I don't consider it absolutely indispensable. Thanks to the internet, people can easily follow free video tutorials, which allows them to acquire practical cooking skills flexibly while saving substantial tuition expenses.",
-                        "formatted": "→ While a cooking class is undoubtedly beneficial, <u>I don't consider it absolutely indispensable</u>. Thanks to the internet, people can easily follow <span class=\"sub-hl\">free video tutorials</span>, which allows them to <span class=\"sub-hl\">acquire practical cooking skills flexibly</span> while <span class=\"sub-hl\">saving substantial tuition expenses</span>."
+                        "text": "While a cooking class is undoubtedly beneficial, I don't think it is completely necessary. Thanks to the internet, people can easily follow free video tutorials, which allows them to acquire practical cooking skills flexibly while saving substantial tuition expenses.",
+                        "formatted": "→ While a cooking class is undoubtedly beneficial, <u>I don't think it is completely necessary</u>. Thanks to the internet, people can easily follow <span class=\"sub-hl\">free video tutorials</span>, which allows them to <span class=\"sub-hl\">acquire practical cooking skills flexibly</span> while <span class=\"sub-hl\">saving substantial tuition expenses</span>."
                     }
                 ]
             }
@@ -20253,7 +20243,7 @@ const practiceTopicsData = [
                                 "vn": "thanh đạm nhưng vẫn rất đã miệng"
                             },
                             {
-                                "en": "wholesome and packed with fresh herbs",
+                                "en": "healthy and full of fresh herbs",
                                 "vn": "bổ dưỡng và nhiều rau thơm tươi"
                             }
                         ]
@@ -20897,7 +20887,7 @@ const practiceTopicsData = [
                                 "vn": "giòn và cực kỳ giải nhiệt"
                             },
                             {
-                                "en": "creamy and nutrient-rich",
+                                "en": "creamy and very nutritious",
                                 "vn": "béo ngậy và giàu dưỡng chất"
                             },
                             {
@@ -20957,8 +20947,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Bơ tươi - Nhấn mạnh cách chế biến đa dạng)",
-                        "text": "If I had to pick one, I'd definitely go for fresh avocado, which is creamy and nutrient-rich. Not only can I eat it fresh or blend it into smoothies, but it also helps me get plenty of vitamin C and antioxidants.",
-                        "formatted": "→ <u>If I had to pick one, I'd definitely go for</u> <span class=\"sub-hl\">fresh avocado</span>, <u>which is</u> <span class=\"sub-hl\">creamy and nutrient-rich</span>. <u>Not only can I</u> <span class=\"sub-hl\">eat it fresh or blend it into smoothies</span>, <u>but it also helps me</u> <span class=\"sub-hl\">get plenty of vitamin C and antioxidants</span>."
+                        "text": "If I had to pick one, I'd definitely go for fresh avocado, which is creamy and very nutritious. Not only can I eat it fresh or blend it into smoothies, but it also helps me get plenty of vitamin C and antioxidants.",
+                        "formatted": "→ <u>If I had to pick one, I'd definitely go for</u> <span class=\"sub-hl\">fresh avocado</span>, <u>which is</u> <span class=\"sub-hl\">creamy and very nutritious</span>. <u>Not only can I</u> <span class=\"sub-hl\">eat it fresh or blend it into smoothies</span>, <u>but it also helps me</u> <span class=\"sub-hl\">get plenty of vitamin C and antioxidants</span>."
                     }
                 ]
             },
@@ -21328,7 +21318,7 @@ const practiceTopicsData = [
                         "title": "☕ [Không gian & Trải nghiệm quán cà phê]:",
                         "items": [
                             {
-                                "en": "tranquil ambiance with soothing music",
+                                "en": "peaceful atmosphere with soothing music",
                                 "vn": "không gian yên tĩnh với nhạc nền êm dịu"
                             },
                             {
@@ -21353,8 +21343,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (YES - Đến quán vì không gian làm việc tập trung và thư thái)",
-                        "text": "Yes, definitely! I frequently visit coffee shops because they offer a tranquil ambiance with soothing background music. It allows me to focus on my study and gives me a peaceful space to unwind after work.",
-                        "formatted": "→ Yes, definitely! <u>I frequently visit coffee shops because they offer a</u> <span class=\"sub-hl\">tranquil ambiance with soothing background music</span>. It allows me to <span class=\"sub-hl\">focus on my study</span> and gives me a peaceful space to <span class=\"sub-hl\">unwind after work</span>."
+                        "text": "Yes, definitely! I frequently visit coffee shops because they offer a peaceful atmosphere with soothing background music. It allows me to focus on my study and gives me a peaceful space to unwind after work.",
+                        "formatted": "→ Yes, definitely! <u>I frequently visit coffee shops because they offer a</u> <span class=\"sub-hl\">peaceful atmosphere with soothing background music</span>. It allows me to <span class=\"sub-hl\">focus on my study</span> and gives me a peaceful space to <span class=\"sub-hl\">unwind after work</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (NO - Ngại ồn ào, chuộng tự pha cà phê tại nhà)",
@@ -21436,11 +21426,11 @@ const practiceTopicsData = [
                                 "vn": "chuẩn bị các trang trình chiếu thuyết trình"
                             },
                             {
-                                "en": "delve into an insightful novel",
+                                "en": "get lost in an interesting novel",
                                 "vn": "đắm chìm vào một cuốn tiểu thuyết sâu sắc"
                             },
                             {
-                                "en": "capture aesthetic photographs",
+                                "en": "take nice, stylish photos",
                                 "vn": "chụp những bức ảnh nghệ thuật đẹp mắt"
                             },
                             {
@@ -21458,8 +21448,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Thưởng thức đồ uống, đọc sách và chụp ảnh sống ảo)",
-                        "text": "Whenever I visit a café, I tend to read an inspiring personal development book while sipping an iced green tea latte. Sometimes, I also take aesthetic photos, which gives me an opportunity to capture memorable moments.",
-                        "formatted": "→ <u>Whenever I visit a café, I tend to</u> <span class=\"sub-hl\">read an inspiring personal development book</span> while <span class=\"sub-hl\">sipping an iced green tea latte</span>. Sometimes, I also <span class=\"sub-hl\">take aesthetic photos</span>, which gives me an opportunity to <span class=\"sub-hl\">capture memorable moments</span>."
+                        "text": "Whenever I visit a café, I tend to read an inspiring personal development book while sipping an iced green tea latte. Sometimes, I also take nice, stylish photos, which gives me an opportunity to capture memorable moments.",
+                        "formatted": "→ <u>Whenever I visit a café, I tend to</u> <span class=\"sub-hl\">read an inspiring personal development book</span> while <span class=\"sub-hl\">sipping an iced green tea latte</span>. Sometimes, I also <span class=\"sub-hl\">take nice, stylish photos</span>, which gives me an opportunity to <span class=\"sub-hl\">capture memorable moments</span>."
                     }
                 ]
             }
@@ -21475,7 +21465,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "Do you often drink green tea?",
                 "qType": "Yes/No Question: Do you often [Vo]?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Uống hằng ngày vì lợi ích thanh lọc và tỉnh táo):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, definitely! <u>I drink green tea almost every single day because it is exceptionally</u> <span class=\"formula-bracket-hl\">[tính từ sức khỏe]</span>. It allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a healthy dose of <span class=\"formula-bracket-hl\">[lợi ích 2]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (NO - Nhạy cảm với vị chát và caffeine, thích trà thảo mộc):</div>\n                    <div class=\"topic-formula-text\">\n                        → To be honest, <u>I rarely drink green tea because I'm quite sensitive to</u> <span class=\"formula-bracket-hl\">[vị đắng / caffeine]</span>. Instead, <u>I prefer herbal teas or fresh fruit juices because they allow me to</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Uống hằng ngày vì lợi ích thanh lọc và tỉnh táo):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, definitely! <u>I drink green tea almost every single day because it is very</u> <span class=\"formula-bracket-hl\">[tính từ sức khỏe]</span>. It allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a healthy dose of <span class=\"formula-bracket-hl\">[lợi ích 2]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (NO - Nhạy cảm với vị chát và caffeine, thích trà thảo mộc):</div>\n                    <div class=\"topic-formula-text\">\n                        → To be honest, <u>I rarely drink green tea because I'm quite sensitive to</u> <span class=\"formula-bracket-hl\">[vị đắng / caffeine]</span>. Instead, <u>I prefer herbal teas or fresh fruit juices because they allow me to</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -22250,7 +22240,7 @@ const practiceTopicsData = [
                                 "vn": "tập thể dục đều đặn và ăn uống lành mạnh"
                             },
                             {
-                                "en": "when the weather changes drastically",
+                                "en": "when the weather changes suddenly",
                                 "vn": "khi thời tiết thay đổi đột ngột / giao mùa"
                             },
                             {
@@ -22289,13 +22279,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Trả lời HIẾM KHI - Hệ miễn dịch khỏe, tập thể dục & ăn uống điều độ)",
-                        "text": "Fortunately, I rarely get sick because I have a strong immune system. Sticking to regular exercise and healthy eating allows me to stay resilient and prevents me from catching seasonal colds.",
-                        "formatted": "→ Fortunately, <u>I rarely get sick</u> because I have a <span class=\"sub-hl\">strong immune system</span>. Sticking to <span class=\"sub-hl\">regular exercise and healthy eating</span> allows me to <span class=\"sub-hl\">stay resilient</span> and prevents me from <span class=\"sub-hl\">catching seasonal colds</span>."
+                        "text": "Fortunately, I rarely get sick because I have a strong immune system. Sticking to regular exercise and healthy eating allows me to stay healthy and strong and prevents me from catching seasonal colds.",
+                        "formatted": "→ Fortunately, <u>I rarely get sick</u> because I have a <span class=\"sub-hl\">strong immune system</span>. Sticking to <span class=\"sub-hl\">regular exercise and healthy eating</span> allows me to <span class=\"sub-hl\">stay healthy and strong</span> and prevents me from <span class=\"sub-hl\">catching seasonal colds</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trả lời THỈNH THOẢNG - Cảm nhẹ khi đổi mùa, nhanh khỏi nhờ nghỉ ngơi & uống nước chanh ấm)",
-                        "text": "To be honest, I only come down with minor illnesses once in a while, especially when the weather changes drastically. However, I usually recover within a couple of days by resting properly, drinking warm lemon water, and taking light medicine.",
-                        "formatted": "→ To be honest, <u>I only come down with minor illnesses once in a while</u>, especially <span class=\"sub-hl\">when the weather changes drastically</span>. However, I usually recover within a couple of days by <span class=\"sub-hl\">resting properly, drinking warm lemon water, and taking light medicine</span>."
+                        "text": "To be honest, I only come down with minor illnesses once in a while, especially when the weather changes suddenly. However, I usually recover within a couple of days by resting properly, drinking warm lemon water, and taking light medicine.",
+                        "formatted": "→ To be honest, <u>I only come down with minor illnesses once in a while</u>, especially <span class=\"sub-hl\">when the weather changes suddenly</span>. However, I usually recover within a couple of days by <span class=\"sub-hl\">resting properly, drinking warm lemon water, and taking light medicine</span>."
                     }
                 ]
             },
@@ -22599,7 +22589,7 @@ const practiceTopicsData = [
                                 "vn": "cân bằng sự nghiệp bận rộn với sức khỏe thể chất"
                             },
                             {
-                                "en": "enhance overall quality of life and longevity",
+                                "en": "improve overall quality of life and live longer",
                                 "vn": "nâng cao chất lượng cuộc sống nói chung và kéo dài tuổi thọ"
                             },
                             {
@@ -23043,7 +23033,7 @@ const practiceTopicsData = [
                                 "vn": "gắn kết với đồng đội ngoài giờ làm hoặc giờ học"
                             },
                             {
-                                "en": "burn off excess calories effortlessly",
+                                "en": "burn off excess calories easily",
                                 "vn": "đốt cháy calo dư thừa một cách nhẹ nhàng"
                             }
                         ]
@@ -23077,15 +23067,15 @@ const practiceTopicsData = [
                         "title": "🌟 [Lợi ích thể thao ngoài Bảng - Vo]:",
                         "items": [
                             {
-                                "en": "combat a sedentary lifestyle caused by desk jobs",
+                                "en": "avoid sitting too much at a desk all day",
                                 "vn": "chống lại lối sống ít vận động do công việc bàn giấy"
                             },
                             {
-                                "en": "develop discipline and perseverance under pressure",
+                                "en": "build discipline and patience under pressure",
                                 "vn": "rèn luyện tính kỷ luật và sự kiên trì dưới áp lực"
                             },
                             {
-                                "en": "strengthen heart health and boost longevity",
+                                "en": "strengthen heart health and live a longer life",
                                 "vn": "tăng cường sức khỏe tim mạch và kéo dài tuổi thọ"
                             },
                             {
@@ -23102,7 +23092,7 @@ const practiceTopicsData = [
                                 "vn": "kỹ năng làm việc nhóm và tinh thần chơi đẹp"
                             },
                             {
-                                "en": "leadership skills and resilience",
+                                "en": "leadership skills and strong determination",
                                 "vn": "kỹ năng lãnh đạo và khả năng vượt khó"
                             },
                             {
@@ -23124,8 +23114,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Chống lối sống thụ động & rèn kỹ năng mềm)",
-                        "text": "I'd say sports play a crucial role beyond just physical fitness. They not only help people combat a sedentary lifestyle caused by desk jobs, but also teach us teamwork skills and fair play from an early age.",
-                        "formatted": "→ <u>I'd say sports play a crucial role beyond just physical fitness. They not only help people</u> <span class=\"sub-hl\">combat a sedentary lifestyle caused by desk jobs</span>, <u>but also teach us</u> <span class=\"sub-hl\">teamwork skills and fair play</span> <u>from an early age.</u>"
+                        "text": "I'd say sports play a crucial role beyond just physical fitness. They not only help people avoid sitting too much at a desk all day, but also teach us teamwork skills and fair play from an early age.",
+                        "formatted": "→ <u>I'd say sports play a crucial role beyond just physical fitness. They not only help people</u> <span class=\"sub-hl\">avoid sitting too much at a desk all day</span>, <u>but also teach us</u> <span class=\"sub-hl\">teamwork skills and fair play</span> <u>from an early age.</u>"
                     }
                 ]
             }
@@ -23315,7 +23305,7 @@ const practiceTopicsData = [
                         "title": "🌟 [Lợi ích thể thao ngoài Bảng - Vo]:",
                         "items": [
                             {
-                                "en": "build discipline and mental resilience",
+                                "en": "build discipline and mental strength",
                                 "vn": "xây dựng tính kỷ luật và sức bền tinh thần"
                             },
                             {
@@ -23341,8 +23331,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Nhấn mạnh giải tỏa căng thẳng và rèn tính kỷ luật, bản lĩnh tinh thần)",
-                        "text": "Absolutely. Playing sports plays a vital role in modern life since it not only helps people reduce stress, but also gives them a chance to build discipline and mental resilience.",
-                        "formatted": "→ <u>Absolutely. Playing sports plays a vital role in modern life since it not only helps people</u> <span class=\"sub-hl\">reduce stress</span>, <u>but also gives them a chance to</u> <span class=\"sub-hl\">build discipline and mental resilience</span>."
+                        "text": "Absolutely. Playing sports plays a vital role in modern life since it not only helps people reduce stress, but also gives them a chance to build discipline and mental strength.",
+                        "formatted": "→ <u>Absolutely. Playing sports plays a vital role in modern life since it not only helps people</u> <span class=\"sub-hl\">reduce stress</span>, <u>but also gives them a chance to</u> <span class=\"sub-hl\">build discipline and mental strength</span>."
                     }
                 ]
             }
@@ -24350,7 +24340,7 @@ const practiceTopicsData = [
                         "title": "🌟 [Lợi ích ngoài Bảng - Vo]:",
                         "items": [
                             {
-                                "en": "break the monotony of daily routines",
+                                "en": "break the boredom of daily routines",
                                 "vn": "phá tan sự đơn điệu của các lịch trình lặp lại mỗi ngày"
                             },
                             {
@@ -24358,7 +24348,7 @@ const practiceTopicsData = [
                                 "vn": "duy trì niềm hứng khởi cao cho các mục tiêu dài hạn"
                             },
                             {
-                                "en": "cultivate emotional resilience under pressure",
+                                "en": "stay emotionally strong under pressure",
                                 "vn": "nuôi dưỡng sức bền cảm xúc khi đối mặt áp lực"
                             },
                             {
@@ -24394,7 +24384,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "What color would you choose for your house?",
                 "qType": "Wh-question: What color would you choose for your house?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Tông màu trắng sáng hoặc màu kem tạo cảm giác rộng rãi, hiện đại):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>If I had the freedom to paint my own house, I would undoubtedly select</u> <span class=\"formula-bracket-hl\">[màu trắng / kem sáng]</span>. This palette creates <span class=\"formula-bracket-hl\">[không gian thoáng đãng]</span>, which allows my family to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Tông màu xanh pastel nhẹ nhàng mang lại cảm giác bình yên):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I would lean toward soft pastel tones, particularly</u> <span class=\"formula-bracket-hl\">[xanh da trời / xanh lá nhạt]</span>. These tranquil colors allow me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and foster <span class=\"formula-bracket-hl\">[bầu không khí thư thái]</span> after long working hours.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Tông màu trắng sáng hoặc màu kem tạo cảm giác rộng rãi, hiện đại):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>If I had the freedom to paint my own house, I would undoubtedly select</u> <span class=\"formula-bracket-hl\">[màu trắng / kem sáng]</span>. This palette creates <span class=\"formula-bracket-hl\">[không gian thoáng đãng]</span>, which allows my family to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Tông màu xanh pastel nhẹ nhàng mang lại cảm giác bình yên):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I would lean toward soft pastel tones, particularly</u> <span class=\"formula-bracket-hl\">[xanh da trời / xanh lá nhạt]</span>. These peaceful colors allow me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and create <span class=\"formula-bracket-hl\">[bầu không khí thư thái]</span> after long working hours.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -24417,7 +24407,7 @@ const practiceTopicsData = [
                                 "vn": "màu xanh pastel dịu nhẹ hoặc xanh xám lá xô thơm"
                             },
                             {
-                                "en": "cultivate a serene sanctuary",
+                                "en": "create a peaceful, relaxing space",
                                 "vn": "xây dựng một chốn bình yên thanh thản"
                             }
                         ]
@@ -24431,8 +24421,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Màu xanh pastel dịu mắt giúp giải tỏa mệt mỏi)",
-                        "text": "I would lean toward soft pastel blue combined with wooden accents. These gentle tones mimic the tranquil sky and ocean, allowing me to reduce mental stress and feel completely relaxed after hectic days.",
-                        "formatted": "→ <u>I would lean toward soft pastel tones, particularly</u> <span class=\"sub-hl\">pastel blue combined with natural wooden accents</span>. These tranquil colors allow me to <span class=\"sub-hl\">reduce mental stress</span> and foster <span class=\"sub-hl\">a serene sanctuary to unwind</span> after long working hours."
+                        "text": "I would lean toward soft pastel blue combined with wooden accents. These gentle tones remind me of the calm sky and ocean, allowing me to reduce mental stress and feel completely relaxed after hectic days.",
+                        "formatted": "→ <u>I would lean toward soft pastel tones, particularly</u> <span class=\"sub-hl\">pastel blue combined with natural wooden accents</span>. These peaceful colors allow me to <span class=\"sub-hl\">reduce mental stress</span> and create <span class=\"sub-hl\">a calm sanctuary to unwind</span> after long working hours."
                     }
                 ]
             },
@@ -24440,7 +24430,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "What color do you usually choose for your clothes?",
                 "qType": "Wh-question: What color do you choose for your clothes?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Các gam màu trung tính: đen, trắng, xám vì thanh lịch và dễ phối đồ):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>When it comes to my wardrobe, I consistently gravitate toward neutral shades like</u> <span class=\"formula-bracket-hl\">[đen, trắng, be, xám]</span>. These timeless colors allow me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and maintain a <span class=\"formula-bracket-hl\">[phong thái chỉn chu]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Màu sắc tươi sáng: xanh biển, vàng nhạt để tràn đầy năng lượng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I love incorporating cheerful, vibrant colors such as</u> <span class=\"formula-bracket-hl\">[xanh da trời / vàng pastel]</span> <u>into my daily outfits</u>. Wearing bright hues helps me <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> and radiates positive vibes.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Các gam màu trung tính: đen, trắng, xám vì thanh lịch và dễ phối đồ):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>When it comes to my wardrobe, I usually go for neutral colors like</u> <span class=\"formula-bracket-hl\">[đen, trắng, be, xám]</span>. These timeless colors allow me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and maintain a <span class=\"formula-bracket-hl\">[phong thái chỉn chu]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Màu sắc tươi sáng: xanh biển, vàng nhạt để tràn đầy năng lượng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I love incorporating cheerful, vibrant colors such as</u> <span class=\"formula-bracket-hl\">[xanh da trời / vàng pastel]</span> <u>into my daily outfits</u>. Wearing bright hues helps me <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> and radiates positive vibes.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -24455,7 +24445,7 @@ const practiceTopicsData = [
                                 "vn": "tông màu đơn sắc vượt thời gian (đen, trắng, than chì)"
                             },
                             {
-                                "en": "effortless to mix and match seamlessly",
+                                "en": "super easy to mix and match",
                                 "vn": "dễ dàng phối đồ hài hòa không tốn thời gian"
                             },
                             {
@@ -24472,8 +24462,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Màu trung tính đen trắng thanh lịch và không bao giờ lỗi mốt)",
-                        "text": "When it comes to my wardrobe, I consistently gravitate toward neutral shades like black, navy, and off-white. These timeless colors are effortless to mix and match, allowing me to look sharp and professional with minimal morning preparation.",
-                        "formatted": "→ <u>When it comes to my wardrobe, I consistently gravitate toward neutral shades like</u> <span class=\"sub-hl\">black, navy, and off-white</span>. These timeless colors allow me to <span class=\"sub-hl\">look sharp with minimal preparation</span> and maintain a <span class=\"sub-hl\">sophisticated appearance in all settings</span>."
+                        "text": "When it comes to my wardrobe, I usually go for neutral colors like black, navy, and off-white. These timeless colors are effortless to mix and match, allowing me to look sharp and professional with minimal morning preparation.",
+                        "formatted": "→ <u>When it comes to my wardrobe, I usually go for neutral colors like</u> <span class=\"sub-hl\">black, navy, and off-white</span>. These timeless colors allow me to <span class=\"sub-hl\">look sharp with minimal preparation</span> and maintain a <span class=\"sub-hl\">stylish appearance in all settings</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Màu sắc tươi tắn giúp tâm trạng vui vẻ và yêu đời hơn)",
@@ -24501,11 +24491,11 @@ const practiceTopicsData = [
                                 "vn": "mối liên hệ tâm lý học giữa màu sắc và tâm trạng"
                             },
                             {
-                                "en": "calming blues evoke serenity and lower stress",
+                                "en": "soft blue brings a calm feeling and reduces stress",
                                 "vn": "sắc xanh dịu gợi lên sự bình yên và giảm căng thẳng"
                             },
                             {
-                                "en": "vibrant reds and yellows stimulate vitality",
+                                "en": "bright red and yellow bring energy and excitement",
                                 "vn": "sắc đỏ và vàng rực rỡ kích thích năng lượng và sức sống"
                             },
                             {
@@ -24523,7 +24513,7 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Có ảnh hưởng nhưng yếu tố nội tâm và công việc quan trọng hơn)",
-                        "text": "While colors certainly exert a subtle visual influence on our perception, I believe our actual mood is predominantly shaped by internal thoughts and physical wellness. A sunny yellow room can stimulate cheerfulness, but it cannot single-handedly eliminate severe work fatigue.",
+                        "text": "While colors can slightly affect how we feel, I believe our mood is mainly shaped by our thoughts and physical health. A bright yellow room can feel cheerful, but it cannot completely remove heavy work stress.",
                         "formatted": "→ <u>While colors certainly exert a subtle psychological influence, I believe our emotions are largely dictated by</u> <span class=\"sub-hl\">internal thoughts and physical wellness</span>. A pleasing color can uplift the mood, but it cannot <span class=\"sub-hl\">single-handedly eliminate deep fatigue or real stress</span>."
                     }
                 ]
@@ -25294,7 +25284,7 @@ const practiceTopicsData = [
                                 "vn": "dành thêm ngân sách cho các khóa học phát triển bản thân"
                             },
                             {
-                                "en": "cultivate long-term smart saving habits",
+                                "en": "build smart saving habits for the long run",
                                 "vn": "nuôi dưỡng thói quen tích lũy tiết kiệm thông minh lâu dài"
                             }
                         ]
@@ -25325,7 +25315,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "Do you usually check the price before buying something? Why or why not?",
                 "qType": "Yes/No + Wh-question: Do you usually check the price before buying something? Why or why not?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Trả lời CÓ - So sánh các nhãn hàng để tối ưu hóa đồng tiền kiếm được và không bị hớ):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely. <u>Checking price tags is a non-negotiable rule for me</u> before making any purchase. It enables me to <span class=\"formula-bracket-hl\">[hành động thông minh 1 - Vo]</span> and helps me <span class=\"formula-bracket-hl\">[lợi ích tài chính 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trả lời TÙY MÓN - Đồ ăn rẻ mua ngay không đắn đo, đồ công nghệ cao cấp mới tìm hiểu kỹ):</div>\n                    <div class=\"topic-formula-text\">\n                        → Well, <u>it largely depends on the value of the product</u>. While I don't hesitate to purchase <span class=\"formula-bracket-hl\">[mặt hàng thường nhật giá rẻ]</span>, I make sure to <span class=\"formula-bracket-hl\">[hành động cân nhắc - Vo]</span> whenever buying <span class=\"formula-bracket-hl\">[mặt hàng đắt đỏ]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Trả lời CÓ - So sánh các nhãn hàng để tối ưu hóa đồng tiền kiếm được và không bị hớ):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely. <u>Checking price tags is a strict rule for me</u> before making any purchase. It enables me to <span class=\"formula-bracket-hl\">[hành động thông minh 1 - Vo]</span> and helps me <span class=\"formula-bracket-hl\">[lợi ích tài chính 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trả lời TÙY MÓN - Đồ ăn rẻ mua ngay không đắn đo, đồ công nghệ cao cấp mới tìm hiểu kỹ):</div>\n                    <div class=\"topic-formula-text\">\n                        → Well, <u>it largely depends on the value of the product</u>. While I don't hesitate to purchase <span class=\"formula-bracket-hl\">[mặt hàng thường nhật giá rẻ]</span>, I make sure to <span class=\"formula-bracket-hl\">[hành động cân nhắc - Vo]</span> whenever buying <span class=\"formula-bracket-hl\">[mặt hàng đắt đỏ]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🏷️ [Hành động so sánh giá] (Cách 1):",
@@ -25415,7 +25405,7 @@ const practiceTopicsData = [
                         "title": "🌟 [Cấu trúc nguyên tắc mua sắm & Phân loại giá trị]:",
                         "items": [
                             {
-                                "en": "checking price tags is a non-negotiable rule for me",
+                                "en": "Checking price tags is a strict rule for me",
                                 "vn": "kiểm tra thẻ giá là nguyên tắc bất di bất dịch của tôi"
                             },
                             {
@@ -25483,8 +25473,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Trả lời CÓ - Kiểm tra giá là nguyên tắc bất di bất dịch, so sánh thương hiệu để không bị mua hớ)",
-                        "text": "Yes, absolutely. Checking price tags is a non-negotiable rule for me before making any purchase. It enables me to compare different brands and helps me optimize my hard-earned money without overpaying.",
-                        "formatted": "→ Yes, absolutely. <u>Checking price tags is a non-negotiable rule for me</u> before making any purchase. It enables me to <span class=\"sub-hl\">compare different brands</span> and helps me <span class=\"sub-hl\">optimize my hard-earned money without overpaying</span>."
+                        "text": "Yes, absolutely. Checking price tags is a strict rule for me before making any purchase. It enables me to compare different brands and helps me optimize my hard-earned money without overpaying.",
+                        "formatted": "→ Yes, absolutely. <u>Checking price tags is a strict rule for me</u> before making any purchase. It enables me to <span class=\"sub-hl\">compare different brands</span> and helps me <span class=\"sub-hl\">optimize my hard-earned money without overpaying</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trả lời TÙY MÓN - Đồ ăn nhỏ mua ngay, đồ công nghệ đắt tiền luôn nghiên cứu kỹ lưỡng)",
@@ -25638,11 +25628,11 @@ const practiceTopicsData = [
                                 "vn": "tạo tấm đệm dự phòng trước các sự cố y tế bất ngờ"
                             },
                             {
-                                "en": "curb reckless consumption habits",
+                                "en": "control careless spending habits",
                                 "vn": "kìm hãm những thói quen tiêu dùng bừa bãi, vô độ"
                             },
                             {
-                                "en": "master the art of frugal living without sacrificing quality",
+                                "en": "manage money wisely without lowering my quality of life",
                                 "vn": "nắm vững nghệ thuật sống tiết kiệm mà không giảm chất lượng sống"
                             },
                             {
@@ -25669,7 +25659,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "Do you think expensive products always have better quality? Why or why not?",
                 "qType": "Yes/No + Wh-question: Do you think expensive products always have better quality? Why or why not?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Trả lời KHÔNG HẲN - Giá cao thường do chi phí quảng cáo và giá trị thương hiệu, đồ tầm trung vẫn rất tốt):</div>\n                    <div class=\"topic-formula-text\">\n                        → Not necessarily. <u>A premium price tag doesn't always guarantee superior quality</u> because much of the cost comes from <span class=\"formula-bracket-hl\">[nguyên nhân đẩy giá]</span>. In reality, many reasonably priced products still offer <span class=\"formula-bracket-hl\">[giá trị thực tế]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trả lời ĐỒNG Ý PHẦN LỚN - Tiền nào của nấy, hàng cao cấp dùng chất liệu tốt, tinh xảo và bảo hành chu đáo):</div>\n                    <div class=\"topic-formula-text\">\n                        → To a large extent, yes. <u>You usually get what you pay for</u> when buying high-end merchandise. Manufacturers invest heavily in <span class=\"formula-bracket-hl\">[yếu tố chất lượng]</span>. This ensures <span class=\"formula-bracket-hl\">[lợi ích trải nghiệm 1]</span> and provides <span class=\"formula-bracket-hl\">[lợi ích bảo hành 2]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Trả lời KHÔNG HẲN - Giá cao thường do chi phí quảng cáo và giá trị thương hiệu, đồ tầm trung vẫn rất tốt):</div>\n                    <div class=\"topic-formula-text\">\n                        → Not necessarily. <u>A premium price tag doesn't always guarantee superior quality</u> because much of the cost comes from <span class=\"formula-bracket-hl\">[nguyên nhân đẩy giá]</span>. In reality, many reasonably priced products still offer <span class=\"formula-bracket-hl\">[giá trị thực tế]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trả lời ĐỒNG Ý PHẦN LỚN - Tiền nào của nấy, hàng cao cấp dùng chất liệu tốt, tinh xảo và bảo hành chu đáo):</div>\n                    <div class=\"topic-formula-text\">\n                        → To a large extent, yes. <u>You usually get what you pay for</u> when buying expensive brand-name products. Manufacturers invest heavily in <span class=\"formula-bracket-hl\">[yếu tố chất lượng]</span>. This ensures <span class=\"formula-bracket-hl\">[lợi ích trải nghiệm 1]</span> and provides <span class=\"formula-bracket-hl\">[lợi ích bảo hành 2]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🏷️ [Yếu tố đẩy giá] (Cách 1):",
@@ -25687,7 +25677,7 @@ const practiceTopicsData = [
                                 "vn": "chi phí tiếp thị và quảng bá cao"
                             },
                             {
-                                "en": "brand prestige",
+                                "en": "famous brand reputation",
                                 "vn": "danh tiếng của thương hiệu"
                             }
                         ]
@@ -25759,7 +25749,7 @@ const practiceTopicsData = [
                         "title": "⭐ [Thương hiệu vs Chất lượng thực tế]:",
                         "items": [
                             {
-                                "en": "heavy advertising campaigns and brand prestige",
+                                "en": "big advertising campaigns and famous brand names",
                                 "vn": "các chiến dịch quảng cáo rầm rộ và uy tín thương hiệu"
                             },
                             {
@@ -25767,7 +25757,7 @@ const practiceTopicsData = [
                                 "vn": "độ bền bỉ vượt trội và hiệu năng cao"
                             },
                             {
-                                "en": "premium materials and rigorous craftsmanship",
+                                "en": "high-quality materials and careful design",
                                 "vn": "chất liệu cao cấp cùng tay nghề gia công tỉ mỉ, chuẩn xác"
                             },
                             {
@@ -25797,7 +25787,7 @@ const practiceTopicsData = [
                                 "vn": "giữ được giá trị bán lại tốt hơn theo thời gian"
                             },
                             {
-                                "en": "reflect personal aesthetic taste and social status",
+                                "en": "show personal style and social status",
                                 "vn": "phản ánh gu thẩm mỹ cá nhân và vị thế xã hội"
                             }
                         ]
@@ -25806,13 +25796,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Trả lời KHÔNG HẲN - Giá đắt do quảng cáo và tên tuổi thương hiệu, đồ tầm trung vẫn có độ bền xuất sắc)",
-                        "text": "Not necessarily. A premium price tag doesn't always guarantee superior quality because much of the cost comes from heavy advertising campaigns and brand prestige. In reality, many reasonably priced products still offer outstanding durability and high performance.",
-                        "formatted": "→ Not necessarily. <u>A premium price tag doesn't always guarantee superior quality</u> because much of the cost comes from <span class=\"sub-hl\">heavy advertising campaigns and brand prestige</span>. In reality, many reasonably priced products still offer <span class=\"sub-hl\">outstanding durability and high performance</span>."
+                        "text": "Not necessarily. A premium price tag doesn't always guarantee superior quality because much of the cost comes from big advertising campaigns and famous brand names. In reality, many reasonably priced products still offer outstanding durability and high performance.",
+                        "formatted": "→ Not necessarily. <u>A premium price tag doesn't always guarantee superior quality</u> because much of the cost comes from <span class=\"sub-hl\">big advertising campaigns and famous brand names</span>. In reality, many reasonably priced products still offer <span class=\"sub-hl\">outstanding durability and high performance</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trả lời ĐỒNG Ý PHẦN LỚN - Tiền nào của nấy, hàng cao cấp có chất liệu tốt, gia công tinh xảo và bảo hành chu đáo)",
-                        "text": "To a large extent, yes. You usually get what you pay for when buying high-end merchandise. Manufacturers invest heavily in premium materials and careful design. This ensures a longer lifespan and provides peace of mind with exceptional customer support.",
-                        "formatted": "→ To a large extent, yes. <u>You usually get what you pay for</u> when buying high-end merchandise. Manufacturers invest heavily in <span class=\"sub-hl\">premium materials and careful design</span>. This ensures <span class=\"sub-hl\">a longer lifespan</span> and provides <span class=\"sub-hl\">peace of mind with exceptional customer support</span>."
+                        "text": "To a large extent, yes. You usually get what you pay for when buying expensive brand-name products. Manufacturers invest heavily in premium materials and careful design. This ensures a longer lifespan and provides peace of mind with exceptional customer support.",
+                        "formatted": "→ To a large extent, yes. <u>You usually get what you pay for</u> when buying expensive brand-name products. Manufacturers invest heavily in <span class=\"sub-hl\">premium materials and careful design</span>. This ensures <span class=\"sub-hl\">a longer lifespan</span> and provides <span class=\"sub-hl\">peace of mind with exceptional customer support</span>."
                     }
                 ]
             }
@@ -26100,7 +26090,7 @@ const practiceTopicsData = [
                         "title": "✨ [Tính từ mô tả hàng hóa]:",
                         "items": [
                             {
-                                "en": "remarkably fresh and reasonably priced",
+                                "en": "really fresh and reasonably priced",
                                 "vn": "tươi ngon rõ rệt và giá cả phải chăng"
                             },
                             {
@@ -26142,8 +26132,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Mua rau quả và hải sản tươi sống)",
-                        "text": "I usually buy seasonal fruits, leafy greens, and fresh seafood at the market because they're remarkably fresh and reasonably priced. Cooking with fresh ingredients allows me to stay healthy and create a balanced lifestyle.",
-                        "formatted": "→ <u>I usually buy</u> <span class=\"sub-hl\">seasonal fruits, leafy greens, and fresh seafood</span> at the market because they're <span class=\"sub-hl\">remarkably fresh and reasonably priced</span>. Cooking with fresh ingredients allows me to <span class=\"sub-hl\">stay healthy</span> and <span class=\"sub-hl\">create a balanced lifestyle</span>."
+                        "text": "I usually buy seasonal fruits, leafy greens, and fresh seafood at the market because they're really fresh and reasonably priced. Cooking with fresh ingredients allows me to stay healthy and create a balanced lifestyle.",
+                        "formatted": "→ <u>I usually buy</u> <span class=\"sub-hl\">seasonal fruits, leafy greens, and fresh seafood</span> at the market because they're <span class=\"sub-hl\">really fresh and reasonably priced</span>. Cooking with fresh ingredients allows me to <span class=\"sub-hl\">stay healthy</span> and <span class=\"sub-hl\">create a balanced lifestyle</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Mua hoa tươi và đồ ăn vặt truyền thống)",
@@ -26201,8 +26191,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Mua sắm tối giản, chỉ bổ sung khi đồ cũ sờn rách)",
-                        "text": "I practice a minimalist lifestyle, so I only purchase clothing items once or twice a year when old ones wear out. Prioritizing durability over fast fashion allows me to save money and curb unnecessary consumer waste.",
-                        "formatted": "→ <u>I practice a minimalist lifestyle, so I only purchase clothes</u> <span class=\"sub-hl\">once or twice a year when necessary</span>. Buying selectively allows me to <span class=\"sub-hl\">save considerable money</span> and helps me <span class=\"sub-hl\">curb unnecessary consumer waste</span>."
+                        "text": "I practice a minimalist lifestyle, so I only purchase clothing items once or twice a year when old ones wear out. Prioritizing durability over fast fashion allows me to save money and reduce unnecessary waste.",
+                        "formatted": "→ <u>I practice a minimalist lifestyle, so I only purchase clothes</u> <span class=\"sub-hl\">once or twice a year when necessary</span>. Buying selectively allows me to <span class=\"sub-hl\">save considerable money</span> and helps me <span class=\"sub-hl\">reduce unnecessary waste</span>."
                     }
                 ]
             },
@@ -26256,7 +26246,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "What types of clothes do you usually buy?",
                 "qType": "Wh-question: What types of clothes do you usually buy?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Trang phục thường ngày đơn giản, thoải mái: áo thun, quần jeans):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My wardrobe consists predominantly of casual garments like</u> <span class=\"formula-bracket-hl\">[áo thun, quần jeans, giày sneakers]</span>. I favor these items because they are <span class=\"formula-bracket-hl\">[tính từ]</span> and allow me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trang phục công sở lịch sự, tôn dáng và màu sắc trung tính):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>For work and study, I gravitate toward smart casual attire such as</u> <span class=\"formula-bracket-hl\">[áo sơ mi, quần tây, áo blazer]</span> in <span class=\"formula-bracket-hl\">[tông màu trung tính]</span>. They allow me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> in diverse environments.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Trang phục thường ngày đơn giản, thoải mái: áo thun, quần jeans):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My wardrobe is mostly made up of casual clothes like</u> <span class=\"formula-bracket-hl\">[áo thun, quần jeans, giày sneakers]</span>. I favor these items because they are <span class=\"formula-bracket-hl\">[tính từ]</span> and allow me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trang phục công sở lịch sự, tôn dáng và màu sắc trung tính):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>For work and study, I usually choose smart casual outfits such as</u> <span class=\"formula-bracket-hl\">[áo sơ mi, quần tây, áo blazer]</span> in <span class=\"formula-bracket-hl\">[tông màu trung tính]</span>. They allow me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> in diverse environments.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -26288,13 +26278,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Áo thun cotton và quần jeans năng động, thoải mái)",
-                        "text": "My wardrobe consists predominantly of casual garments like breathable cotton T-shirts, classic jeans, and sneakers. I favor these pieces because they are comfortable, durable, and allow me to move around freely throughout the day.",
-                        "formatted": "→ <u>My wardrobe consists predominantly of casual garments like</u> <span class=\"sub-hl\">breathable cotton T-shirts, classic jeans, and sneakers</span>. I favor these items because they are <span class=\"sub-hl\">comfortable and versatile</span>, and allow me to <span class=\"sub-hl\">move around freely throughout the day</span>."
+                        "text": "My wardrobe is mostly made up of casual clothes like breathable cotton T-shirts, classic jeans, and sneakers. I favor these pieces because they are comfortable, durable, and allow me to move around freely throughout the day.",
+                        "formatted": "→ <u>My wardrobe is mostly made up of casual clothes like</u> <span class=\"sub-hl\">breathable cotton T-shirts, classic jeans, and sneakers</span>. I favor these items because they are <span class=\"sub-hl\">comfortable and versatile</span>, and allow me to <span class=\"sub-hl\">move around freely throughout the day</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Áo sơ mi và blazer lịch thiệp, dễ phối đồ công sở)",
-                        "text": "For work and university, I gravitate toward smart casual attire such as tailored shirts and sleek blazers in neutral tones like beige and black. They allow me to present a sophisticated appearance while remaining effortless to mix and match.",
-                        "formatted": "→ <u>For work and study, I gravitate toward smart casual attire such as</u> <span class=\"sub-hl\">tailored shirts and sleek blazers</span> in <span class=\"sub-hl\">neutral tones like beige and black</span>. They allow me to <span class=\"sub-hl\">present a sophisticated appearance</span> in diverse environments."
+                        "text": "For work and university, I usually choose smart casual outfits such as tailored shirts and sleek blazers in neutral tones like beige and black. They allow me to look neat and stylish while still being easy to mix and match.",
+                        "formatted": "→ <u>For work and study, I usually choose smart casual outfits such as</u> <span class=\"sub-hl\">tailored shirts and sleek blazers</span> in <span class=\"sub-hl\">neutral tones like beige and black</span>. They allow me to <span class=\"sub-hl\">present a stylish appearance</span> in diverse environments."
                     }
                 ]
             }
@@ -26567,7 +26557,7 @@ const practiceTopicsData = [
                                 "vn": "giữ ấm mà không bị cồng kềnh"
                             },
                             {
-                                "en": "look put-together effortlessly",
+                                "en": "look put-together easily",
                                 "vn": "trông gọn gàng mà không tốn công"
                             },
                             {
@@ -26972,7 +26962,7 @@ const practiceTopicsData = [
                                 "vn": "di chuyển nhanh nhẹn quanh khuôn viên trường thật thoải mái"
                             },
                             {
-                                "en": "elevate even the simplest casual outfit effortlessly",
+                                "en": "elevate even the simplest casual outfit easily",
                                 "vn": "nâng tầm cả những bộ đồ thường ngày đơn giản nhất"
                             },
                             {
@@ -27011,8 +27001,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Chỉ mang dịp cuối tuần để giữ giày luôn mới)",
-                        "text": "To be honest, I only put on my favorite pair on weekends and special outings with friends so they stay in great condition. Wearing them always makes me feel stylish and self-assured and lets me elevate even the simplest casual outfit effortlessly.",
-                        "formatted": "→ <u>To be honest, I only put on my favorite pair</u> <span class=\"sub-hl\">on weekends and special outings with friends</span> so they stay in great condition. Wearing them always makes me feel <span class=\"sub-hl\">stylish and self-assured</span> and lets me <span class=\"sub-hl\">elevate even the simplest casual outfit effortlessly</span>."
+                        "text": "To be honest, I only put on my favorite pair on weekends and special outings with friends so they stay in great condition. Wearing them always makes me feel stylish and self-assured and lets me elevate even the simplest casual outfit easily.",
+                        "formatted": "→ <u>To be honest, I only put on my favorite pair</u> <span class=\"sub-hl\">on weekends and special outings with friends</span> so they stay in great condition. Wearing them always makes me feel <span class=\"sub-hl\">stylish and self-assured</span> and lets me <span class=\"sub-hl\">elevate even the simplest casual outfit easily</span>."
                     }
                 ]
             },
@@ -27080,7 +27070,7 @@ const practiceTopicsData = [
                                 "vn": "khô ráo dễ dàng sau khi đi trên đường ướt"
                             },
                             {
-                                "en": "run quick errands around the neighborhood effortlessly",
+                                "en": "run quick errands around the neighborhood easily",
                                 "vn": "chạy việc vặt quanh khu phố thật nhẹ nhàng"
                             }
                         ]
@@ -27109,7 +27099,7 @@ const practiceTopicsData = [
                         "title": "👟 [2 tính từ mô tả giày]:",
                         "items": [
                             {
-                                "en": "ultra-lightweight and remarkably durable",
+                                "en": "ultra-lightweight and really durable",
                                 "vn": "siêu nhẹ và cực kỳ bền bỉ"
                             },
                             {
@@ -27155,7 +27145,7 @@ const practiceTopicsData = [
                                 "vn": "đứng và đi cả ngày mà không bị phồng rộp chân"
                             },
                             {
-                                "en": "pair them seamlessly with jeans, dresses, or sportswear",
+                                "en": "match them easily with jeans, dresses, or sportswear",
                                 "vn": "phối mượt mà với quần jean, váy hay đồ thể thao"
                             },
                             {
@@ -27172,7 +27162,7 @@ const practiceTopicsData = [
                         "title": "😊 [Tính từ cảm xúc]:",
                         "items": [
                             {
-                                "en": "effortlessly stylish and comfortable",
+                                "en": "easily stylish and comfortable",
                                 "vn": "phong cách tự nhiên và thoải mái"
                             },
                             {
@@ -27193,8 +27183,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Siêu nhẹ, bền bỉ và không đau chân)",
-                        "text": "What makes them my absolute favorite is that they're both ultra-lightweight and remarkably durable. Not only do they allow me to stay on my feet all day without any blisters, but they also make me feel effortlessly stylish and comfortable.",
-                        "formatted": "→ <u>What makes them my absolute favorite is that they're both</u> <span class=\"sub-hl\">ultra-lightweight and remarkably durable</span>. Not only do they allow me to <span class=\"sub-hl\">stay on my feet all day without any blisters</span>, but they also make me feel <span class=\"sub-hl\">effortlessly stylish and comfortable</span>."
+                        "text": "What makes them my absolute favorite is that they're both ultra-lightweight and really durable. Not only do they allow me to stay on my feet all day without any blisters, but they also make me feel easily stylish and comfortable.",
+                        "formatted": "→ <u>What makes them my absolute favorite is that they're both</u> <span class=\"sub-hl\">ultra-lightweight and really durable</span>. Not only do they allow me to <span class=\"sub-hl\">stay on my feet all day without any blisters</span>, but they also make me feel <span class=\"sub-hl\">easily stylish and comfortable</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Đôi giày đầu tiên tự mua bằng tiền làm thêm)",
@@ -28260,7 +28250,7 @@ const practiceTopicsData = [
                                 "vn": "chuyển tiền chỉ trong vài giây"
                             },
                             {
-                                "en": "pay utility bills online effortlessly",
+                                "en": "pay utility bills online easily",
                                 "vn": "thanh toán hóa đơn trực tuyến dễ dàng"
                             },
                             {
@@ -29354,7 +29344,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "Do you like travelling?",
                 "qType": "Yes/No: Do you like [noun/V-ing]?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Trả lời CÓ - Đam mê du lịch, khám phá nền văn hóa mới và mở mang tầm mắt):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, definitely. <u>I'm an avid traveler</u> because exploring new destinations allows me to <span class=\"formula-bracket-hl\">[hoạt động trải nghiệm - Vo]</span>. It gives me a great opportunity to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trả lời KHÔNG - Dễ bị say xe trên những chuyến đi dài, chuộng kỳ nghỉ tại gia yên tĩnh):</div>\n                    <div class=\"topic-formula-text\">\n                        → Not really. <u>I easily suffer from severe motion sickness</u> on long journeys, and that makes me feel exhausted. Therefore, I prefer <span class=\"formula-bracket-hl\">[hình thức nghỉ ngơi tại nhà]</span>. This way, I can <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> peacefully.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Trả lời CÓ - Đam mê du lịch, khám phá nền văn hóa mới và mở mang tầm mắt):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, definitely. <u>I'm a huge travel lover</u> because exploring new destinations allows me to <span class=\"formula-bracket-hl\">[hoạt động trải nghiệm - Vo]</span>. It gives me a great opportunity to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trả lời KHÔNG - Dễ bị say xe trên những chuyến đi dài, chuộng kỳ nghỉ tại gia yên tĩnh):</div>\n                    <div class=\"topic-formula-text\">\n                        → Not really. <u>I easily suffer from severe motion sickness</u> on long journeys, and that makes me feel exhausted. Therefore, I prefer <span class=\"formula-bracket-hl\">[hình thức nghỉ ngơi tại nhà]</span>. This way, I can <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> peacefully.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "✈️ [Hoạt động trải nghiệm khi du lịch] (Cách 1):",
@@ -29448,7 +29438,7 @@ const practiceTopicsData = [
                         "title": "🌟 [Cấu trúc bày tỏ sở thích du lịch & Cảm giác cá nhân]:",
                         "items": [
                             {
-                                "en": "I'm an avid traveler",
+                                "en": "I'm a huge travel lover",
                                 "vn": "tôi là một người có niềm đam mê du lịch mãnh liệt"
                             },
                             {
@@ -29516,8 +29506,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Trả lời CÓ - Khám phá điểm đến mới, hòa mình vào văn hóa bản địa và mở mang tầm mắt)",
-                        "text": "Yes, definitely. I'm an avid traveler because exploring new destinations allows me to immerse myself in local cultures. It gives me a great opportunity to broaden my horizons and recharge my batteries after long workdays.",
-                        "formatted": "→ Yes, definitely. <u>I'm an avid traveler</u> because exploring new destinations allows me to <span class=\"sub-hl\">immerse myself in local cultures</span>. It gives me a great opportunity to <span class=\"sub-hl\">broaden my horizons</span> and <span class=\"sub-hl\">recharge my batteries after long workdays</span>."
+                        "text": "Yes, definitely. I'm a huge travel lover because exploring new destinations allows me to immerse myself in local cultures. It gives me a great opportunity to broaden my horizons and recharge my batteries after long workdays.",
+                        "formatted": "→ Yes, definitely. <u>I'm a huge travel lover</u> because exploring new destinations allows me to <span class=\"sub-hl\">immerse myself in local cultures</span>. It gives me a great opportunity to <span class=\"sub-hl\">broaden my horizons</span> and <span class=\"sub-hl\">recharge my batteries after long workdays</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trả lời KHÔNG - Hay bị say tàu xe đường dài, thích kỳ nghỉ tại nhà yên tĩnh để xả hơi)",
@@ -29653,7 +29643,7 @@ const practiceTopicsData = [
                                 "vn": "những chuyến rẽ hướng ngẫu hứng và nhịp độ linh hoạt"
                             },
                             {
-                                "en": "foster self-reliance and independence",
+                                "en": "build independence",
                                 "vn": "nuôi dưỡng sự tự lực và tính độc lập"
                             }
                         ]
@@ -29671,7 +29661,7 @@ const practiceTopicsData = [
                                 "vn": "đảm bảo an toàn và an ninh ở những vùng đất xa lạ"
                             },
                             {
-                                "en": "take candid photos of each other effortlessly",
+                                "en": "take candid photos of each other easily",
                                 "vn": "chụp những bức ảnh tự nhiên cho nhau một cách dễ dàng"
                             },
                             {
@@ -29866,7 +29856,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "What is your favorite trip that you have taken?",
                 "qType": "Wh-question: What is your favorite trip that you have taken?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Chuyến đi biển nghỉ dưỡng & tái tạo năng lượng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>By far the most memorable journey I have ever embarked on was my trip to</u> <span class=\"formula-bracket-hl\">[địa điểm biển]</span>. The breathtaking scenery and fresh sea breeze allowed me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gave me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Chuyến đi vùng cao khám phá văn hóa & thiên nhiên hùng vĩ):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Without a doubt, my favorite trip was my excursion to the mountainous town of</u> <span class=\"formula-bracket-hl\">[địa danh miền núi]</span>. It was a fascinating adventure that allowed me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Chuyến đi biển nghỉ dưỡng & tái tạo năng lượng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>By far the most memorable trip I have ever taken was my trip to</u> <span class=\"formula-bracket-hl\">[địa điểm biển]</span>. The breathtaking scenery and fresh sea breeze allowed me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gave me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Chuyến đi vùng cao khám phá văn hóa & thiên nhiên hùng vĩ):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Without a doubt, my favorite trip was my excursion to the mountainous town of</u> <span class=\"formula-bracket-hl\">[địa danh miền núi]</span>. It was a fascinating adventure that allowed me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -29898,8 +29888,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Chuyến đi Đà Nẵng ngắm biển và nạp lại năng lượng)",
-                        "text": "By far the most memorable journey I have ever embarked on was my vacation in Da Nang last summer. The pristine beaches and crystal-clear water allowed me to unwind completely and gave me a chance to escape intense metropolitan pressure.",
-                        "formatted": "→ <u>By far the most memorable journey I have ever embarked on was</u> <span class=\"sub-hl\">my vacation in Da Nang last summer</span>. The pristine beaches and crystal-clear water allowed me to <span class=\"sub-hl\">unwind completely</span> and gave me a chance to <span class=\"sub-hl\">escape intense metropolitan pressure</span>."
+                        "text": "By far the most memorable trip I have ever taken was my vacation in Da Nang last summer. The clean, untouched beaches and clear water allowed me to relax completely and escape busy city life.",
+                        "formatted": "→ <u>By far the most memorable trip I have ever taken was</u> <span class=\"sub-hl\">my vacation in Da Nang last summer</span>. The clean and natural beaches and crystal-clear water allowed me to <span class=\"sub-hl\">unwind completely</span> and gave me a chance to <span class=\"sub-hl\">escape intense big-city pressure</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Chuyến khám phá Đà Lạt sương mù cùng nhóm bạn thân)",
@@ -29912,7 +29902,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "Do you often try local food when you travel?",
                 "qType": "Yes/No Question: Do you often [Vo]?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Ẩm thực địa phương là linh hồn của chuyến đi):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely! <u>Sampling authentic local cuisine is an indispensable part of my travel itinerary</u>. Tasting regional specialties allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a deeper appreciation of <span class=\"formula-bracket-hl\">[văn hóa bản địa]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (THẬN TRỌNG - Thích nhưng chọn lọc kỹ vì bụng dạ nhạy cảm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, but I tend to be somewhat selective due to</u> <span class=\"formula-bracket-hl\">[vấn đề tiêu hóa / dạ dày]</span>. I prefer visiting reputable local restaurants so that I can <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> without <span class=\"formula-bracket-hl\">[nguy cơ đau bụng - V-ing]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Ẩm thực địa phương là linh hồn của chuyến đi):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely! <u>Trying real local food is an essential part of my travel plan</u>. Tasting regional specialties allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me a deeper appreciation of <span class=\"formula-bracket-hl\">[văn hóa bản địa]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (THẬN TRỌNG - Thích nhưng chọn lọc kỹ vì bụng dạ nhạy cảm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, but I tend to be somewhat selective due to</u> <span class=\"formula-bracket-hl\">[vấn đề tiêu hóa / dạ dày]</span>. I prefer visiting reputable local restaurants so that I can <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> without <span class=\"formula-bracket-hl\">[nguy cơ đau bụng - V-ing]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -29927,7 +29917,7 @@ const practiceTopicsData = [
                                 "vn": "thưởng thức các món đặc sản vùng miền đích thực"
                             },
                             {
-                                "en": "indispensable part of my travel itinerary",
+                                "en": "essential part of my travel plan",
                                 "vn": "phần không thể thiếu trong lịch trình du lịch"
                             },
                             {
@@ -29944,8 +29934,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (YES - Mê mẩn đặc sản địa phương vì phản ánh rõ nét văn hóa)",
-                        "text": "Yes, absolutely! Sampling authentic local cuisine is an indispensable part of every journey for me. Tasting regional specialties allows me to broaden my culinary horizons and gives me a deeper appreciation of the indigenous culture.",
-                        "formatted": "→ Yes, absolutely! <u>Sampling authentic local cuisine is an indispensable part of my travel itinerary</u>. Tasting regional specialties allows me to <span class=\"sub-hl\">broaden my culinary horizons</span> and gives me <span class=\"sub-hl\">a deeper appreciation of the indigenous culture</span>."
+                        "text": "Yes, absolutely! Trying real local food is an essential part of every trip for me. Tasting regional specialties allows me to discover new flavors and understand the local culture much better.",
+                        "formatted": "→ Yes, absolutely! <u>Trying real local food is an essential part of my travel plan</u>. Tasting regional specialties allows me to <span class=\"sub-hl\">broaden my culinary horizons</span> and gives me <span class=\"sub-hl\">a deeper appreciation of the indigenous culture</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (CÓ nhưng chọn lọc quán uy tín để đảm bảo sức khỏe)",
@@ -29958,7 +29948,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "What are your favorite activities to do when you travel?",
                 "qType": "Wh-question: What are your favorite activities to do when you travel?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Khám phá cảnh quan thiên nhiên & chụp ảnh lưu niệm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Whenever I visit a new destination, my top priority is to</u> <span class=\"formula-bracket-hl\">[hoạt động tham quan - Vo]</span>. Wandering through breathtaking landscapes allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Giao lưu với người dân bản địa & dạo chợ đêm truyền thống):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I take immense pleasure in</u> <span class=\"formula-bracket-hl\">[hoạt động văn hóa - V-ing]</span> and exploring <span class=\"formula-bracket-hl\">[địa điểm địa phương]</span>. Interacting with local residents allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Khám phá cảnh quan thiên nhiên & chụp ảnh lưu niệm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Whenever I visit a new destination, my top priority is to</u> <span class=\"formula-bracket-hl\">[hoạt động tham quan - Vo]</span>. Wandering through breathtaking landscapes allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Giao lưu với người dân bản địa & dạo chợ đêm truyền thống):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I really enjoy</u> <span class=\"formula-bracket-hl\">[hoạt động văn hóa - V-ing]</span> and exploring <span class=\"formula-bracket-hl\">[địa điểm địa phương]</span>. Interacting with local residents allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -29990,13 +29980,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Tham quan danh lam thắng cảnh và chụp ảnh nghệ thuật)",
-                        "text": "Whenever I visit a new destination, my top priority is to explore iconic historical landmarks and marvel at pristine natural sceneries. These excursions allow me to revitalize my spirit and preserve precious memories through photography.",
-                        "formatted": "→ <u>Whenever I visit a new destination, my top priority is to</u> <span class=\"sub-hl\">explore iconic historical landmarks and marvel at pristine natural sceneries</span>. These excursions allow me to <span class=\"sub-hl\">revitalize my spirit</span> and give me an opportunity to <span class=\"sub-hl\">preserve precious memories through photography</span>."
+                        "text": "Whenever I visit a new destination, my top priority is to explore iconic historical landmarks and enjoy beautiful natural scenery. These trips allow me to refresh my mind and preserve precious memories through photography.",
+                        "formatted": "→ <u>Whenever I visit a new destination, my top priority is to</u> <span class=\"sub-hl\">explore iconic historical landmarks and marvel at clean and natural natural sceneries</span>. These excursions allow me to <span class=\"sub-hl\">refresh my spirit</span> and give me an opportunity to <span class=\"sub-hl\">preserve precious memories through photography</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Dạo chợ đêm và tìm hiểu lối sống sinh hoạt của dân địa phương)",
-                        "text": "I take immense pleasure in strolling through bustling night markets and interacting with hospitable street vendors. Conversing with local residents allows me to gain authentic cultural insights that cannot be found in guidebooks.",
-                        "formatted": "→ <u>I take immense pleasure in</u> <span class=\"sub-hl\">strolling through bustling night markets</span> and <span class=\"sub-hl\">interacting with hospitable street vendors</span>. Conversing with local residents allows me to <span class=\"sub-hl\">gain authentic cultural insights</span> and <span class=\"sub-hl\">appreciate diverse ways of living</span>."
+                        "text": "I really enjoy strolling through bustling night markets and interacting with friendly local sellers. Conversing with local residents allows me to gain authentic cultural insights that cannot be found in guidebooks.",
+                        "formatted": "→ <u>I really enjoy</u> <span class=\"sub-hl\">strolling through bustling night markets</span> and <span class=\"sub-hl\">interacting with friendly local sellers</span>. Conversing with local residents allows me to <span class=\"sub-hl\">gain authentic cultural insights</span> and <span class=\"sub-hl\">appreciate diverse ways of living</span>."
                     }
                 ]
             }
@@ -30012,7 +30002,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "Do you like going on trips?",
                 "qType": "Yes/No Question: Do you like going on trips?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Đam mê xê dịch để mở mang tầm nhìn và giải tỏa áp lực):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, passionately! <u>Venturing on exciting trips is one of my greatest joys in life</u>. Exploring unfamiliar territories allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and provides a marvelous opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (YES - Thích các chuyến dã ngoại ngắn cuối tuần về vùng quê yên bình):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I certainly do, especially short weekend excursions away from bustling cities</u>. Escaping to the tranquil countryside allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> without <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Đam mê xê dịch để mở mang tầm nhìn và giải tỏa áp lực):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, passionately! <u>Venturing on exciting trips is one of my greatest joys in life</u>. Exploring unfamiliar territories allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and provides a marvelous opportunity to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (YES - Thích các chuyến dã ngoại ngắn cuối tuần về vùng quê yên bình):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I certainly do, especially short weekend excursions away from bustling cities</u>. Escaping to the peaceful countryside allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> without <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -30044,13 +30034,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (YES - Mê du lịch khám phá văn hóa và xả stress)",
-                        "text": "Yes, passionately! Venturing on exciting trips is one of my greatest joys in life. Exploring unfamiliar territories allows me to broaden my geographical horizons and provides a marvelous opportunity to relieve stress after relentless exam cycles.",
-                        "formatted": "→ Yes, passionately! <u>Venturing on exciting trips is one of my greatest joys in life</u>. Exploring unfamiliar territories allows me to <span class=\"sub-hl\">broaden my geographical horizons</span> and provides a marvelous opportunity to <span class=\"sub-hl\">relieve stress after relentless exam cycles</span>."
+                        "text": "Yes, passionately! Going on exciting trips is one of my biggest joys in life. Exploring new places allows me to explore new places and gives me a great chance to relax after stressful exams.",
+                        "formatted": "→ Yes, passionately! <u>Venturing on exciting trips is one of my greatest joys in life</u>. Exploring unfamiliar territories allows me to <span class=\"sub-hl\">broaden my geographical horizons</span> and provides a marvelous opportunity to <span class=\"sub-hl\">relieve stress after constant exam cycles</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (YES - Thích các chuyến cắm trại ngoại ô vào cuối tuần)",
-                        "text": "Yes, I certainly do, especially short weekend excursions away from bustling cities. Escaping to the tranquil countryside allows me to breathe crisp fresh air without disrupting my professional weekday routine.",
-                        "formatted": "→ <u>Yes, I certainly do, especially short weekend excursions away from bustling cities</u>. Escaping to the tranquil countryside allows me to <span class=\"sub-hl\">breathe crisp fresh air</span> without <span class=\"sub-hl\">disrupting my professional weekday routine</span>."
+                        "text": "Yes, I certainly do, especially short weekend excursions away from bustling cities. Escaping to the peaceful countryside allows me to breathe crisp fresh air without disrupting my professional weekday routine.",
+                        "formatted": "→ <u>Yes, I certainly do, especially short weekend excursions away from bustling cities</u>. Escaping to the peaceful countryside allows me to <span class=\"sub-hl\">breathe crisp fresh air</span> without <span class=\"sub-hl\">disrupting my professional weekday routine</span>."
                     }
                 ]
             },
@@ -30090,8 +30080,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Kế hoạch đi nghỉ dưỡng ở Phú Quốc vào tháng sau)",
-                        "text": "Yes, indeed! I am currently fine-tuning plans for a four-day coastal vacation to Phu Quoc island next month. Going on this journey will allow my group to taste exquisite freshly caught seafood and gives us a wonderful chance to strengthen our intimate friendships.",
-                        "formatted": "→ Yes, indeed! <u>I am currently fine-tuning plans for a four-day coastal vacation to</u> <span class=\"sub-hl\">Phu Quoc island next month</span>. Going on this journey will allow my group to <span class=\"sub-hl\">taste exquisite freshly caught seafood</span> and gives us a wonderful chance to <span class=\"sub-hl\">strengthen our intimate friendships</span>."
+                        "text": "Yes, indeed! I am currently fine-tuning plans for a four-day coastal vacation to Phu Quoc island next month. Going on this journey will allow my group to enjoy delicious fresh seafood and gives us a wonderful chance to strengthen our intimate friendships.",
+                        "formatted": "→ Yes, indeed! <u>I am currently fine-tuning plans for a four-day coastal vacation to</u> <span class=\"sub-hl\">Phu Quoc island next month</span>. Going on this journey will allow my group to <span class=\"sub-hl\">enjoy delicious fresh seafood</span> and gives us a wonderful chance to <span class=\"sub-hl\">strengthen our intimate friendships</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Kế hoạch phượt săn mây ở Tà Xùa sau khi hoàn thành khóa luận)",
@@ -30104,7 +30094,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "What kind of trips do you enjoy the most?",
                 "qType": "Wh-Question: What kind of trips do you enjoy most?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Du lịch nghỉ dưỡng ven biển thảnh thơi & dịch vụ cao cấp):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Without a shadow of a doubt, luxurious coastal retreats are my favorite type of trip</u>. Lounging on white-sand shores and hearing ocean waves allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and helps me <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Du lịch phiêu lưu, leo núi và khám phá vẻ đẹp hoang dã):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Personally, I am deeply drawn to active adventure excursions such as trekking in national parks</u>. Trekking through rugged trails allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and fosters a tremendous <span class=\"formula-bracket-hl\">[cảm giác chinh phục thành công]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Du lịch nghỉ dưỡng ven biển thảnh thơi & dịch vụ cao cấp):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Without a shadow of a doubt, relaxing beach trips are my favorite type of trip</u>. Lounging on white-sand shores and hearing ocean waves allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and helps me <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Du lịch phiêu lưu, leo núi và khám phá vẻ đẹp hoang dã):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Personally, I am deeply drawn to active adventure excursions such as trekking in national parks</u>. Trekking through rugged trails allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and creates a tremendous <span class=\"formula-bracket-hl\">[cảm giác chinh phục thành công]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -30115,7 +30105,7 @@ const practiceTopicsData = [
                         "title": "🌄 [Loại hình Chuyến đi Yêu thích]:",
                         "items": [
                             {
-                                "en": "luxurious and tranquil coastal retreats",
+                                "en": "relaxing and comfortable beach trips",
                                 "vn": "những chuyến nghỉ dưỡng ven biển thanh bình và sang trọng"
                             },
                             {
@@ -30127,7 +30117,7 @@ const practiceTopicsData = [
                                 "vn": "đắm mình vào thiên nhiên hoang dã chưa bị khai phá"
                             },
                             {
-                                "en": "foster an immense sense of accomplishment",
+                                "en": "give me a huge sense of achievement",
                                 "vn": "nuôi dưỡng một cảm giác thành tựu và chiến thắng to lớn"
                             }
                         ]
@@ -30136,13 +30126,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Nghỉ dưỡng thảnh thơi bên bờ biển để phục hồi tâm trí)",
-                        "text": "Without a shadow of a doubt, luxurious coastal retreats are my favorite type of trip. Lounging on white-sand shores and hearing ocean waves allows me to disconnect from digital exhaustion and helps me rejuvenate my inner peace.",
-                        "formatted": "→ <u>Without a shadow of a doubt, luxurious coastal retreats are my favorite type of trip</u>. Lounging on white-sand shores and hearing ocean waves allows me to <span class=\"sub-hl\">disconnect from digital exhaustion</span> and helps me <span class=\"sub-hl\">rejuvenate my inner peace</span>."
+                        "text": "Without a shadow of a doubt, relaxing beach trips are my favorite type of trip. Lounging on white-sand shores and hearing ocean waves allows me to disconnect from screens and helps me refresh my mind.",
+                        "formatted": "→ <u>Without a shadow of a doubt, relaxing beach trips are my favorite type of trip</u>. Lounging on white-sand shores and hearing ocean waves allows me to <span class=\"sub-hl\">disconnect from digital exhaustion</span> and helps me <span class=\"sub-hl\">refresh my inner peace</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trekking rừng núi mạo hiểm để thử thách sức bền bản thân)",
-                        "text": "Personally, I am deeply drawn to active adventure excursions such as trekking in national parks. Trekking through rugged trails allows me to enhance my physical endurance and fosters a tremendous sense of personal triumph when reaching majestic summits.",
-                        "formatted": "→ <u>Personally, I am deeply drawn to active adventure excursions such as trekking in national parks</u>. Trekking through rugged trails allows me to <span class=\"sub-hl\">enhance my physical endurance</span> and fosters a tremendous <span class=\"sub-hl\">sense of personal triumph when reaching majestic summits</span>."
+                        "text": "Personally, I am deeply drawn to active adventure excursions such as trekking in national parks. Trekking through rugged trails allows me to enhance my physical endurance and creates a tremendous sense of personal triumph when reaching majestic summits.",
+                        "formatted": "→ <u>Personally, I am deeply drawn to active adventure excursions such as trekking in national parks</u>. Trekking through rugged trails allows me to <span class=\"sub-hl\">enhance my physical endurance</span> and creates a tremendous <span class=\"sub-hl\">sense of personal triumph when reaching majestic summits</span>."
                     }
                 ]
             }
@@ -30269,7 +30259,7 @@ const practiceTopicsData = [
                                 "vn": "vừa hoài niệm vừa tràn đầy sức sống"
                             },
                             {
-                                "en": "serene, picturesque, and unspoiled",
+                                "en": "peaceful, scenic, and natural",
                                 "vn": "thanh bình, đẹp như tranh và hoang sơ"
                             }
                         ]
@@ -30704,7 +30694,7 @@ const practiceTopicsData = [
                                 "vn": "hữu ích và dễ hiểu đến bất ngờ"
                             },
                             {
-                                "en": "reliable and indispensable for solo travelers",
+                                "en": "reliable and essential for solo travelers",
                                 "vn": "đáng tin cậy và không thể thiếu cho người đi du lịch một mình"
                             },
                             {
@@ -30721,7 +30711,7 @@ const practiceTopicsData = [
                                 "vn": "tìm tuyến đường nhanh nhất vào giờ cao điểm"
                             },
                             {
-                                "en": "locate hidden cafes and local landmarks effortlessly",
+                                "en": "locate hidden cafes and local landmarks easily",
                                 "vn": "tìm ra các quán cà phê ẩn mình và địa danh địa phương dễ dàng"
                             },
                             {
@@ -30883,7 +30873,7 @@ const practiceTopicsData = [
                         "title": "✨ [Tính từ mô tả]:",
                         "items": [
                             {
-                                "en": "remarkably warm and patient",
+                                "en": "really warm and patient",
                                 "vn": "vô cùng ấm áp và kiên nhẫn"
                             },
                             {
@@ -30925,8 +30915,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Hỏi cô bán hàng rong khi hết pin điện thoại)",
-                        "text": "Yes, I asked a friendly street vendor for directions when my phone ran out of battery in a narrow alley. Fortunately, they were remarkably warm and patient, which allowed me to reach my destination on time and get local food tips.",
-                        "formatted": "→ <u>Yes, I asked</u> <span class=\"sub-hl\">a friendly street vendor</span> for directions when <span class=\"sub-hl\">my phone ran out of battery in a narrow alley</span>. Fortunately, they were <span class=\"sub-hl\">remarkably warm and patient</span>, which allowed me to <span class=\"sub-hl\">reach my destination on time and get local food tips</span>."
+                        "text": "Yes, I asked a friendly street vendor for directions when my phone ran out of battery in a narrow alley. Fortunately, they were really warm and patient, which allowed me to reach my destination on time and get local food tips.",
+                        "formatted": "→ <u>Yes, I asked</u> <span class=\"sub-hl\">a friendly street vendor</span> for directions when <span class=\"sub-hl\">my phone ran out of battery in a narrow alley</span>. Fortunately, they were <span class=\"sub-hl\">really warm and patient</span>, which allowed me to <span class=\"sub-hl\">reach my destination on time and get local food tips</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Hỏi đường lúc GPS lỗi và tình cờ khám phá chỗ hay)",
@@ -31119,11 +31109,11 @@ const practiceTopicsData = [
                         "title": "🏖️ [Nghỉ dưỡng biển & Sum họp miền quê]:",
                         "items": [
                             {
-                                "en": "stroll along pristine beaches",
+                                "en": "walk along clean, beautiful beaches",
                                 "vn": "tản bộ dọc theo những bãi biển nguyên sơ, trong lành"
                             },
                             {
-                                "en": "savor fresh seafood at seaside restaurants",
+                                "en": "enjoy fresh seafood at seaside restaurants",
                                 "vn": "thưởng thức hải sản tươi ngon tại nhà hàng ven biển"
                             },
                             {
@@ -31153,7 +31143,7 @@ const practiceTopicsData = [
                                 "vn": "thắt chặt sợi dây gắn kết giữa các thế hệ qua những mẩu chuyện xưa"
                             },
                             {
-                                "en": "capture candid family portraits for keepsakes",
+                                "en": "take natural family photos to keep as memories",
                                 "vn": "chụp những bức ảnh gia đình tự nhiên để lưu giữ kỷ niệm"
                             },
                             {
@@ -31166,8 +31156,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Đi nghỉ mát Đà Nẵng cùng gia đình - Tản bộ bờ biển nguyên sơ và thưởng thức hải sản tươi)",
-                        "text": "On my last vacation, I took a four-day trip to Da Nang with my family. We made the most of our stay by strolling along pristine beaches and savoring fresh seafood at lively seaside restaurants.",
-                        "formatted": "→ On my last vacation, <u>I took a four-day trip to Da Nang with my family</u>. We made the most of our stay by <span class=\"sub-hl\">strolling along pristine beaches</span> and <span class=\"sub-hl\">savoring fresh seafood at lively seaside restaurants</span>."
+                        "text": "On my last vacation, I took a four-day trip to Da Nang with my family. We made the most of our stay by walking along clean, beautiful beaches and enjoying fresh seafood at lively seaside restaurants.",
+                        "formatted": "→ On my last vacation, <u>I took a four-day trip to Da Nang with my family</u>. We made the most of our stay by <span class=\"sub-hl\">walking along clean, beautiful beaches</span> and <span class=\"sub-hl\">enjoying fresh seafood at lively seaside restaurants</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Về quê thăm ông bà - Quây quần bên mâm cơm gia đình ấm cúng và tránh xa sự ngột ngạt thành thị)",
@@ -31522,7 +31512,7 @@ const practiceTopicsData = [
                                 "vn": "ủng hộ ngành du lịch và dịch vụ lưu trú địa phương"
                             },
                             {
-                                "en": "strengthen neighborhood solidarity through community festivals",
+                                "en": "build stronger neighborhood bonds through community festivals",
                                 "vn": "thắt chặt tình làng nghĩa xóm qua các lễ hội cộng đồng"
                             },
                             {
@@ -33354,7 +33344,7 @@ const practiceTopicsData = [
                                 "vn": "đội ngũ giáo viên tận tâm và mức học phí vừa phải"
                             },
                             {
-                                "en": "state-of-the-art facilities and dynamic extracurricular activities",
+                                "en": "modern facilities and dynamic extracurricular activities",
                                 "vn": "cơ sở vật chất tối tân và các hoạt động ngoại khóa năng động"
                             },
                             {
@@ -33402,8 +33392,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trường tư thục hiện đại - Cơ sở vật chất tối tân, ngoại khóa năng động, rèn tư duy phản biện và tự lập)",
-                        "text": "Throughout my childhood, I was enrolled in a modern private school. It offered state-of-the-art facilities and dynamic extracurricular activities. That really helped me develop critical thinking and become much more independent.",
-                        "formatted": "→ Throughout my childhood, <u>I was enrolled in a modern private school</u>. It offered <span class=\"sub-hl\">state-of-the-art facilities and dynamic extracurricular activities</span>. That really helped me <span class=\"sub-hl\">develop critical thinking and become much more independent</span>."
+                        "text": "Throughout my childhood, I was enrolled in a modern private school. It offered modern facilities and dynamic extracurricular activities. That really helped me develop critical thinking and become much more independent.",
+                        "formatted": "→ Throughout my childhood, <u>I was enrolled in a modern private school</u>. It offered <span class=\"sub-hl\">modern facilities and dynamic extracurricular activities</span>. That really helped me <span class=\"sub-hl\">develop critical thinking and become much more independent</span>."
                     }
                 ]
             },
@@ -33562,7 +33552,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "In the future, which type of school do you think will become more common, and why?",
                 "qType": "Prediction Wh-question: Which type of school will become more common, and why?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Trường tư thục & song ngữ bùng nổ - Đời sống nâng cao, phụ huynh đầu tư chương trình quốc tế để con tự tin hội nhập):</div>\n                    <div class=\"topic-formula-text\">\n                        → Looking ahead, <u>I foresee that private and bilingual schools will become increasingly prevalent</u>. As living standards rise, modern parents are more willing to invest in <span class=\"formula-bracket-hl\">[yếu tố giáo dục cao cấp]</span> to give their children <span class=\"formula-bracket-hl\">[lợi thế tương lai]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trường công lập giữ vị thế chủ đạo - Nhà nước hiện đại hóa hạ tầng, chất lượng cao phục vụ toàn dân):</div>\n                    <div class=\"topic-formula-text\">\n                        → From my perspective, <u>public schools will definitely remain the mainstream choice</u> in our society. The government continues to <span class=\"formula-bracket-hl\">[hành động đầu tư của nhà nước - Vo]</span> so that quality education remains <span class=\"formula-bracket-hl\">[tính chất dễ tiếp cận]</span> for every citizen.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Trường tư thục & song ngữ bùng nổ - Đời sống nâng cao, phụ huynh đầu tư chương trình quốc tế để con tự tin hội nhập):</div>\n                    <div class=\"topic-formula-text\">\n                        → Looking ahead, <u>I foresee that private and bilingual schools will become more and more popular</u>. As living standards rise, modern parents are more willing to invest in <span class=\"formula-bracket-hl\">[yếu tố giáo dục cao cấp]</span> to give their children <span class=\"formula-bracket-hl\">[lợi thế tương lai]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Trường công lập giữ vị thế chủ đạo - Nhà nước hiện đại hóa hạ tầng, chất lượng cao phục vụ toàn dân):</div>\n                    <div class=\"topic-formula-text\">\n                        → From my perspective, <u>public schools will definitely remain the mainstream choice</u> in our society. The government continues to <span class=\"formula-bracket-hl\">[hành động đầu tư của nhà nước - Vo]</span> so that quality education remains <span class=\"formula-bracket-hl\">[tính chất dễ tiếp cận]</span> for every citizen.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "📈 [Điều kiện của phụ huynh] (Cách 1):",
@@ -33631,7 +33621,7 @@ const practiceTopicsData = [
                         "title": "🌟 [Cấu trúc dự đoán xu hướng giáo dục tương lai]:",
                         "items": [
                             {
-                                "en": "foresee that private and bilingual schools will become increasingly prevalent",
+                                "en": "foresee that private and bilingual schools will become more and more popular",
                                 "vn": "dự đoán rằng trường tư thục và song ngữ sẽ ngày càng trở nên thịnh hành"
                             },
                             {
@@ -33664,7 +33654,7 @@ const practiceTopicsData = [
                                 "vn": "các gia đình trung lưu ngày càng mở rộng với mức thu nhập khả dụng cao hơn"
                             },
                             {
-                                "en": "state-funded educational reforms and subsidized school fees",
+                                "en": "government investment and affordable tuition fees",
                                 "vn": "các cải cách giáo dục từ ngân sách nhà nước và học phí được hỗ trợ trợ cấp"
                             }
                         ]
@@ -33690,7 +33680,7 @@ const practiceTopicsData = [
                                 "vn": "đảm bảo quyền tiếp cận giáo dục bình đẳng giữa vùng sâu vùng xa và thành thị"
                             },
                             {
-                                "en": "foster well-rounded civic awareness among young citizens",
+                                "en": "build strong social awareness among young citizens",
                                 "vn": "nuôi dưỡng nhận thức công dân toàn diện trong giới trẻ"
                             }
                         ]
@@ -33699,8 +33689,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Trường tư thục & song ngữ bùng nổ - Đời sống nâng cao, phụ huynh đầu tư bằng cấp quốc tế cho con)",
-                        "text": "Looking ahead, I foresee that private and bilingual schools will become increasingly prevalent. As living standards rise, modern parents are more willing to invest in international curriculums to give their children a competitive edge in global workplaces.",
-                        "formatted": "→ Looking ahead, <u>I foresee that private and bilingual schools will become increasingly prevalent</u>. As living standards rise, modern parents are more willing to invest in <span class=\"sub-hl\">international curriculums</span> to give their children <span class=\"sub-hl\">a competitive edge in global workplaces</span>."
+                        "text": "Looking ahead, I foresee that private and bilingual schools will become more and more popular. As living standards rise, modern parents are more willing to invest in international curriculums to give their children a competitive edge in global workplaces.",
+                        "formatted": "→ Looking ahead, <u>I foresee that private and bilingual schools will become more and more popular</u>. As living standards rise, modern parents are more willing to invest in <span class=\"sub-hl\">international curriculums</span> to give their children <span class=\"sub-hl\">a competitive edge in global workplaces</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trường công lập giữ vị thế chủ đạo - Nhà nước số hóa học đường, giáo dục chất lượng cho mọi người dân)",
@@ -33745,7 +33735,7 @@ const practiceTopicsData = [
                                 "vn": "nhiều thử thách nhưng rất xứng đáng"
                             },
                             {
-                                "en": "memorable and transformative",
+                                "en": "memorable and life-changing",
                                 "vn": "đáng nhớ và giúp trưởng thành vượt bậc"
                             }
                         ]
@@ -34764,7 +34754,7 @@ const practiceTopicsData = [
                                 "vn": "luyện kỹ thuật nhại theo các đoạn đối thoại thực tế và ghi âm lại giọng của mình"
                             },
                             {
-                                "en": "utilize spaced repetition flashcard applications",
+                                "en": "use smart flashcard apps",
                                 "vn": "sử dụng các ứng dụng thẻ từ vựng lặp lại ngắt quãng thông minh"
                             },
                             {
@@ -34782,7 +34772,7 @@ const practiceTopicsData = [
                         "title": "🌟 [Lợi ích ngoài Bảng - Vo]:",
                         "items": [
                             {
-                                "en": "absorb authentic idioms while sharpening listening comprehension effortlessly",
+                                "en": "absorb authentic idioms while sharpening listening comprehension easily",
                                 "vn": "thẩm thấu các thành ngữ đời thực đồng thời rèn luyện kỹ năng nghe hiểu nhẹ nhàng"
                             },
                             {
@@ -34799,8 +34789,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Đắm chìm truyền thông - Xem phim phụ đề tiếng Anh, nghe podcast hằng ngày tiếp thu thành ngữ tự nhiên)",
-                        "text": "Over the years, I've relied heavily on media immersion to acquire English naturally. I regularly stream TV shows with English subtitles and listen to daily podcasts. This helps me absorb authentic idioms and sharpen my listening comprehension effortlessly.",
-                        "formatted": "→ Over the years, <u>I've relied heavily on media immersion to acquire English naturally</u>. I regularly <span class=\"sub-hl\">stream TV shows with English subtitles and listen to daily podcasts</span>. This helps me <span class=\"sub-hl\">absorb authentic idioms and sharpen my listening comprehension effortlessly</span>."
+                        "text": "Over the years, I've relied heavily on media immersion to acquire English naturally. I regularly stream TV shows with English subtitles and listen to daily podcasts. This helps me absorb authentic idioms and sharpen my listening comprehension easily.",
+                        "formatted": "→ Over the years, <u>I've relied heavily on media immersion to acquire English naturally</u>. I regularly <span class=\"sub-hl\">stream TV shows with English subtitles and listen to daily podcasts</span>. This helps me <span class=\"sub-hl\">absorb authentic idioms and sharpen my listening comprehension easily</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Dùng app & Kỹ thuật Shadowing - Nhại lại và ghi âm giọng nói hằng ngày, tự sửa lỗi phát âm và tăng độ lưu loát)",
@@ -34813,7 +34803,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "In your opinion, what is the most difficult skill in learning English?",
                 "qType": "Superlative Wh-question: What is the most difficult skill in learning English?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Kỹ năng Nói - Đòi hỏi phản xạ nhanh dưới áp lực, người học dễ ngắc ngứ khi nói chuyện với người bản xứ):</div>\n                    <div class=\"topic-formula-text\">\n                        → From my perspective, <u>speaking is undeniably the most daunting aspect of language learning</u>. It requires <span class=\"formula-bracket-hl\">[yêu cầu phản xạ cao]</span>, so many learners <span class=\"formula-bracket-hl\">[rào cản tâm lý - Vo]</span> when <span class=\"formula-bracket-hl\">[hoàn cảnh giao tiếp - V-ing]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Kỹ năng Nghe - Người bản xứ nuốt âm nối từ và dùng ngữ điệu địa phương, rất khó bắt kịp trong thời gian thực):</div>\n                    <div class=\"topic-formula-text\">\n                        → To me, <u>listening comprehension poses the steepest challenge</u> for non-native learners. In real life, speakers frequently <span class=\"formula-bracket-hl\">[đặc tính ngôn ngữ nói tự nhiên]</span>, so it's really hard to <span class=\"formula-bracket-hl\">[khó khăn bắt kịp - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Kỹ năng Nói - Đòi hỏi phản xạ nhanh dưới áp lực, người học dễ ngắc ngứ khi nói chuyện với người bản xứ):</div>\n                    <div class=\"topic-formula-text\">\n                        → From my perspective, <u>speaking is definitely the most daunting aspect of language learning</u>. It requires <span class=\"formula-bracket-hl\">[yêu cầu phản xạ cao]</span>, so many learners <span class=\"formula-bracket-hl\">[rào cản tâm lý - Vo]</span> when <span class=\"formula-bracket-hl\">[hoàn cảnh giao tiếp - V-ing]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Kỹ năng Nghe - Người bản xứ nuốt âm nối từ và dùng ngữ điệu địa phương, rất khó bắt kịp trong thời gian thực):</div>\n                    <div class=\"topic-formula-text\">\n                        → To me, <u>listening comprehension poses the steepest challenge</u> for non-native learners. In real life, speakers frequently <span class=\"formula-bracket-hl\">[đặc tính ngôn ngữ nói tự nhiên]</span>, so it's really hard to <span class=\"formula-bracket-hl\">[khó khăn bắt kịp - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🗣️ [Khó khăn khi nói] (Cách 1):",
@@ -34903,7 +34893,7 @@ const practiceTopicsData = [
                         "title": "🌟 [Cấu trúc bày tỏ độ khó của kỹ năng tiếng Anh]:",
                         "items": [
                             {
-                                "en": "speaking is undeniably the most daunting aspect of language learning",
+                                "en": "speaking is definitely the most daunting aspect of language learning",
                                 "vn": "kỹ năng nói không thể phủ nhận là khía cạnh đáng sợ và thử thách nhất trong việc học ngôn ngữ"
                             },
                             {
@@ -34971,8 +34961,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Kỹ năng Nói - Phản xạ tức thì dưới áp lực, người học dễ đơ và ngắc ngứ khi nói chuyện với người bản xứ)",
-                        "text": "From my perspective, speaking is undeniably the most daunting aspect of language learning. It requires instant reaction and accurate phrasing under pressure, so many learners freeze up and hesitate when conversing with native speakers.",
-                        "formatted": "→ From my perspective, <u>speaking is undeniably the most daunting aspect of language learning</u>. It requires <span class=\"sub-hl\">instant reaction and accurate phrasing under pressure</span>, so many learners <span class=\"sub-hl\">freeze up and hesitate when conversing with native speakers</span>."
+                        "text": "From my perspective, speaking is definitely the most daunting aspect of language learning. It requires instant reaction and accurate phrasing under pressure, so many learners freeze up and hesitate when conversing with native speakers.",
+                        "formatted": "→ From my perspective, <u>speaking is definitely the most daunting aspect of language learning</u>. It requires <span class=\"sub-hl\">instant reaction and accurate phrasing under pressure</span>, so many learners <span class=\"sub-hl\">freeze up and hesitate when conversing with native speakers</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Kỹ năng Nghe - Người bản xứ nuốt âm nối từ và dùng ngữ điệu địa phương, rất khó bắt kịp trong thời gian thực)",
@@ -35652,7 +35642,7 @@ const practiceTopicsData = [
                                 "vn": "lưu từ mới vào thẻ học để ôn tập nhanh"
                             },
                             {
-                                "en": "look up slang and modern expressions effortlessly",
+                                "en": "look up slang and modern expressions easily",
                                 "vn": "tra cứu tiếng lóng và cách diễn đạt hiện đại dễ dàng"
                             }
                         ]
@@ -35675,7 +35665,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "Does a dictionary help you in learning English?",
                 "qType": "Yes/No Question: Does [X] help you in [Y]?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Chắc chắn có - Mở rộng vốn từ và sửa phát âm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Certainly. A good dictionary is definitely essential for my English learning because</u> it allows me to <span class=\"formula-bracket-hl\">[lợi ích 1]</span> and <span class=\"formula-bracket-hl\">[lợi ích từ điển ngoài Bảng - Vo]</span>. It also helps me <span class=\"formula-bracket-hl\">[lợi ích 2]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Rất hữu ích - Hiểu sâu ngữ cảnh và dùng từ tự nhiên):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Sure, it helps me tremendously. Beyond basic meanings, a reliable dictionary allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích từ điển ngoài Bảng - Vo]</span>, which makes it much easier to <span class=\"formula-bracket-hl\">[lợi ích 1]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Chắc chắn có - Mở rộng vốn từ và sửa phát âm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Certainly. A good dictionary is definitely essential for my English learning because</u> it allows me to <span class=\"formula-bracket-hl\">[lợi ích 1]</span> and <span class=\"formula-bracket-hl\">[lợi ích từ điển ngoài Bảng - Vo]</span>. It also helps me <span class=\"formula-bracket-hl\">[lợi ích 2]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Rất hữu ích - Hiểu sâu ngữ cảnh và dùng từ tự nhiên):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Sure, it helps me a lot. Beyond basic meanings, a reliable dictionary allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích từ điển ngoài Bảng - Vo]</span>, which makes it much easier to <span class=\"formula-bracket-hl\">[lợi ích 1]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -35712,8 +35702,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Giúp hiểu sắc thái từ đồng nghĩa và học hiệu quả hơn)",
-                        "text": "Sure, it helps me tremendously. Beyond basic meanings, a reliable dictionary allows me to understand subtle differences between synonyms, which makes it much easier to learn to communicate and study more effectively.",
-                        "formatted": "→ <u>Sure, it helps me tremendously. Beyond basic meanings, a reliable dictionary allows me to</u> <span class=\"sub-hl\">understand subtle differences between synonyms</span>, which makes it much easier to <span class=\"sub-hl\">learn to communicate</span> and <span class=\"sub-hl\">study more effectively</span>."
+                        "text": "Sure, it helps me a lot. Beyond basic meanings, a reliable dictionary allows me to understand subtle differences between synonyms, which makes it much easier to learn to communicate and study more effectively.",
+                        "formatted": "→ <u>Sure, it helps me a lot. Beyond basic meanings, a reliable dictionary allows me to</u> <span class=\"sub-hl\">understand subtle differences between synonyms</span>, which makes it much easier to <span class=\"sub-hl\">learn to communicate</span> and <span class=\"sub-hl\">study more effectively</span>."
                     }
                 ]
             }
@@ -35729,7 +35719,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "Have you ever taken an online course?",
                 "qType": "Yes/No Question: Have you taken an online course?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Đã hoàn thành các khóa học kỹ năng/tiếng Anh trên nền tảng số):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, definitely! <u>I have completed several virtual courses on platforms such as</u> <span class=\"formula-bracket-hl\">[Coursera / Udemy]</span>. I found this mode of education remarkably <span class=\"formula-bracket-hl\">[tính từ]</span>, and it allowed me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (YES - Từng trải nghiệm học trực tuyến thời gian đại học qua Zoom/Teams):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I experienced extensive online schooling during my university semesters via</u> <span class=\"formula-bracket-hl\">[Zoom / MS Teams]</span>. It was a novel experience that allowed me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> without <span class=\"formula-bracket-hl\">[bất lợi đi lại - V-ing]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Đã hoàn thành các khóa học kỹ năng/tiếng Anh trên nền tảng số):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, definitely! <u>I have completed several virtual courses on platforms such as</u> <span class=\"formula-bracket-hl\">[Coursera / Udemy]</span>. I found this way of learning really <span class=\"formula-bracket-hl\">[tính từ]</span>, and it allowed me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (YES - Từng trải nghiệm học trực tuyến thời gian đại học qua Zoom/Teams):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I experienced extensive online schooling during my university semesters via</u> <span class=\"formula-bracket-hl\">[Zoom / MS Teams]</span>. It was a novel experience that allowed me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> without <span class=\"formula-bracket-hl\">[bất lợi đi lại - V-ing]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -35761,8 +35751,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Khóa học tiếng Anh và phân tích dữ liệu trên Coursera)",
-                        "text": "Yes, definitely! I have completed several certified courses on Coursera, specializing in business English and data visualization. I found the flexible curriculum extremely accommodating, and it allowed me to acquire market-relevant credentials from the comfort of my home.",
-                        "formatted": "→ Yes, definitely! <u>I have completed several virtual courses on platforms such as</u> <span class=\"sub-hl\">Coursera, specializing in business English</span>. I found this mode of education remarkably <span class=\"sub-hl\">accommodating and flexible</span>, and it allowed me to <span class=\"sub-hl\">acquire market-relevant credentials from home</span>."
+                        "text": "Yes, definitely! I have completed several certified courses on Coursera, specializing in business English and data visualization. I found the flexible schedule really convenient, and it allowed me to earn useful certificates right from home.",
+                        "formatted": "→ Yes, definitely! <u>I have completed several virtual courses on platforms such as</u> <span class=\"sub-hl\">Coursera, specializing in business English</span>. I found this way of learning really <span class=\"sub-hl\">convenient and flexible</span>, and it allowed me to <span class=\"sub-hl\">acquire market-relevant credentials from home</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trải nghiệm học đại học từ xa qua Zoom tiện lợi)",
@@ -35775,7 +35765,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "Do you enjoy learning online? Why or why not?",
                 "qType": "Yes/No Question: Do you enjoy online learning? Why or why not?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Thích vì sự linh hoạt về thời gian, không gian và nguồn tài liệu dồi dào):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely! <u>I truly relish distance learning because of its unmatched</u> <span class=\"formula-bracket-hl\">[tính linh hoạt]</span>. Being able to replay lectures allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me full autonomy over <span class=\"formula-bracket-hl\">[tiến độ học]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (KHÔNG THẬT SỰ THÍCH - Nhớ không khí lớp học truyền thống và tương tác người thật):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To be honest, I'm not very keen on learning through a computer screen</u>. Staring at monitors causes <span class=\"formula-bracket-hl\">[mỏi mắt / thiếu tập trung]</span>, so <u>I prefer traditional face-to-face instruction because it allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Thích vì sự linh hoạt về thời gian, không gian và nguồn tài liệu dồi dào):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely! <u>I really enjoy online learning because of its great</u> <span class=\"formula-bracket-hl\">[tính linh hoạt]</span>. Being able to replay lectures allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and gives me full control over <span class=\"formula-bracket-hl\">[tiến độ học]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (KHÔNG THẬT SỰ THÍCH - Nhớ không khí lớp học truyền thống và tương tác người thật):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To be honest, I'm not very keen on learning through a computer screen</u>. Staring at monitors causes <span class=\"formula-bracket-hl\">[mỏi mắt / thiếu tập trung]</span>, so <u>I prefer traditional face-to-face instruction because it allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -35786,11 +35776,11 @@ const practiceTopicsData = [
                         "title": "⚖️ [Đánh giá trải nghiệm học Online]:",
                         "items": [
                             {
-                                "en": "unmatched flexibility and schedule autonomy",
+                                "en": "great flexibility and control over my schedule",
                                 "vn": "sự linh hoạt vô song và tự chủ hoàn toàn lịch học"
                             },
                             {
-                                "en": "rewind and replay intricate explanations",
+                                "en": "rewind and replay difficult explanations",
                                 "vn": "tua lại và nghe lại những phần giải thích phức tạp"
                             },
                             {
@@ -35807,12 +35797,12 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (YES - Tự chủ tiến độ học tập và tua lại video bài giảng tùy thích)",
-                        "text": "Yes, absolutely! I truly relish distance learning because of its unmatched temporal and geographic flexibility. Being able to pause and replay intricate lectures allows me to absorb complex concepts thoroughly and optimize my personalized study schedule.",
-                        "formatted": "→ Yes, absolutely! <u>I truly relish distance learning because of its unmatched</u> <span class=\"sub-hl\">temporal and geographic flexibility</span>. Being able to replay lectures allows me to <span class=\"sub-hl\">absorb complex concepts thoroughly</span> and gives me full autonomy over <span class=\"sub-hl\">my personalized study schedule</span>."
+                        "text": "Yes, absolutely! I really enjoy online learning because of its great flexibility in time and location. Being able to pause and replay difficult lessons allows me to understand hard topics well and manage my own study time.",
+                        "formatted": "→ Yes, absolutely! <u>I really enjoy online learning because of its great</u> <span class=\"sub-hl\">temporal and geographic flexibility</span>. Being able to replay lectures allows me to <span class=\"sub-hl\">absorb complex concepts thoroughly</span> and gives me full control over <span class=\"sub-hl\">my personalized study schedule</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (NO - Mỏi mắt và thiếu sự kết nối cảm xúc chân thực với thầy cô bạn bè)",
-                        "text": "To be honest, I am not particularly keen on virtual classes because prolonged screen time causes severe digital eye strain and feelings of isolation. I much prefer physical classrooms where lively face-to-face interactions foster spontaneous discussions and teamwork.",
+                        "text": "To be honest, I am not particularly keen on virtual classes because prolonged screen time causes severe digital eye strain and feelings of isolation. I much prefer physical classrooms where direct face-to-face interaction encourages natural discussions and teamwork.",
                         "formatted": "→ <u>To be honest, I'm not very keen on learning through a computer screen</u>. Staring at monitors causes <span class=\"sub-hl\">severe eye strain and feelings of isolation</span>, so <u>I prefer traditional face-to-face instruction because it allows me to</u> <span class=\"sub-hl\">engage in lively spontaneous discussions and feel true human warmth</span>."
                     }
                 ]
@@ -35821,7 +35811,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "What are some disadvantages of online learning?",
                 "qType": "Wh-question: What are some disadvantages of online learning?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Dễ bị xao nhãng và đòi hỏi tính tự kỷ luật cực kỳ cao):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>A prominent drawback of distance education is the perpetual temptation of</u> <span class=\"formula-bracket-hl\">[sự xao nhãng trên mạng]</span>. Without physical supervision, learners easily <span class=\"formula-bracket-hl\">[sa đà vào mạng xã hội]</span>, which hampers their <span class=\"formula-bracket-hl\">[hiệu quả học tập]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Sự cố đường truyền internet và thiếu cơ hội rèn luyện kỹ năng mềm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Another critical disadvantage stems from</u> <span class=\"formula-bracket-hl\">[sự cố kỹ thuật & đường truyền]</span>. Furthermore, the absence of physical peer engagement deprives students of chances to <span class=\"formula-bracket-hl\">[rèn luyện kỹ năng mềm]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Dễ bị xao nhãng và đòi hỏi tính tự kỷ luật cực kỳ cao):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>A major downside of online learning is the constant temptation of</u> <span class=\"formula-bracket-hl\">[sự xao nhãng trên mạng]</span>. Without physical supervision, learners easily <span class=\"formula-bracket-hl\">[sa đà vào mạng xã hội]</span>, which hampers their <span class=\"formula-bracket-hl\">[hiệu quả học tập]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Sự cố đường truyền internet và thiếu cơ hội rèn luyện kỹ năng mềm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Another critical disadvantage stems from</u> <span class=\"formula-bracket-hl\">[sự cố kỹ thuật & đường truyền]</span>. Furthermore, the absence of physical peer engagement takes away students' chances to <span class=\"formula-bracket-hl\">[rèn luyện kỹ năng mềm]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -35832,7 +35822,7 @@ const practiceTopicsData = [
                         "title": "⚠️ [Những mặt trái của học online]:",
                         "items": [
                             {
-                                "en": "perpetual digital distractions and social media alerts",
+                                "en": "constant digital distractions and social media notifications",
                                 "vn": "những sự xao nhãng kỹ thuật số liên tục và thông báo mạng xã hội"
                             },
                             {
@@ -35853,13 +35843,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Dễ mất tập trung vì mạng xã hội và đòi hỏi kỷ luật sắt)",
-                        "text": "A prominent drawback of distance education is the perpetual temptation of online distractions, such as social media and video games. Without direct teacher supervision, learners lacking iron self-discipline can easily procrastinate and experience plummeting academic performance.",
-                        "formatted": "→ <u>A prominent drawback of distance education is the perpetual temptation of</u> <span class=\"sub-hl\">online distractions like social media alerts</span>. Without physical supervision, learners easily <span class=\"sub-hl\">procrastinate on their assignments</span>, which hampers their <span class=\"sub-hl\">overall academic performance</span>."
+                        "text": "A major downside of online learning is the constant temptation of digital distractions, such as social media and video games. Without direct teacher supervision, students without strong self-discipline can easily lose focus and see their grades drop.",
+                        "formatted": "→ <u>A major downside of online learning is the constant temptation of</u> <span class=\"sub-hl\">online distractions like social media alerts</span>. Without physical supervision, learners easily <span class=\"sub-hl\">procrastinate on their assignments</span>, which hampers their <span class=\"sub-hl\">overall academic performance</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trục trặc đường truyền mạng và thiếu môi trường tương tác xã hội)",
                         "text": "Another critical disadvantage stems from technical glitches and unstable internet connectivity, which frequently interrupt lectures. Furthermore, studying behind a screen deprives students of natural socializing opportunities, hindering the development of vital interpersonal skills.",
-                        "formatted": "→ <u>Another critical disadvantage stems from</u> <span class=\"sub-hl\">technical glitches and unstable broadband connectivity</span>. Furthermore, the absence of physical peer engagement deprives students of chances to <span class=\"sub-hl\">develop vital interpersonal communication and social teamwork skills</span>."
+                        "formatted": "→ <u>Another critical disadvantage stems from</u> <span class=\"sub-hl\">technical glitches and unstable broadband connectivity</span>. Furthermore, the absence of physical peer engagement takes away students' chances to <span class=\"sub-hl\">develop vital interpersonal communication and social teamwork skills</span>."
                     }
                 ]
             }
@@ -35898,7 +35888,7 @@ const practiceTopicsData = [
                                 "vn": "doanh nghiệp năng động và giàu tính đổi mới sáng tạo"
                             },
                             {
-                                "en": "hone indispensable professional skills",
+                                "en": "develop essential job skills",
                                 "vn": "mài giũa những kỹ năng chuyên môn không thể thiếu"
                             }
                         ]
@@ -35907,13 +35897,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Sinh viên chuyên ngành Kinh doanh quốc tế tại ĐH Quốc gia)",
-                        "text": "At present, I am an undergraduate student majoring in International Business at the National University. Studying in such a competitive and modern academic environment allows me to acquire profound market knowledge and equips me with critical thinking skills for my future career.",
-                        "formatted": "→ <u>At present, I am an undergraduate student majoring in</u> <span class=\"sub-hl\">International Business at the National University</span>. Studying in such a competitive and modern academic environment allows me to <span class=\"sub-hl\">acquire profound market knowledge</span> and equips me with <span class=\"sub-hl\">critical thinking skills for my future career</span>."
+                        "text": "At present, I am an undergraduate student majoring in International Business at the National University. Studying in such a competitive and modern academic environment allows me to gain practical business knowledge and equips me with critical thinking skills for my future career.",
+                        "formatted": "→ <u>At present, I am an undergraduate student majoring in</u> <span class=\"sub-hl\">International Business at the National University</span>. Studying in such a competitive and modern academic environment allows me to <span class=\"sub-hl\">gain practical business knowledge</span> and equips me with <span class=\"sub-hl\">critical thinking skills for my future career</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Nhân viên marketing tại một công ty công nghệ ở trung tâm TP.HCM)",
-                        "text": "Currently, I am working as a digital marketing specialist at a dynamic tech firm located in central Ho Chi Minh City. Operating in a fast-paced professional atmosphere allows me to hone my creative campaigns and provides ample chances to collaborate with visionary colleagues.",
-                        "formatted": "→ <u>Currently, I am working as a</u> <span class=\"sub-hl\">digital marketing specialist at a dynamic tech firm in central Ho Chi Minh City</span>. Operating in a fast-paced professional atmosphere allows me to <span class=\"sub-hl\">hone my creative campaigns</span> and provides ample chances to <span class=\"sub-hl\">collaborate with visionary colleagues</span>."
+                        "text": "Currently, I am working as a digital marketing specialist at a dynamic tech firm located in central Ho Chi Minh City. Operating in a fast-paced professional atmosphere allows me to improve my creative marketing campaigns and provides ample chances to work with creative and talented colleagues.",
+                        "formatted": "→ <u>Currently, I am working as a</u> <span class=\"sub-hl\">digital marketing specialist at a dynamic tech firm in central Ho Chi Minh City</span>. Operating in a fast-paced professional atmosphere allows me to <span class=\"sub-hl\">improve my creative marketing campaigns</span> and provides ample chances to <span class=\"sub-hl\">work with creative and talented colleagues</span>."
                     }
                 ]
             },
@@ -35921,7 +35911,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "What do you do to study or work more effectively?",
                 "qType": "Wh-Question: What do you do to study or work effectively?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Lập danh sách ưu tiên & áp dụng kỹ thuật quản trị thời gian Pomodoro):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To enhance my personal output, I consistently implement structured techniques like</u> <span class=\"formula-bracket-hl\">[phương pháp Pomodoro & danh sách to-do list]</span>. Breaking down heavy workloads into manageable intervals allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and prevents me from <span class=\"formula-bracket-hl\">[bị kiệt sức / phân tâm - V-ing]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Tạo không gian làm việc tối giản, yên tĩnh & tắt mọi thông báo gây xao nhãng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My most potent strategy is cultivating a serene, clutter-free environment</u>. Muting smartphone notifications and keeping my workspace organized allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and helps me enter <span class=\"formula-bracket-hl\">[trạng thái tập trung sâu]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Lập danh sách ưu tiên & áp dụng kỹ thuật quản trị thời gian Pomodoro):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To improve my daily productivity, I regularly use simple techniques like</u> <span class=\"formula-bracket-hl\">[phương pháp Pomodoro & danh sách to-do list]</span>. Breaking down heavy workloads into manageable intervals allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and prevents me from <span class=\"formula-bracket-hl\">[bị kiệt sức / phân tâm - V-ing]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Tạo không gian làm việc tối giản, yên tĩnh & tắt mọi thông báo gây xao nhãng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My most effective strategy is keeping a quiet, tidy workspace</u>. Muting smartphone notifications and keeping my workspace organized allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and helps me enter <span class=\"formula-bracket-hl\">[trạng thái tập trung sâu]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -35936,11 +35926,11 @@ const practiceTopicsData = [
                                 "vn": "áp dụng kỹ thuật Pomodoro đã được kiểm chứng qua thời gian"
                             },
                             {
-                                "en": "break down colossal projects into manageable chunks",
+                                "en": "break down huge projects into smaller steps",
                                 "vn": "chia nhỏ các dự án khổng lồ thành từng phần vừa sức"
                             },
                             {
-                                "en": "cultivate a clutter-free and distraction-free workspace",
+                                "en": "keep a neat and distraction-free workspace",
                                 "vn": "xây dựng không gian làm việc gọn gàng và không phiền nhiễu"
                             },
                             {
@@ -35953,13 +35943,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Áp dụng Pomodoro 25 phút tập trung và nghỉ ngắn 5 phút)",
-                        "text": "To enhance my personal output, I consistently implement structured techniques like the Pomodoro method alongside a clear daily checklist. Breaking down heavy workloads into manageable intervals allows me to maintain intense concentration and prevents me from feeling mentally burnt out.",
-                        "formatted": "→ <u>To enhance my personal output, I consistently implement structured techniques like</u> <span class=\"sub-hl\">the Pomodoro method alongside a clear daily checklist</span>. Breaking down heavy workloads into manageable intervals allows me to <span class=\"sub-hl\">maintain intense concentration</span> and prevents me from <span class=\"sub-hl\">feeling mentally burnt out</span>."
+                        "text": "To improve my daily productivity, I regularly use simple techniques like the Pomodoro method alongside a clear daily checklist. Breaking down heavy workloads into manageable intervals allows me to maintain intense concentration and prevents me from feeling mentally burnt out.",
+                        "formatted": "→ <u>To improve my daily productivity, I regularly use simple techniques like</u> <span class=\"sub-hl\">the Pomodoro method alongside a clear daily checklist</span>. Breaking down heavy workloads into manageable intervals allows me to <span class=\"sub-hl\">maintain intense concentration</span> and prevents me from <span class=\"sub-hl\">feeling mentally burnt out</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Dọn dẹp bàn làm việc tối giản và để điện thoại ở chế độ im lặng)",
-                        "text": "My most potent strategy is cultivating a serene, clutter-free environment. Muting smartphone notifications and keeping my workspace strictly tidy allows me to eliminate needless temptations and helps me enter a state of deep mental flow effortlessly.",
-                        "formatted": "→ <u>My most potent strategy is cultivating a serene, clutter-free environment</u>. Muting smartphone notifications and keeping my workspace organized allows me to <span class=\"sub-hl\">eliminate needless temptations</span> and helps me <span class=\"sub-hl\">enter a state of deep mental flow effortlessly</span>."
+                        "text": "My most effective strategy is keeping a quiet, tidy workspace. Muting smartphone notifications and keeping my workspace strictly tidy allows me to avoid distractions and helps me focus deeply with ease.",
+                        "formatted": "→ <u>My most effective strategy is keeping a quiet, tidy workspace</u>. Muting smartphone notifications and keeping my workspace organized allows me to <span class=\"sub-hl\">eliminate needless temptations</span> and helps me <span class=\"sub-hl\">enter a state of deep mental flow easily</span>."
                     }
                 ]
             },
@@ -35967,7 +35957,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "Do you think good facilities are important for effective learning or working? Why?",
                 "qType": "Yes/No Question: Are good facilities important?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Cơ sở vật chất tối tân tạo cảm hứng và nâng tầm năng suất vượt bậc):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely! <u>Ergonomic facilities and state-of-the-art equipment play a transformative role in productivity</u>. Having high-speed internet, air-conditioned rooms, and comfortable seating allows individuals to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and minimizes <span class=\"formula-bracket-hl\">[mệt mỏi thể chất]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (CÂN BẰNG - Cơ sở vật chất rất tốt nhưng tính kỷ luật và ý chí cá nhân mới là quyết định):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>While sophisticated infrastructure undeniably provides a solid foundation, I maintain that personal grit and determination are far more critical</u>. A dedicated learner or worker can <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span> even in modest circumstances.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Cơ sở vật chất tối tân tạo cảm hứng và nâng tầm năng suất vượt bậc):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, absolutely! <u>Comfortable furniture and modern equipment play a huge role in our productivity</u>. Having high-speed internet, air-conditioned rooms, and comfortable seating allows individuals to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and minimizes <span class=\"formula-bracket-hl\">[mệt mỏi thể chất]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (CÂN BẰNG - Cơ sở vật chất rất tốt nhưng tính kỷ luật và ý chí cá nhân mới là quyết định):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>While modern facilities certainly provide a great foundation, I believe that personal discipline and determination matter much more</u>. A dedicated learner or worker can <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span> even in modest circumstances.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -35978,19 +35968,19 @@ const practiceTopicsData = [
                         "title": "🏛️ [Cơ sở vật chất & Hiệu quả lao động]:",
                         "items": [
                             {
-                                "en": "ergonomic furniture and state-of-the-art equipment",
+                                "en": "comfortable furniture and modern equipment",
                                 "vn": "nội thất chuẩn công thái học và trang thiết bị tối tân"
                             },
                             {
-                                "en": "transformative boost to overall efficiency",
+                                "en": "major boost to overall productivity",
                                 "vn": "sự thúc đẩy mang tính bước ngoặt cho năng suất tổng thể"
                             },
                             {
-                                "en": "mitigate chronic physical strains and fatigue",
+                                "en": "prevent physical aches and tiredness",
                                 "vn": "giảm thiểu những đau nhức thể chất và sự mệt mỏi kinh niên"
                             },
                             {
-                                "en": "unwavering intrinsic motivation and grit",
+                                "en": "strong inner motivation and determination",
                                 "vn": "động lực nội tại vững vàng và lòng kiên định sắt đá"
                             }
                         ]
@@ -35999,13 +35989,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Cơ sở hiện đại giúp bảo vệ sức khỏe và kích thích sáng tạo)",
-                        "text": "Yes, absolutely! Ergonomic facilities and state-of-the-art equipment play a transformative role in productivity. Having high-speed internet, well-lit spaces, and ergonomic seating allows individuals to work for extended periods without fatigue and minimizes chronic back strain.",
-                        "formatted": "→ Yes, absolutely! <u>Ergonomic facilities and state-of-the-art equipment play a transformative role in productivity</u>. Having high-speed internet, well-lit spaces, and ergonomic seating allows individuals to <span class=\"sub-hl\">work for extended periods without fatigue</span> and minimizes <span class=\"sub-hl\">chronic back strain</span>."
+                        "text": "Yes, absolutely! Comfortable furniture and modern equipment play a huge role in our productivity. Having high-speed internet, well-lit spaces, and comfortable chairs allows individuals to work for extended periods without fatigue and reduces back pain.",
+                        "formatted": "→ Yes, absolutely! <u>Comfortable furniture and modern equipment play a huge role in our productivity</u>. Having high-speed internet, well-lit spaces, and comfortable chairs allows individuals to <span class=\"sub-hl\">work for extended periods without fatigue</span> and minimizes <span class=\"sub-hl\">chronic back strain</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Cơ sở tốt là lợi thế nhưng kỷ luật tự giác mới là yếu tố quyết định)",
-                        "text": "While sophisticated infrastructure undeniably provides a solid foundation, I maintain that personal grit and determination are far more critical. A dedicated learner with high discipline can master challenging skills and attain outstanding accomplishments even in relatively modest conditions.",
-                        "formatted": "→ <u>While sophisticated infrastructure undeniably provides a solid foundation, I maintain that personal grit and determination are far more critical</u>. A dedicated learner or worker can <span class=\"sub-hl\">master challenging skills</span> and <span class=\"sub-hl\">attain outstanding accomplishments</span> even in relatively modest conditions."
+                        "text": "While modern facilities certainly provide a great foundation, I believe that personal discipline and determination matter much more. A dedicated learner with high discipline can master challenging skills and achieve great results even in simple conditions.",
+                        "formatted": "→ <u>While modern facilities certainly provide a great foundation, I believe that personal discipline and determination matter much more</u>. A dedicated learner or worker can <span class=\"sub-hl\">master challenging skills</span> and <span class=\"sub-hl\">achieve outstanding accomplishments</span> even in relatively modest conditions."
                     }
                 ]
             }
@@ -36600,7 +36590,7 @@ const practiceTopicsData = [
                                 "vn": "cảm thấy tù túng trong nhà"
                             },
                             {
-                                "en": "following a monotonous routine",
+                                "en": "following a boring daily routine",
                                 "vn": "theo đuổi một lịch trình đơn điệu"
                             }
                         ]
@@ -37402,7 +37392,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "How often do you use your mobile phone?",
                 "qType": "Frequency Wh-question: How often do you use your mobile phone?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Dùng thường xuyên cả ngày - Thiết bị không thể thiếu cho công việc và liên lạc gia đình):</div>\n                    <div class=\"topic-formula-text\">\n                        → To be honest, <u>I use my mobile phone constantly throughout the day</u>. It's an indispensable tool because it allows me to <span class=\"formula-bracket-hl\">[nhu cầu liên lạc 1 - Vo]</span> and helps me <span class=\"formula-bracket-hl\">[nhu cầu công việc 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Dùng có chừng mực - Chủ động giới hạn thời gian màn hình, cất máy trước khi ngủ để tránh mỏi mắt):</div>\n                    <div class=\"topic-formula-text\">\n                        → I check my phone quite often, but <u>I actively try to limit my daily screen time</u>. I usually <span class=\"formula-bracket-hl\">[hành động giới hạn - Vo]</span>. This allows me to <span class=\"formula-bracket-hl\">[lợi ích sức khỏe 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Dùng thường xuyên cả ngày - Thiết bị không thể thiếu cho công việc và liên lạc gia đình):</div>\n                    <div class=\"topic-formula-text\">\n                        → To be honest, <u>I use my mobile phone constantly throughout the day</u>. It's an essential tool because it allows me to <span class=\"formula-bracket-hl\">[nhu cầu liên lạc 1 - Vo]</span> and helps me <span class=\"formula-bracket-hl\">[nhu cầu công việc 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Dùng có chừng mực - Chủ động giới hạn thời gian màn hình, cất máy trước khi ngủ để tránh mỏi mắt):</div>\n                    <div class=\"topic-formula-text\">\n                        → I check my phone quite often, but <u>I actively try to limit my daily screen time</u>. I usually <span class=\"formula-bracket-hl\">[hành động giới hạn - Vo]</span>. This allows me to <span class=\"formula-bracket-hl\">[lợi ích sức khỏe 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "📲 [Mục đích thiết yếu - Danh từ] (Cách 1):",
@@ -37487,7 +37477,7 @@ const practiceTopicsData = [
                                 "vn": "sử dụng điện thoại liên tục trong suốt cả ngày"
                             },
                             {
-                                "en": "it's an indispensable tool because it allows me to...",
+                                "en": "it's an essential tool because it allows me to...",
                                 "vn": "nó là công cụ không thể thiếu vì cho phép tôi..."
                             },
                             {
@@ -37542,7 +37532,7 @@ const practiceTopicsData = [
                                 "vn": "luôn sẵn sàng tiếp nhận và phản hồi các vấn đề công việc khẩn cấp"
                             },
                             {
-                                "en": "foster deeper face-to-face conversations with family",
+                                "en": "encourage warmer face-to-face talks with family",
                                 "vn": "thúc đẩy những cuộc trò chuyện trực tiếp sâu sắc hơn bên gia đình"
                             }
                         ]
@@ -37551,8 +37541,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Dùng thường xuyên cả ngày - Công cụ thiết yếu cho công việc và giữ liên lạc gia đình)",
-                        "text": "To be honest, I use my mobile phone constantly throughout the day. It's an indispensable tool because it allows me to handle daily work tasks and helps me keep in touch with my family and friends.",
-                        "formatted": "→ To be honest, <u>I use my mobile phone constantly throughout the day</u>. It's an indispensable tool because it allows me to <span class=\"sub-hl\">handle daily work tasks</span> and helps me <span class=\"sub-hl\">keep in touch with my family and friends</span>."
+                        "text": "To be honest, I use my mobile phone constantly throughout the day. It's an essential tool because it allows me to handle daily work tasks and helps me keep in touch with my family and friends.",
+                        "formatted": "→ To be honest, <u>I use my mobile phone constantly throughout the day</u>. It's an essential tool because it allows me to <span class=\"sub-hl\">handle daily work tasks</span> and helps me <span class=\"sub-hl\">keep in touch with my family and friends</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Dùng có chừng mực - Tắt thông báo và cất máy trước khi ngủ để tránh mỏi mắt)",
@@ -37565,7 +37555,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "What do you mostly use your phone for?",
                 "qType": "Wh-question: What do you mostly use your phone for?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Giải trí thư giãn - Nghe nhạc, xem clip ngắn hài hước để xả stress sau giờ làm việc):</div>\n                    <div class=\"topic-formula-text\">\n                        → Primarily, <u>I rely on my smartphone for leisure and relaxation</u>. I frequently <span class=\"formula-bracket-hl\">[hoạt động giải trí - Vo]</span>. It allows me to <span class=\"formula-bracket-hl\">[lợi ích xả stress 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích tâm trạng 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Phục vụ học tập và công việc - Tra cứu tài liệu, check email và ghi chú lịch trình):</div>\n                    <div class=\"topic-formula-text\">\n                        → Most of the time, <u>I utilize my phone as a productivity tool for work and study</u>. I often <span class=\"formula-bracket-hl\">[hoạt động hiệu suất - Vo]</span>. This allows me to <span class=\"formula-bracket-hl\">[lợi ích quản lý 1 - Vo]</span> and helps me <span class=\"formula-bracket-hl\">[lợi ích hiệu quả 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Giải trí thư giãn - Nghe nhạc, xem clip ngắn hài hước để xả stress sau giờ làm việc):</div>\n                    <div class=\"topic-formula-text\">\n                        → Primarily, <u>I rely on my smartphone for leisure and relaxation</u>. I frequently <span class=\"formula-bracket-hl\">[hoạt động giải trí - Vo]</span>. It allows me to <span class=\"formula-bracket-hl\">[lợi ích xả stress 1 - Vo]</span> and gives me a chance to <span class=\"formula-bracket-hl\">[lợi ích tâm trạng 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Phục vụ học tập và công việc - Tra cứu tài liệu, check email và ghi chú lịch trình):</div>\n                    <div class=\"topic-formula-text\">\n                        → Most of the time, <u>I use my phone as a helpful tool for work and study</u>. I often <span class=\"formula-bracket-hl\">[hoạt động hiệu suất - Vo]</span>. This allows me to <span class=\"formula-bracket-hl\">[lợi ích quản lý 1 - Vo]</span> and helps me <span class=\"formula-bracket-hl\">[lợi ích hiệu quả 2 - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🎵 [Hoạt động giải trí] (Cách 1):",
@@ -37675,7 +37665,7 @@ const practiceTopicsData = [
                                 "vn": "phụ thuộc vào điện thoại thông minh để giải trí và thư giãn"
                             },
                             {
-                                "en": "utilize my phone as a productivity tool for work and study",
+                                "en": "use my phone as a helpful tool for work and study",
                                 "vn": "tận dụng điện thoại như một công cụ tăng hiệu suất cho công việc và học tập"
                             },
                             {
@@ -37744,8 +37734,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Phục vụ học tập & công việc - Check email khẩn và tra tài liệu giúp quản lý công việc trôi chảy)",
-                        "text": "Most of the time, I utilize my phone as a productivity tool for work and study. I often check urgent emails and look up academic materials. This allows me to manage my daily schedule smoothly and helps me stay organized.",
-                        "formatted": "→ Most of the time, <u>I utilize my phone as a productivity tool for work and study</u>. I often <span class=\"sub-hl\">check urgent emails and look up academic materials</span>. This allows me to <span class=\"sub-hl\">manage my daily schedule smoothly</span> and helps me <span class=\"sub-hl\">stay organized</span>."
+                        "text": "Most of the time, I use my phone as a helpful tool for work and study. I often check urgent emails and look up academic materials. This allows me to manage my daily schedule smoothly and helps me stay organized.",
+                        "formatted": "→ Most of the time, <u>I use my phone as a helpful tool for work and study</u>. I often <span class=\"sub-hl\">check urgent emails and look up academic materials</span>. This allows me to <span class=\"sub-hl\">manage my daily schedule smoothly</span> and helps me <span class=\"sub-hl\">stay organized</span>."
                     }
                 ]
             },
@@ -37863,7 +37853,7 @@ const practiceTopicsData = [
                                 "vn": "tham gia vào các cuộc thi đố vui trực tuyến đầy lôi cuốn"
                             },
                             {
-                                "en": "incessant social media alerts and mobile gaming",
+                                "en": "nonstop social media notifications and mobile gaming",
                                 "vn": "các chuông báo mạng xã hội liên hồi và việc chơi game trên điện thoại"
                             },
                             {
@@ -37971,7 +37961,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "What do you usually talk about when you make phone calls?",
                 "qType": "Wh-question: What do you usually talk about when you make phone calls?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Hỏi thăm cuộc sống thường nhật, tâm sự niềm vui nỗi buồn):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>When calling my family or close friends, our conversations revolve around</u> <span class=\"formula-bracket-hl\">[chủ đề thường nhật]</span>. Sharing daily experiences allows us to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> and relieves mental tension.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Thảo luận công việc, tiến độ dự án và kế hoạch gặp mặt):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My phone calls are predominantly work-oriented, focusing on</u> <span class=\"formula-bracket-hl\">[tiến độ dự án / giải quyết vấn đề]</span>. Discussing over the phone allows me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> and prevents miscommunication.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Hỏi thăm cuộc sống thường nhật, tâm sự niềm vui nỗi buồn):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>When calling my family or close friends, our conversations revolve around</u> <span class=\"formula-bracket-hl\">[chủ đề thường nhật]</span>. Sharing daily experiences allows us to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> and relieves mental tension.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Thảo luận công việc, tiến độ dự án và kế hoạch gặp mặt):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My phone calls are mostly about work, focusing on</u> <span class=\"formula-bracket-hl\">[tiến độ dự án / giải quyết vấn đề]</span>. Discussing over the phone allows me to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> and prevents miscommunication.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -38008,8 +37998,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trao đổi công việc gấp và thống nhất phương án xử lý)",
-                        "text": "My phone calls are predominantly work-oriented, focusing on troubleshooting project bottlenecks and organizing client schedules. Discussing matters directly over the phone allows me to make prompt decisions and ensures high operational efficiency.",
-                        "formatted": "→ <u>My phone calls are predominantly work-oriented, focusing on</u> <span class=\"sub-hl\">troubleshooting project bottlenecks and organizing schedules</span>. Discussing over the phone allows me to <span class=\"sub-hl\">make prompt decisions and ensures high operational efficiency</span>."
+                        "text": "My phone calls are mostly about work, such as solving project problems and arranging schedules. Talking directly on the phone allows me to make quick decisions and work much more efficiently.",
+                        "formatted": "→ <u>My phone calls are mostly about work, focusing on</u> <span class=\"sub-hl\">troubleshooting project bottlenecks and organizing schedules</span>. Discussing over the phone allows me to <span class=\"sub-hl\">make prompt decisions and ensures high operational efficiency</span>."
                     }
                 ]
             },
@@ -38302,7 +38292,7 @@ const practiceTopicsData = [
                                 "vn": "vẻ thanh lịch vượt thời gian và thời trang sang trọng"
                             },
                             {
-                                "en": "fine craftsmanship and classic beauty",
+                                "en": "careful design and classic beauty",
                                 "vn": "tay nghề chế tác tinh xảo và vẻ đẹp cổ điển"
                             },
                             {
@@ -38356,7 +38346,7 @@ const practiceTopicsData = [
                                 "vn": "trở nên hợp túi tiền hơn nhiều"
                             },
                             {
-                                "en": "connect seamlessly with other devices",
+                                "en": "connect smoothly with other devices",
                                 "vn": "kết nối mượt mà với các thiết bị khác"
                             }
                         ]
@@ -38760,7 +38750,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "How often do you use emails?",
                 "qType": "Wh-Question: How often do you use emails?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Dùng hàng ngày liên tục cho công việc chuyên môn và học thuật):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Practically on a daily basis! As an active student / working professional, email is central to my daily workflow</u>. Regularly checking and responding to emails allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and ensures that I <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Dùng vài lần mỗi tuần cho các giao dịch hành chính hoặc thư tín trang trọng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I typically send and review emails several times a week, strictly for formal transactions</u>. While I prefer instant messaging for casual chatter, utilizing email for business inquiries allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and maintains <span class=\"formula-bracket-hl\">[tính chuyên nghiệp]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Dùng hàng ngày liên tục cho công việc chuyên môn và học thuật):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Practically on a daily basis! As an active student / working professional, email is a core part of my daily work</u>. Regularly checking and responding to emails allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and ensures that I <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Dùng vài lần mỗi tuần cho các giao dịch hành chính hoặc thư tín trang trọng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I typically send and review emails several times a week, mainly for formal communication</u>. While I prefer instant messaging for casual chatter, using email for work messages allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and maintains <span class=\"formula-bracket-hl\">[tính chuyên nghiệp]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -38779,7 +38769,7 @@ const practiceTopicsData = [
                                 "vn": "trao đổi thư từ điện tử trang trọng"
                             },
                             {
-                                "en": "manage incoming inquiries seamlessly",
+                                "en": "handle incoming requests smoothly",
                                 "vn": "quản lý các yêu cầu gửi đến một cách trơn tru"
                             },
                             {
@@ -38792,13 +38782,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Kiểm tra hộp thư nhiều lần mỗi ngày để trao đổi công việc và bài tập)",
-                        "text": "Practically on a daily basis! As an active working professional, email is central to my daily workflow. Regularly checking and responding to emails allows me to coordinate seamlessly with corporate colleagues and ensures that I resolve urgent client inquiries without delay.",
-                        "formatted": "→ <u>Practically on a daily basis! As an active student / working professional, email is central to my daily workflow</u>. Regularly checking and responding to emails allows me to <span class=\"sub-hl\">coordinate seamlessly with corporate colleagues</span> and ensures that I <span class=\"sub-hl\">resolve urgent client inquiries without delay</span>."
+                        "text": "Practically on a daily basis! As an active working professional, email is a core part of my daily work. Regularly checking and responding to emails allows me to work smoothly with my colleagues and ensures that I reply to urgent client requests quickly.",
+                        "formatted": "→ <u>Practically on a daily basis! As an active student / working professional, email is a core part of my daily work</u>. Regularly checking and responding to emails allows me to <span class=\"sub-hl\">work smoothly with my colleagues</span> and ensures that I <span class=\"sub-hl\">reply to urgent client requests quickly</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Dùng vài lần một tuần khi cần gửi hợp đồng hay tài liệu chính thức)",
-                        "text": "I typically send and review emails several times a week, strictly for formal transactions and university notifications. While I prefer instant messaging for casual chatter, utilizing email for business inquiries allows me to archive detailed documentation and maintains high professional standards.",
-                        "formatted": "→ <u>I typically send and review emails several times a week, strictly for formal transactions</u>. While I prefer instant messaging for casual chatter, utilizing email for business inquiries allows me to <span class=\"sub-hl\">archive detailed documentation</span> and maintains <span class=\"sub-hl\">high professional standards</span>."
+                        "text": "I typically send and review emails several times a week, mainly for formal communication and university notifications. While I prefer instant messaging for casual chatter, using email for work messages allows me to keep clear written records and stay professional.",
+                        "formatted": "→ <u>I typically send and review emails several times a week, mainly for formal communication</u>. While I prefer instant messaging for casual chatter, using email for work messages allows me to <span class=\"sub-hl\">archive detailed documentation</span> and maintains <span class=\"sub-hl\">high professional standards</span>."
                     }
                 ]
             },
@@ -38806,7 +38796,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "Why do people use emails?",
                 "qType": "Wh-Question: Why do people use emails?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Tính trang trọng, chuyên nghiệp và có văn bản lưu trữ đối chiếu rõ ràng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>From my perspective, the primary justification is its unmatched formality and legal accountability</u>. Having a structured written record allows organizations to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and prevents <span class=\"formula-bracket-hl\">[tranh cãi hoặc hiểu lầm công việc]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Giao tiếp bất đồng bộ, tiện gửi đính kèm tập tin dung lượng lớn xuyên biên giới):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Another key reason is the great convenience of email communication and file transfer</u>. Exchanging contracts and comprehensive reports via email allows professionals to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> across different time zones without <span class=\"formula-bracket-hl\">[áp lực phải trả lời ngay]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Tính trang trọng, chuyên nghiệp và có văn bản lưu trữ đối chiếu rõ ràng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>From my perspective, the main reason is its high formality and clear written record</u>. Having a structured written record allows organizations to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and prevents <span class=\"formula-bracket-hl\">[tranh cãi hoặc hiểu lầm công việc]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Giao tiếp bất đồng bộ, tiện gửi đính kèm tập tin dung lượng lớn xuyên biên giới):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Another key reason is the great convenience of email communication and file transfer</u>. Exchanging contracts and comprehensive reports via email allows professionals to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> across different time zones without <span class=\"formula-bracket-hl\">[áp lực phải trả lời ngay]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -38817,7 +38807,7 @@ const practiceTopicsData = [
                         "title": "💼 [Lý do & Tầm quan trọng của Email]:",
                         "items": [
                             {
-                                "en": "unmatched formality and documentation",
+                                "en": "high formality and clear written records",
                                 "vn": "tính trang trọng và lưu trữ tài liệu không gì sánh bằng"
                             },
                             {
@@ -38838,8 +38828,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Đảm bảo bằng chứng văn bản và tính chuyên nghiệp chuẩn mực)",
-                        "text": "From my perspective, the primary justification is its unmatched formality and legal accountability. Having a structured written record allows organizations to verify project agreements transparently and prevents costly misunderstandings among business partners.",
-                        "formatted": "→ <u>From my perspective, the primary justification is its unmatched formality and legal accountability</u>. Having a structured written record allows organizations to <span class=\"sub-hl\">verify project agreements transparently</span> and prevents <span class=\"sub-hl\">costly misunderstandings among business partners</span>."
+                        "text": "From my perspective, the main reason is its high formality and clear written record. Having a structured written record allows organizations to check project details clearly and prevents costly misunderstandings among business partners.",
+                        "formatted": "→ <u>From my perspective, the main reason is its high formality and clear written record</u>. Having a structured written record allows organizations to <span class=\"sub-hl\">check project details clearly</span> and prevents <span class=\"sub-hl\">costly misunderstandings among business partners</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Tiện lợi để gửi tệp lớn và phản hồi thong thả không bị gián đoạn)",
@@ -38852,7 +38842,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "What are some disadvantages of using emails?",
                 "qType": "Wh-Question: What are disadvantages of emails?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Hộp thư rác quá tải, thư lừa đảo độc hại & rủi ro an ninh mạng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Without a doubt, the most prominent drawback is the influx of relentless spam and phishing scams</u>. Sorting through piles of junk correspondence often causes users to <span class=\"formula-bracket-hl\">[tốn thời gian / mệt mỏi]</span> and compromises <span class=\"formula-bracket-hl\">[an toàn dữ liệu bảo mật]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Phản hồi chậm trễ và dễ gây hiểu lầm do thiếu ngữ điệu cảm xúc):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Another serious limitation is the lack of immediate feedback and interpersonal tone</u>. Because text lacks emotional cues, ambiguous wording may lead to <span class=\"formula-bracket-hl\">[bất đồng quan điểm]</span> and severely impedes <span class=\"formula-bracket-hl\">[tiến độ giải quyết sự việc khẩn cấp]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Hộp thư rác quá tải, thư lừa đảo độc hại & rủi ro an ninh mạng):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Without a doubt, the most prominent drawback is the constant flow of spam emails and online scams</u>. Clearing out lots of junk emails often causes users to <span class=\"formula-bracket-hl\">[tốn thời gian / mệt mỏi]</span> and compromises <span class=\"formula-bracket-hl\">[an toàn dữ liệu bảo mật]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Phản hồi chậm trễ và dễ gây hiểu lầm do thiếu ngữ điệu cảm xúc):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Another serious limitation is the lack of immediate feedback and personal tone</u>. Because text lacks emotional cues, unclear wording can lead to <span class=\"formula-bracket-hl\">[bất đồng quan điểm]</span> and slows down <span class=\"formula-bracket-hl\">[tiến độ giải quyết sự việc khẩn cấp]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -38863,7 +38853,7 @@ const practiceTopicsData = [
                         "title": "⚠️ [Bất lợi & Rủi ro khi dùng Email]:",
                         "items": [
                             {
-                                "en": "relentless spam emails and malicious phishing",
+                                "en": "constant spam emails and online scams",
                                 "vn": "thư rác tràn lan và chiêu trò lừa đảo độc hại"
                             },
                             {
@@ -38884,13 +38874,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Quá tải thư rác tiếp thị và nguy cơ bị tấn công lừa đảo)",
-                        "text": "Without a doubt, the most prominent drawback is the influx of relentless spam and phishing scams. Sorting through piles of junk correspondence often causes users to waste valuable working hours and compromises confidential accounts if malicious links are accidentally opened.",
-                        "formatted": "→ <u>Without a doubt, the most prominent drawback is the influx of relentless spam and phishing scams</u>. Sorting through piles of junk correspondence often causes users to <span class=\"sub-hl\">waste valuable working hours</span> and compromises <span class=\"sub-hl\">confidential accounts if malicious links are accidentally opened</span>."
+                        "text": "Without a doubt, the most prominent drawback is the constant flow of spam emails and online scams. Clearing out lots of junk emails often causes users to waste valuable working hours and puts personal accounts at risk if we click on bad links by mistake.",
+                        "formatted": "→ <u>Without a doubt, the most prominent drawback is the constant flow of spam emails and online scams</u>. Clearing out lots of junk emails often causes users to <span class=\"sub-hl\">waste valuable working hours</span> and compromises <span class=\"sub-hl\">confidential accounts if malicious links are accidentally opened</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Dễ gây hiểu lầm ngữ điệu và không phù hợp với việc cực kỳ khẩn cấp)",
-                        "text": "Another serious limitation is the lack of immediate feedback and interpersonal tone. Because text lacks emotional cues, ambiguous wording may lead to interpersonal friction among coworkers and severely impedes rapid problem-solving during urgent crises.",
-                        "formatted": "→ <u>Another serious limitation is the lack of immediate feedback and interpersonal tone</u>. Because text lacks emotional cues, ambiguous wording may lead to <span class=\"sub-hl\">interpersonal friction among coworkers</span> and severely impedes <span class=\"sub-hl\">rapid problem-solving during urgent crises</span>."
+                        "text": "Another serious limitation is the lack of immediate feedback and personal tone. Because text lacks emotional cues, unclear wording can lead to interpersonal friction among coworkers and slows down rapid problem-solving during urgent crises.",
+                        "formatted": "→ <u>Another serious limitation is the lack of immediate feedback and personal tone</u>. Because text lacks emotional cues, unclear wording can lead to <span class=\"sub-hl\">interpersonal friction among coworkers</span> and slows down <span class=\"sub-hl\">rapid problem-solving during urgent crises</span>."
                     }
                 ]
             }
@@ -39492,7 +39482,7 @@ const practiceTopicsData = [
                                 "vn": "tạo nét ấm áp, cá nhân hóa mà email không thể sánh được"
                             },
                             {
-                                "en": "keep physical letters as cherished keepsakes",
+                                "en": "keep handwritten letters as special memories",
                                 "vn": "lưu giữ những lá thư giấy như kỷ vật trân quý"
                             },
                             {
@@ -39530,8 +39520,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Giá trị cảm xúc và kỷ vật)",
-                        "text": "Sending letters by post brings us a number of benefits. For example, it allows us to add a warm, personal touch that emails can't match and keep physical letters as cherished keepsakes. Moreover, handwritten notes feel far more sincere and heartfelt.",
-                        "formatted": "→ <u>Sending letters by post brings us a number of benefits. For example, it allows us to</u> <span class=\"sub-hl\">add a warm, personal touch that emails can't match</span> <u>and</u> <span class=\"sub-hl\">keep physical letters as cherished keepsakes</span>. <u>Moreover, handwritten notes feel</u> <span class=\"sub-hl\">far more sincere and heartfelt</span>."
+                        "text": "Sending letters by post brings us a number of benefits. For example, it allows us to add a warm, personal touch that emails can't match and keep handwritten letters as special memories. Moreover, handwritten notes feel far more sincere and heartfelt.",
+                        "formatted": "→ <u>Sending letters by post brings us a number of benefits. For example, it allows us to</u> <span class=\"sub-hl\">add a warm, personal touch that emails can't match</span> <u>and</u> <span class=\"sub-hl\">keep handwritten letters as special memories</span>. <u>Moreover, handwritten notes feel</u> <span class=\"sub-hl\">far more sincere and heartfelt</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Gửi giấy tờ gốc và vùng xa)",
@@ -39598,7 +39588,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "What topics do you usually read about?",
                 "qType": "Wh-question: What topics do you usually read about?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Chủ đề phát triển bản thân, quản lý tài chính và phong cách sống):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I'm particularly keen on blogs that delve into</u> <span class=\"formula-bracket-hl\">[chủ đề 1]</span> and <span class=\"formula-bracket-hl\">[chủ đề 2]</span>. Absorbing actionable advice on these matters allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Chủ đề công nghệ thông tin, lập trình và trí tuệ nhân tạo):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My primary reading interest centers on</u> <span class=\"formula-bracket-hl\">[công nghệ & chuyển đổi số]</span>. Keeping up with technological breakthroughs gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> and stay ahead in my career.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Chủ đề phát triển bản thân, quản lý tài chính và phong cách sống):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I'm particularly keen on blogs that explore</u> <span class=\"formula-bracket-hl\">[chủ đề 1]</span> and <span class=\"formula-bracket-hl\">[chủ đề 2]</span>. Absorbing actionable advice on these matters allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Chủ đề công nghệ thông tin, lập trình và trí tuệ nhân tạo):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My primary reading interest centers on</u> <span class=\"formula-bracket-hl\">[công nghệ & chuyển đổi số]</span>. Keeping up with technological breakthroughs gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> and stay ahead in my career.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -39630,12 +39620,12 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Phát triển kỹ năng quản lý thời gian và tài chính cá nhân)",
-                        "text": "I'm particularly keen on blogs that delve into smart personal finance management and productivity frameworks. Absorbing actionable advice from these platforms allows me to optimize my monthly budgeting and maintain a balanced lifestyle.",
-                        "formatted": "→ <u>I'm particularly keen on blogs that delve into</u> <span class=\"sub-hl\">smart personal finance and productivity frameworks</span>. Absorbing actionable advice on these matters allows me to <span class=\"sub-hl\">optimize my monthly budgeting</span> and <span class=\"sub-hl\">maintain a balanced, purpose-driven lifestyle</span>."
+                        "text": "I'm particularly keen on blogs that talk about smart personal finance and effective study habits. Absorbing actionable advice from these platforms allows me to optimize my monthly budgeting and maintain a balanced lifestyle.",
+                        "formatted": "→ <u>I'm particularly keen on blogs that explore</u> <span class=\"sub-hl\">smart personal finance and productivity frameworks</span>. Absorbing actionable advice on these matters allows me to <span class=\"sub-hl\">optimize my monthly budgeting</span> and <span class=\"sub-hl\">maintain a balanced, purpose-driven lifestyle</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Công nghệ AI, thiết kế đồ họa và kỹ năng số thời hiện đại)",
-                        "text": "My primary reading interest centers on tech blogs covering artificial intelligence and software engineering. Keeping abreast of digital breakthroughs allows me to upgrade my technical skill set and adapt swiftly to modern market requirements.",
+                        "text": "My primary reading interest centers on tech blogs covering artificial intelligence and software engineering. Keeping up with new tech trends allows me to improve my skills and adapt quickly to the job market.",
                         "formatted": "→ <u>My primary reading interest centers on</u> <span class=\"sub-hl\">tech blogs covering artificial intelligence and software tools</span>. Keeping up with technological breakthroughs gives me an opportunity to <span class=\"sub-hl\">upgrade my skill set</span> and stay ahead in my career."
                     }
                 ]
@@ -39663,7 +39653,7 @@ const practiceTopicsData = [
                                 "vn": "né tránh những cạm bẫy sai lầm phổ biến trong sự nghiệp"
                             },
                             {
-                                "en": "foster multidimensional thinking and open-mindedness",
+                                "en": "build open-minded thinking from different angles",
                                 "vn": "nuôi dưỡng tư duy đa chiều và tinh thần cởi mở"
                             },
                             {
@@ -39681,7 +39671,7 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Mở mang thế giới quan và trau dồi khả năng phản biện)",
-                        "text": "Reading diverse bloggers exposes me to distinct worldviews and cultural nuances. This practice sharpens my analytical thinking, challenges my inherent biases, and empowers me to make well-rounded personal decisions.",
+                        "text": "Reading different bloggers introduces me to fresh viewpoints and cultural perspectives. This helps sharpen my thinking, open my mind, and make smarter decisions in life.",
                         "formatted": "→ <u>Reading diverse bloggers exposes me to</u> <span class=\"sub-hl\">distinct worldviews and contrasting perspectives</span>. It sharpens my ability to <span class=\"sub-hl\">analyze problems critically</span> and empowers me to make <span class=\"sub-hl\">well-informed life decisions</span>."
                     }
                 ]
@@ -39717,7 +39707,7 @@ const practiceTopicsData = [
                                 "vn": "kích thích tư duy trí tuệ"
                             },
                             {
-                                "en": "remarkably therapeutic",
+                                "en": "really therapeutic",
                                 "vn": "có tính chữa lành / giải tỏa rõ rệt"
                             },
                             {
@@ -40555,7 +40545,7 @@ const practiceTopicsData = [
                                 "vn": "chủ động và được tôn trọng"
                             },
                             {
-                                "en": "impressive and articulate",
+                                "en": "confident and clear when speaking",
                                 "vn": "ấn tượng và ăn nói lưu loát"
                             }
                         ]
@@ -40825,7 +40815,7 @@ const practiceTopicsData = [
                                 "vn": "hiểu thái độ của người nói nhanh chóng"
                             },
                             {
-                                "en": "follow the main ideas effortlessly",
+                                "en": "follow the main ideas easily",
                                 "vn": "theo dõi các ý chính dễ dàng"
                             },
                             {
@@ -40868,8 +40858,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Lợi ích hai chiều cho người nói và người nghe)",
-                        "text": "Body language offers several clear advantages in daily communication. It not only helps speakers learn to communicate better, but also enables listeners to follow the main ideas effortlessly, making conversations feel warm and engaging.",
-                        "formatted": "→ <u>Body language offers several clear advantages in daily communication. It not only helps speakers</u> <span class=\"sub-hl\">learn to communicate</span> <u>better, but also enables listeners to</u> <span class=\"sub-hl\">follow the main ideas effortlessly</span>, <u>making conversations feel</u> <span class=\"sub-hl\">warm and engaging</span>."
+                        "text": "Body language offers several clear advantages in daily communication. It not only helps speakers learn to communicate better, but also enables listeners to follow the main ideas easily, making conversations feel warm and engaging.",
+                        "formatted": "→ <u>Body language offers several clear advantages in daily communication. It not only helps speakers</u> <span class=\"sub-hl\">learn to communicate</span> <u>better, but also enables listeners to</u> <span class=\"sub-hl\">follow the main ideas easily</span>, <u>making conversations feel</u> <span class=\"sub-hl\">warm and engaging</span>."
                     }
                 ]
             }
@@ -41379,7 +41369,7 @@ const practiceTopicsData = [
                 "qNum": 1,
                 "question": "Do you often use public transport?",
                 "qType": "Yes/No Question: Do you often use public transport?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Thường xuyên đi xe buýt / tàu điện ngầm để đi học, đi làm):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, on a fairly regular basis. <u>Commuting via public transit like city buses or the elevated metro is my daily choice</u>. It not only allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> but also gives me time to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (NO - Hiếm khi vì phương tiện cá nhân linh hoạt và tiết kiệm thời gian hơn):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To be perfectly frank, I seldom commute by public transport because</u> <span class=\"formula-bracket-hl\">[mạng lưới chưa đồng bộ / bất tiện]</span>. I prefer traveling on my motorbike, which allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and avoid <span class=\"formula-bracket-hl\">[bất tiện của xe buýt - V-ing]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Thường xuyên đi xe buýt / tàu điện ngầm để đi học, đi làm):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, on a fairly regular basis. <u>Commuting via public transit like city buses or the elevated metro is my daily choice</u>. It not only allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> but also gives me time to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (NO - Hiếm khi vì phương tiện cá nhân linh hoạt và tiết kiệm thời gian hơn):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To be honest, I rarely use public transport because</u> <span class=\"formula-bracket-hl\">[mạng lưới chưa đồng bộ / bất tiện]</span>. I prefer traveling on my motorbike, which allows me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and avoid <span class=\"formula-bracket-hl\">[bất tiện của xe buýt - V-ing]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -41416,8 +41406,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (NO - Đi xe máy cá nhân vì cơ động và đường sá ngõ ngách nhiều)",
-                        "text": "To be perfectly frank, I seldom commute by public transport because bus routes do not reach my residential alleyways conveniently. I prefer traveling on my motorbike, which allows me to take proactive control of my travel schedule and avoid waiting endlessly at bus stops.",
-                        "formatted": "→ <u>To be perfectly frank, I seldom commute by public transport because</u> <span class=\"sub-hl\">bus routes do not reach my residential alleyways conveniently</span>. I prefer traveling on my motorbike, which allows me to <span class=\"sub-hl\">take proactive control of my travel schedule</span> and avoid <span class=\"sub-hl\">waiting endlessly at crowded bus stops</span>."
+                        "text": "To be honest, I rarely use public transport because bus routes do not reach my small neighborhood streets easily. I prefer traveling on my motorbike, which allows me to easily control my own travel schedule and avoid waiting endlessly at bus stops.",
+                        "formatted": "→ <u>To be honest, I rarely use public transport because</u> <span class=\"sub-hl\">bus routes do not reach my small neighborhood streets easily</span>. I prefer traveling on my motorbike, which allows me to <span class=\"sub-hl\">easily control my own travel schedule</span> and avoid <span class=\"sub-hl\">waiting endlessly at crowded bus stops</span>."
                     }
                 ]
             },
@@ -41436,15 +41426,15 @@ const practiceTopicsData = [
                         "title": "⚖️ [So sánh Phương tiện công cộng vs Phương tiện cá nhân]:",
                         "items": [
                             {
-                                "en": "diminish personal carbon footprint",
+                                "en": "reduce my personal carbon footprint",
                                 "vn": "cắt giảm lượng dấu chân carbon của cá nhân"
                             },
                             {
-                                "en": "grant unmatched schedule flexibility",
+                                "en": "give great schedule flexibility",
                                 "vn": "mang lại sự linh hoạt lịch trình không gì sánh bằng"
                             },
                             {
-                                "en": "curb heavy traffic congestion",
+                                "en": "reduce heavy traffic jams",
                                 "vn": "kìm hãm tình trạng ùn tắc giao thông nghiêm trọng"
                             },
                             {
@@ -41457,13 +41447,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Chọn phương tiện công cộng vì văn minh và bảo vệ sinh thái)",
-                        "text": "If I had to choose between the two, I would strongly lean towards public transit. Opting for buses or trains allows me to cut down living expenses substantially and plays a vital role in reducing emissions that pollute our city air.",
-                        "formatted": "→ <u>If I had to choose between the two, I would strongly lean towards public transit</u>. Opting for buses or trains allows me to <span class=\"sub-hl\">cut down living expenses substantially</span> and plays a vital role in <span class=\"sub-hl\">reducing emissions that pollute our city air</span>."
+                        "text": "If I had to choose between the two, I would strongly lean towards public transit. Opting for buses or trains allows me to cut down my monthly expenses a lot and plays a vital role in reducing emissions that pollute our city air.",
+                        "formatted": "→ <u>If I had to choose between the two, I would strongly lean towards public transit</u>. Opting for buses or trains allows me to <span class=\"sub-hl\">cut down my monthly expenses a lot</span> and plays a vital role in <span class=\"sub-hl\">reducing emissions that pollute our city air</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Chọn phương tiện cá nhân vì tính linh động tuyệt đối)",
-                        "text": "Without hesitation, I favor private vehicles such as motorbikes. Having individual mobility allows me to handle unexpected emergencies swiftly and grants me complete independence to navigate freely without relying on fixed transit timetables.",
-                        "formatted": "→ <u>Without hesitation, I favor private vehicles such as motorbikes or personal cars</u>. Having individual mobility allows me to <span class=\"sub-hl\">handle unexpected emergencies swiftly</span> and grants me complete independence to <span class=\"sub-hl\">navigate freely without relying on fixed transit timetables</span>."
+                        "text": "Without hesitation, I favor private vehicles such as motorbikes. Having my own vehicle allows me to handle urgent situations quickly and gives me full freedom to go anywhere without waiting for bus schedules.",
+                        "formatted": "→ <u>Without hesitation, I favor private vehicles such as motorbikes or personal cars</u>. Having individual mobility allows me to <span class=\"sub-hl\">handle unexpected emergencies quickly</span> and grants me complete independence to <span class=\"sub-hl\">navigate freely without relying on fixed transit timetables</span>."
                     }
                 ]
             },
@@ -41471,7 +41461,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "What are the advantages of using public transport?",
                 "qType": "Wh-Question: What are advantages of public transport?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Lợi ích về môi trường & giảm thiểu ùn tắc giao thông đô thị):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>First and foremost, the most evident advantage is environmental preservation and traffic reduction</u>. By accommodating dozens of commuters at once, mass transit allows cities to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and helps <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Lợi ích về mặt kinh tế cá nhân & an toàn giao thông):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>From an economic and safety viewpoint, public transport is exceptionally advantageous</u>. Utilizing subsidized transit fares allows citizens to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and greatly lowers <span class=\"formula-bracket-hl\">[nguy cơ tai nạn giao thông]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Lợi ích về môi trường & giảm thiểu ùn tắc giao thông đô thị):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>First and foremost, the clearest benefit is protecting the environment and reducing traffic</u>. By carrying dozens of passengers at once, buses and trains allow cities to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and helps <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Lợi ích về mặt kinh tế cá nhân & an toàn giao thông):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>In terms of cost and safety, public transport is very beneficial</u>. Using affordable public bus and train tickets allows people to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and greatly lowers <span class=\"formula-bracket-hl\">[nguy cơ tai nạn giao thông]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -41486,11 +41476,11 @@ const practiceTopicsData = [
                                 "vn": "làm giảm bớt tình trạng ùn tắc giao thông nghiêm trọng"
                             },
                             {
-                                "en": "drastically slash greenhouse gas emissions",
+                                "en": "cut down harmful emissions a lot",
                                 "vn": "cắt giảm mạnh mẽ lượng khí thải nhà kính"
                             },
                             {
-                                "en": "cost-effective and subsidized transit fares",
+                                "en": "affordable and budget-friendly bus fares",
                                 "vn": "giá vé được trợ giá tiết kiệm và hiệu quả kinh tế"
                             },
                             {
@@ -41503,13 +41493,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Giảm thiểu tắc đường và làm sạch bầu không khí đô thị)",
-                        "text": "First and foremost, the most evident advantage is environmental preservation and traffic reduction. By accommodating dozens of commuters at once, mass transit allows cities to reduce severe traffic jams during peak hours and helps drastically slash greenhouse gas emissions.",
-                        "formatted": "→ <u>First and foremost, the most evident advantage is environmental preservation and traffic reduction</u>. By accommodating dozens of commuters at once, mass transit allows cities to <span class=\"sub-hl\">reduce severe traffic jams during peak hours</span> and helps <span class=\"sub-hl\">drastically slash greenhouse gas emissions</span>."
+                        "text": "First and foremost, the clearest benefit is protecting the environment and reducing traffic. By carrying dozens of passengers at once, buses and trains allow cities to reduce severe traffic jams during peak hours and helps cut down harmful emissions a lot.",
+                        "formatted": "→ <u>First and foremost, the clearest benefit is protecting the environment and reducing traffic</u>. By carrying dozens of passengers at once, buses and trains allow cities to <span class=\"sub-hl\">reduce severe traffic jams during peak hours</span> and helps <span class=\"sub-hl\">cut down harmful emissions a lot</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Tiết kiệm ngân sách sinh hoạt và nâng cao độ an toàn cho người dân)",
-                        "text": "From an economic and safety viewpoint, public transport is exceptionally advantageous. Utilizing subsidized transit fares allows citizens to save money on daily travel and greatly lowers the risk of traffic accidents.",
-                        "formatted": "→ <u>From an economic and safety viewpoint, public transport is exceptionally advantageous</u>. Utilizing subsidized transit fares allows citizens to <span class=\"sub-hl\">save money on daily travel</span> and greatly lowers <span class=\"sub-hl\">the risk of traffic accidents</span>."
+                        "text": "In terms of cost and safety, public transport is very beneficial. Using affordable public bus and train tickets allows people to save money on daily travel and greatly lowers the risk of traffic accidents.",
+                        "formatted": "→ <u>In terms of cost and safety, public transport is very beneficial</u>. Using affordable public bus and train tickets allows people to <span class=\"sub-hl\">save money on daily travel</span> and greatly lowers <span class=\"sub-hl\">the risk of traffic accidents</span>."
                     }
                 ]
             }
@@ -41632,7 +41622,7 @@ const practiceTopicsData = [
                         "title": "🌱 [Lợi ích ngoài Bảng - Vo]:",
                         "items": [
                             {
-                                "en": "curb carbon emissions and air pollution",
+                                "en": "cut down carbon emissions and air pollution",
                                 "vn": "cắt giảm khí thải carbon và ô nhiễm không khí"
                             },
                             {
@@ -41640,7 +41630,7 @@ const practiceTopicsData = [
                                 "vn": "giảm thiểu tình trạng kẹt xe kinh niên"
                             },
                             {
-                                "en": "remarkably cost-effective",
+                                "en": "really cost-effective",
                                 "vn": "vô cùng tiết kiệm chi phí"
                             },
                             {
@@ -41657,13 +41647,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Bảo vệ môi trường và giảm lượng khí thải carbon)",
-                        "text": "One major advantage of traveling by bus is that it helps curb carbon emissions and reduce urban air pollution. By encouraging collective transport over personal motorbikes, it allows cities to reduce chronic traffic jams.",
-                        "formatted": "→ <u>One major advantage of traveling by bus is that it helps</u> <span class=\"sub-hl\">curb carbon emissions and reduce urban air pollution</span>. By encouraging collective transport over personal motorbikes, it allows cities to <span class=\"sub-hl\">reduce chronic traffic jams</span>."
+                        "text": "One major advantage of traveling by bus is that it helps cut down carbon emissions and reduce city air pollution. By encouraging collective transport over personal motorbikes, it allows cities to reduce chronic traffic jams.",
+                        "formatted": "→ <u>One major advantage of traveling by bus is that it helps</u> <span class=\"sub-hl\">cut down carbon emissions and reduce city air pollution</span>. By encouraging collective transport over personal motorbikes, it allows cities to <span class=\"sub-hl\">reduce chronic traffic jams</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Tiết kiệm chi phí và thư giãn trong lúc di chuyển)",
-                        "text": "Without a doubt, commuting by bus is remarkably cost-effective and relaxing. Passengers can simply sit back, listen to their favorite podcasts, and avoid the stress of navigating harsh weather and congested streets.",
-                        "formatted": "→ <u>Without a doubt, commuting by bus is remarkably</u> <span class=\"sub-hl\">cost-effective and relaxing</span>. Passengers can simply sit back, <span class=\"sub-hl\">listen to their favorite podcasts</span>, and avoid <span class=\"sub-hl\">the stress of navigating harsh weather and congested streets</span>."
+                        "text": "Without a doubt, commuting by bus is really cost-effective and relaxing. Passengers can simply sit back, listen to their favorite podcasts, and avoid the stress of navigating harsh weather and congested streets.",
+                        "formatted": "→ <u>Without a doubt, commuting by bus is really</u> <span class=\"sub-hl\">cost-effective and relaxing</span>. Passengers can simply sit back, <span class=\"sub-hl\">listen to their favorite podcasts</span>, and avoid <span class=\"sub-hl\">the stress of navigating harsh weather and congested streets</span>."
                     }
                 ]
             }
@@ -42495,7 +42485,7 @@ const practiceTopicsData = [
                                 "vn": "thông thoáng, yên tĩnh và dễ chịu khi lái xe"
                             },
                             {
-                                "en": "smooth and free from severe gridlock",
+                                "en": "smooth and free from bad traffic jams",
                                 "vn": "êm thuận và không bị tắc nghẽn nặng"
                             },
                             {
@@ -43305,7 +43295,7 @@ const practiceTopicsData = [
                                 "vn": "giúp việc đi lại hàng ngày an toàn và êm thuận hơn"
                             },
                             {
-                                "en": "prevent chaotic gridlock on main roads",
+                                "en": "prevent heavy traffic jams on main roads",
                                 "vn": "ngăn chặn kẹt xe hỗn loạn trên các trục đường chính"
                             }
                         ]
@@ -43319,8 +43309,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Lệch giờ làm và nâng cao ý thức giao thông)",
-                        "text": "One effective solution is to stagger school and office working hours while raising public awareness about road etiquette. Not only does that prevent chaotic gridlock on main roads, but it also allows people to reduce stress.",
-                        "formatted": "→ <u>One effective solution is to</u> <span class=\"sub-hl\">stagger school and office working hours</span> <u>while</u> <span class=\"sub-hl\">raising public awareness about road etiquette</span><u>. Not only does that</u> <span class=\"sub-hl\">prevent chaotic gridlock on main roads</span><u>, but it also allows people to</u> <span class=\"sub-hl\">reduce stress</span><u>.</u>"
+                        "text": "One effective solution is to stagger school and office working hours while raising public awareness about road etiquette. Not only does that prevent heavy traffic jams on main roads, but it also allows people to reduce stress.",
+                        "formatted": "→ <u>One effective solution is to</u> <span class=\"sub-hl\">stagger school and office working hours</span> <u>while</u> <span class=\"sub-hl\">raising public awareness about road etiquette</span><u>. Not only does that</u> <span class=\"sub-hl\">prevent heavy traffic jams on main roads</span><u>, but it also allows people to</u> <span class=\"sub-hl\">reduce stress</span><u>.</u>"
                     }
                 ]
             }
@@ -46479,7 +46469,7 @@ const practiceTopicsData = [
                                 "vn": "lối đi lát gạch đẹp và ghế đá sạch sẽ"
                             },
                             {
-                                "en": "a tranquil lake with fresh air",
+                                "en": "a peaceful lake with fresh air",
                                 "vn": "một hồ nước yên bình với không khí trong lành"
                             },
                             {
@@ -46659,7 +46649,7 @@ const practiceTopicsData = [
                         "title": "🎭 [Cảm xúc đối lập trong đám đông]:",
                         "items": [
                             {
-                                "en": "thrilled and invigorated",
+                                "en": "excited and energized",
                                 "vn": "hồi hộp phấn khích và tràn đầy sinh lực"
                             },
                             {
@@ -46680,8 +46670,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Phấn chấn và hòa mình vào nguồn năng lượng lễ hội)",
-                        "text": "To be honest, I felt immensely thrilled and invigorated. The shared enthusiasm of thousands of cheering people allowed me to shake off personal worries and feel a profound sense of unity with everyone around me.",
-                        "formatted": "→ <u>To be honest, I felt immensely</u> <span class=\"sub-hl\">thrilled and invigorated</span>. The shared enthusiasm of thousands of cheering people allowed me to <span class=\"sub-hl\">shake off personal worries and feel a profound sense of unity</span>."
+                        "text": "To be honest, I felt super excited and full of energy. The shared enthusiasm of thousands of cheering people allowed me to shake off personal worries and feel a strong sense of connection with everyone around me.",
+                        "formatted": "→ <u>To be honest, I felt immensely</u> <span class=\"sub-hl\">excited and energized</span>. The shared enthusiasm of thousands of cheering people allowed me to <span class=\"sub-hl\">shake off personal worries and feel a strong sense of connection</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Ngột ngạt, căng thẳng và mong muốn về nơi yên tĩnh)",
@@ -46694,7 +46684,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "Do you prefer crowded places or quiet places? Why?",
                 "qType": "Choice Question: Do you prefer crowded or quiet places? Why?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Chọn nơi yên tĩnh để thư giãn, tái tạo năng lượng và đọc sách):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Personally, I much prefer quiet places because I find tranquility essential for my</u> <span class=\"formula-bracket-hl\">[sức khỏe tinh thần]</span>. Peaceful environments allow me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and give me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Cân bằng cả hai tùy vào tâm trạng và hoàn cảnh):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>In my view, both environments serve distinct purposes depending on my mood</u>. While quiet places allow me to <span class=\"formula-bracket-hl\">[lợi ích nơi yên tĩnh - Vo]</span>, occasionally visiting bustling spots gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích nơi đông người - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Chọn nơi yên tĩnh để thư giãn, tái tạo năng lượng và đọc sách):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Personally, I much prefer quiet places because I find peace and quiet essential for my</u> <span class=\"formula-bracket-hl\">[sức khỏe tinh thần]</span>. Peaceful environments allow me to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and give me a chance to <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Cân bằng cả hai tùy vào tâm trạng và hoàn cảnh):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>In my view, both environments serve distinct purposes depending on my mood</u>. While quiet places allow me to <span class=\"formula-bracket-hl\">[lợi ích nơi yên tĩnh - Vo]</span>, occasionally visiting bustling spots gives me an opportunity to <span class=\"formula-bracket-hl\">[lợi ích nơi đông người - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -46705,11 +46695,11 @@ const practiceTopicsData = [
                         "title": "⚖️ [So sánh Không gian yên tĩnh vs Náo nhiệt]:",
                         "items": [
                             {
-                                "en": "serene environment with natural sounds",
+                                "en": "calm environment with natural sounds",
                                 "vn": "không gian thanh bình với âm thanh tự nhiên"
                             },
                             {
-                                "en": "nurture inner peace and mindfulness",
+                                "en": "enjoy inner peace and stay calm",
                                 "vn": "nuôi dưỡng sự an yên nội tại và chánh niệm"
                             },
                             {
@@ -46726,13 +46716,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Ưu tiên nơi yên tĩnh để tĩnh tâm và tái tạo năng lượng)",
-                        "text": "Personally, I much prefer quiet places because I find tranquility essential for my mental well-being. Peaceful environments like libraries or peaceful parks allow me to reflect deeply, read books, and recharge my batteries without unnecessary distractions.",
-                        "formatted": "→ <u>Personally, I much prefer quiet places because I find tranquility essential for my</u> <span class=\"sub-hl\">mental well-being</span>. Peaceful environments like libraries or peaceful parks allow me to <span class=\"sub-hl\">reflect deeply, read books, and recharge my batteries</span> without unnecessary distractions."
+                        "text": "Personally, I much prefer quiet places because I find peace and quiet essential for my mental well-being. Peaceful environments like libraries or peaceful parks allow me to reflect deeply, read books, and recharge my batteries without unnecessary distractions.",
+                        "formatted": "→ <u>Personally, I much prefer quiet places because I find peace and quiet essential for my</u> <span class=\"sub-hl\">mental well-being</span>. Peaceful environments like libraries or peaceful parks allow me to <span class=\"sub-hl\">reflect deeply, read books, and recharge my batteries</span> without unnecessary distractions."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Linh hoạt: Nơi yên tĩnh để làm việc, nơi đông đúc để đổi gió)",
-                        "text": "In my view, both environments serve distinct purposes depending on my mood. While serene spots allow me to concentrate on intellectual tasks, occasionally immersing myself in bustling festivals gives me an opportunity to absorb dynamic energy and feel connected with society.",
-                        "formatted": "→ <u>In my view, both environments serve distinct purposes depending on my mood</u>. While serene spots allow me to <span class=\"sub-hl\">concentrate on intellectual tasks</span>, occasionally immersing myself in bustling festivals gives me an opportunity to <span class=\"sub-hl\">absorb dynamic energy and feel connected with society</span>."
+                        "text": "In my view, both environments serve distinct purposes depending on my mood. While quiet spots allow me to focus on my study or work, occasionally immersing myself in bustling festivals gives me an opportunity to absorb dynamic energy and feel connected with society.",
+                        "formatted": "→ <u>In my view, both environments serve distinct purposes depending on my mood</u>. While calm spots allow me to <span class=\"sub-hl\">concentrate on intellectual tasks</span>, occasionally immersing myself in bustling festivals gives me an opportunity to <span class=\"sub-hl\">absorb dynamic energy and feel connected with society</span>."
                     }
                 ]
             }
@@ -50016,7 +50006,7 @@ const practiceTopicsData = [
                                 "vn": "viết nhật ký tay cá nhân"
                             },
                             {
-                                "en": "hold onto meaningful souvenir keepsakes",
+                                "en": "keep meaningful souvenirs",
                                 "vn": "giữ lại những món kỷ vật lưu niệm ý nghĩa"
                             }
                         ]
@@ -50070,7 +50060,7 @@ const practiceTopicsData = [
                                 "vn": "ghi nhớ khắc sâu những chi tiết quan trọng vào đầu"
                             },
                             {
-                                "en": "retain complex information effortlessly",
+                                "en": "remember complex information easily",
                                 "vn": "ghi nhớ lượng thông tin phức tạp một cách dễ dàng"
                             }
                         ]
@@ -50093,7 +50083,7 @@ const practiceTopicsData = [
                 "qNum": 2,
                 "question": "Have you ever forgotten something important? What happened?",
                 "qType": "Yes/No Question: Have you forgotten something important?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Quên mang giấy tờ tùy thân / chìa khóa trong ngày quan trọng):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, unfortunately! <u>I vividly remember an occasion when I completely forgot</u> <span class=\"formula-bracket-hl\">[vật quan trọng / giấy tờ]</span>. As a direct consequence, I had to <span class=\"formula-bracket-hl\">[hậu quả khẩn cấp]</span>, which caused immense stress but taught me to <span class=\"formula-bracket-hl\">[lợi ích / bài học - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (YES - Suýt quên một cuộc hẹn phỏng vấn hoặc thi cử do quá tải lịch trình):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To my deep embarrassment, there was a time when I inadvertently missed</u> <span class=\"formula-bracket-hl\">[sự kiện / cuộc hẹn quan trọng]</span> due to a hectic schedule. Although I managed to <span class=\"formula-bracket-hl\">[khắc phục tình huống]</span>, it motivated me to <span class=\"formula-bracket-hl\">[lợi ích / giải pháp - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (YES - Quên mang giấy tờ tùy thân / chìa khóa trong ngày quan trọng):</div>\n                    <div class=\"topic-formula-text\">\n                        → Yes, unfortunately! <u>I vividly remember an occasion when I completely forgot</u> <span class=\"formula-bracket-hl\">[vật quan trọng / giấy tờ]</span>. As a direct consequence, I had to <span class=\"formula-bracket-hl\">[hậu quả khẩn cấp]</span>, which caused a lot of stress but taught me to <span class=\"formula-bracket-hl\">[lợi ích / bài học - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (YES - Suýt quên một cuộc hẹn phỏng vấn hoặc thi cử do quá tải lịch trình):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To my deep embarrassment, there was a time when I accidentally missed</u> <span class=\"formula-bracket-hl\">[sự kiện / cuộc hẹn quan trọng]</span> due to a hectic schedule. Although I managed to <span class=\"formula-bracket-hl\">[khắc phục tình huống]</span>, it motivated me to <span class=\"formula-bracket-hl\">[lợi ích / giải pháp - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -50108,7 +50098,7 @@ const practiceTopicsData = [
                                 "vn": "hoàn toàn quên bẵng đi mất"
                             },
                             {
-                                "en": "inadvertently overlook a vital deadline",
+                                "en": "accidentally miss an important deadline",
                                 "vn": "vô tình bỏ sót một hạn chót tối quan trọng"
                             },
                             {
@@ -50116,7 +50106,7 @@ const practiceTopicsData = [
                                 "vn": "học được một bài học cay đắng nhưng vô cùng đắt giá"
                             },
                             {
-                                "en": "double-check my belongings meticulously",
+                                "en": "double-check my things very carefully",
                                 "vn": "kiểm tra lại đồ đạc một cách hết sức tỉ mỉ"
                             }
                         ]
@@ -50125,13 +50115,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Quên thẻ căn cước trước giờ vào phòng thi chứng chỉ)",
-                        "text": "Yes, unfortunately! I vividly remember an occasion when I completely forgot my national identification card before a major exam. As a direct consequence, I had to rush back home in a panic, which caused immense stress but taught me to prepare essential documents the night before.",
-                        "formatted": "→ Yes, unfortunately! <u>I vividly remember an occasion when I completely forgot</u> <span class=\"sub-hl\">my national identification card before a major exam</span>. As a direct consequence, I had to <span class=\"sub-hl\">rush back home in a panic</span>, which caused immense stress but taught me to <span class=\"sub-hl\">prepare essential documents the night before</span>."
+                        "text": "Yes, unfortunately! I vividly remember an occasion when I completely forgot my national identification card before a major exam. As a direct consequence, I had to rush back home in a panic, which caused a lot of stress but taught me to prepare essential documents the night before.",
+                        "formatted": "→ Yes, unfortunately! <u>I vividly remember an occasion when I completely forgot</u> <span class=\"sub-hl\">my national identification card before a major exam</span>. As a direct consequence, I had to <span class=\"sub-hl\">rush back home in a panic</span>, which caused a lot of stress but taught me to <span class=\"sub-hl\">prepare essential documents the night before</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Quên một buổi họp nhóm trực tuyến do mải mê làm bài tập)",
-                        "text": "To my deep embarrassment, there was a time when I inadvertently missed a crucial team project meeting due to an overloaded schedule. Although I managed to apologize and submit my contribution early the next morning, it motivated me to manage my commitments far more rigorously.",
-                        "formatted": "→ <u>To my deep embarrassment, there was a time when I inadvertently missed</u> <span class=\"sub-hl\">a crucial team project meeting due to an overloaded schedule</span>. Although I managed to <span class=\"sub-hl\">apologize and submit my contribution early the next morning</span>, it motivated me to <span class=\"sub-hl\">manage my commitments far more rigorously</span>."
+                        "text": "To my deep embarrassment, there was a time when I accidentally missed a crucial team project meeting due to an overloaded schedule. Although I managed to apologize and submit my contribution early the next morning, it motivated me to manage my commitments far more rigorously.",
+                        "formatted": "→ <u>To my deep embarrassment, there was a time when I accidentally missed</u> <span class=\"sub-hl\">a crucial team project meeting due to an overloaded schedule</span>. Although I managed to <span class=\"sub-hl\">apologize and submit my contribution early the next morning</span>, it motivated me to <span class=\"sub-hl\">manage my commitments far more rigorously</span>."
                     }
                 ]
             },
@@ -50139,7 +50129,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "Do you think people remember things better now or in the past? Why?",
                 "qType": "Choice Question: Do people remember better now or in the past?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (IN THE PAST - Người xưa có trí nhớ tự nhiên tốt hơn vì không phụ thuộc công nghệ):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>From my perspective, people in previous generations had far superior memory retention compared to today</u>. Nowadays, because we suffer from digital amnesia and constant smartphone dependence, people tend to <span class=\"formula-bracket-hl\">[nhược điểm hiện đại]</span> rather than <span class=\"formula-bracket-hl\">[rèn luyện trí não - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (NOW / CÂN BẰNG - Thời nay con người xử lý và ghi nhớ thông tin đa chiều hiệu quả hơn nhờ công nghệ):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>In my view, while people in the past relied on raw memorization, people nowadays manage information far more efficiently thanks to</u> <span class=\"formula-bracket-hl\">[công cụ lưu trữ số]</span>. Utilizing intelligent databases allows us to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and focus on <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (IN THE PAST - Người xưa có trí nhớ tự nhiên tốt hơn vì không phụ thuộc công nghệ):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>From my perspective, people in previous generations had a much stronger memory than people today</u>. Nowadays, because we rely too heavily on digital devices and constant smartphone dependence, people tend to <span class=\"formula-bracket-hl\">[nhược điểm hiện đại]</span> rather than <span class=\"formula-bracket-hl\">[rèn luyện trí não - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (NOW / CÂN BẰNG - Thời nay con người xử lý và ghi nhớ thông tin đa chiều hiệu quả hơn nhờ công nghệ):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>In my view, while people in the past had to memorize everything by heart, people nowadays manage information far more efficiently thanks to</u> <span class=\"formula-bracket-hl\">[công cụ lưu trữ số]</span>. Using digital storage apps allows us to <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> and focus on <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -50150,7 +50140,7 @@ const practiceTopicsData = [
                         "title": "🔍 [Trí nhớ & Sự phát triển công nghệ]:",
                         "items": [
                             {
-                                "en": "suffer from digital amnesia",
+                                "en": "rely too heavily on digital devices",
                                 "vn": "mắc chứng đãng trí kỹ thuật số (quá ỷ lại vào máy móc)"
                             },
                             {
@@ -50171,13 +50161,13 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Thời xưa nhớ tốt hơn vì não bộ được rèn luyện thường xuyên)",
-                        "text": "From my perspective, people in previous generations had far superior memory retention compared to today. Nowadays, because we suffer from digital amnesia and constant smartphone dependence, people tend to rely on search engines for every tiny detail rather than actively exercising their mental faculties.",
-                        "formatted": "→ <u>From my perspective, people in previous generations had far superior memory retention compared to today</u>. Nowadays, because we suffer from digital amnesia and constant smartphone dependence, people tend to <span class=\"sub-hl\">rely on search engines for every tiny detail</span> rather than <span class=\"sub-hl\">actively exercising their mental faculties</span>."
+                        "text": "From my perspective, people in previous generations had a much stronger memory than people today. Nowadays, because we rely too heavily on digital devices and constant smartphone dependence, people tend to rely on search engines for every tiny detail rather than actively exercising their mental faculties.",
+                        "formatted": "→ <u>From my perspective, people in previous generations had a much stronger memory than people today</u>. Nowadays, because we rely too heavily on digital devices and constant smartphone dependence, people tend to <span class=\"sub-hl\">rely on search engines for every tiny detail</span> rather than <span class=\"sub-hl\">actively exercising their mental faculties</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Thời nay quản lý và xử lý thông tin thông minh hơn nhờ hệ sinh thái số)",
-                        "text": "In my view, while people in the past relied on raw memorization, people nowadays manage information far more efficiently thanks to cloud storage and smart productivity apps. Utilizing intelligent databases allows us to retrieve essential knowledge instantly and focus on high-level creative problem-solving.",
-                        "formatted": "→ <u>In my view, while people in the past relied on raw memorization, people nowadays manage information far more efficiently thanks to</u> <span class=\"sub-hl\">cloud storage and smart productivity apps</span>. Utilizing intelligent databases allows us to <span class=\"sub-hl\">retrieve essential knowledge instantly</span> and focus on <span class=\"sub-hl\">high-level creative problem-solving</span>."
+                        "text": "In my view, while people in the past had to memorize everything by heart, people nowadays manage information far more efficiently thanks to cloud storage and smart productivity apps. Using digital notes and cloud apps allows us to find important information quickly and focus more on creative problem-solving.",
+                        "formatted": "→ <u>In my view, while people in the past had to memorize everything by heart, people nowadays manage information far more efficiently thanks to</u> <span class=\"sub-hl\">cloud storage and smart productivity apps</span>. Using digital storage apps allows us to <span class=\"sub-hl\">retrieve essential knowledge instantly</span> and focus on <span class=\"sub-hl\">high-level creative problem-solving</span>."
                     }
                 ]
             }
@@ -50717,7 +50707,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "Who is the most talkative person in your family?",
                 "qType": "Wh-question: Who is the most [tính từ] person in [nhóm]?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Mẹ hoặc chị gái - Giàu năng lượng và hay kể chuyện):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>The most talkative person in my family is definitely</u> <span class=\"formula-bracket-hl\">[thành viên gia đình]</span>. Everyone loves chatting with her because she always <span class=\"formula-bracket-hl\">[thói quen nói chuyện]</span>. Besides, she's very <span class=\"formula-bracket-hl\">[2 tính từ tính cách]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Bố hoặc em trai - Hài hước và luôn khuấy động bầu không khí):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Without a doubt,</u> <span class=\"formula-bracket-hl\">[thành viên gia đình]</span> talks the most at home. He's remarkably <span class=\"formula-bracket-hl\">[2 tính từ tính cách]</span>, and he constantly <span class=\"formula-bracket-hl\">[thói quen nói chuyện]</span>, which always helps us <span class=\"formula-bracket-hl\">[lợi ích]</span>.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Mẹ hoặc chị gái - Giàu năng lượng và hay kể chuyện):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>The most talkative person in my family is definitely</u> <span class=\"formula-bracket-hl\">[thành viên gia đình]</span>. Everyone loves chatting with her because she always <span class=\"formula-bracket-hl\">[thói quen nói chuyện]</span>. Besides, she's very <span class=\"formula-bracket-hl\">[2 tính từ tính cách]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Bố hoặc em trai - Hài hước và luôn khuấy động bầu không khí):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Without a doubt,</u> <span class=\"formula-bracket-hl\">[thành viên gia đình]</span> talks the most at home. He's really <span class=\"formula-bracket-hl\">[2 tính từ tính cách]</span>, and he constantly <span class=\"formula-bracket-hl\">[thói quen nói chuyện]</span>, which always helps us <span class=\"formula-bracket-hl\">[lợi ích]</span>.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -50800,8 +50790,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Em trai hài hước, hay kể chuyện đùa làm cả nhà vui)",
-                        "text": "Without a doubt, my younger brother talks the most at home. He's remarkably humorous and genuinely caring, and he constantly cracks witty jokes and shares fascinating trivia during meals, which always helps us reduce stress.",
-                        "formatted": "→ <u>Without a doubt,</u> <span class=\"sub-hl\">my younger brother</span> talks the most at home. He's remarkably <span class=\"sub-hl\">humorous and genuinely caring</span>, and he constantly <span class=\"sub-hl\">cracks witty jokes and shares fascinating trivia during meals</span>, which always helps us <span class=\"sub-hl\">reduce stress</span>."
+                        "text": "Without a doubt, my younger brother talks the most at home. He's really humorous and genuinely caring, and he constantly cracks witty jokes and shares fascinating trivia during meals, which always helps us reduce stress.",
+                        "formatted": "→ <u>Without a doubt,</u> <span class=\"sub-hl\">my younger brother</span> talks the most at home. He's really <span class=\"sub-hl\">humorous and genuinely caring</span>, and he constantly <span class=\"sub-hl\">cracks witty jokes and shares fascinating trivia during meals</span>, which always helps us <span class=\"sub-hl\">reduce stress</span>."
                     }
                 ]
             }
@@ -52016,7 +52006,7 @@ const practiceTopicsData = [
                                 "vn": "linh hoạt và có trách nhiệm"
                             },
                             {
-                                "en": "independent and resilient",
+                                "en": "independent and strong",
                                 "vn": "độc lập và kiên cường"
                             }
                         ]
@@ -54414,8 +54404,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Tái sử dụng thùng carton đóng hàng và giấy phế liệu)",
-                        "text": "I frequently repurpose cardboard delivery boxes and used printer paper for domestic storage and note-taking. Instead of throwing them out immediately, reusing them gives me a chance to save money and curb deforestation.",
-                        "formatted": "→ <u>I frequently repurpose paper products, such as</u> <span class=\"sub-hl\">cardboard delivery boxes and used printer paper for storage</span>. Instead of throwing them away, <u>reusing them gives me a chance to</u> <span class=\"sub-hl\">save money and curb deforestation</span>."
+                        "text": "I frequently reuse cardboard delivery boxes and used printer paper for domestic storage and note-taking. Instead of throwing them out immediately, reusing them gives me a chance to save money and help protect forests.",
+                        "formatted": "→ <u>I frequently repurpose paper products, such as</u> <span class=\"sub-hl\">cardboard delivery boxes and used printer paper for storage</span>. Instead of throwing them away, <u>reusing them gives me a chance to</u> <span class=\"sub-hl\">save money and help protect forests</span>."
                     }
                 ]
             },
@@ -54455,7 +54445,7 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Ý thức cư dân tăng cao, hình thành thói quen phân loại)",
-                        "text": "Yes, to a great extent. Environmental awareness in my neighborhood has improved significantly over the past few years. Many residents diligently separate plastics, papers, and organic food scraps, which helps keep our local streets clean and green.",
+                        "text": "Yes, to a great extent. Environmental awareness in my neighborhood has improved significantly over the past few years. Many residents carefully sort plastics, papers, and organic food scraps, which helps keep our local streets clean and green.",
                         "formatted": "→ <u>Yes, to a great extent. Environmental awareness in my neighborhood has improved significantly</u>. Residents actively <span class=\"sub-hl\">separate plastics, papers, and organic food scraps</span>, which allows our community to <span class=\"sub-hl\">keep our local streets clean and green</span>."
                     },
                     {
@@ -54488,7 +54478,7 @@ const practiceTopicsData = [
                                 "vn": "các chương trình đổi rác tái chế lấy cây xanh"
                             },
                             {
-                                "en": "impose stringent fines on illegal dumping",
+                                "en": "give strict fines on illegal dumping",
                                 "vn": "áp dụng mức phạt nghiêm khắc đối với việc xả rác bừa bãi"
                             },
                             {
@@ -54507,7 +54497,7 @@ const practiceTopicsData = [
                     {
                         "label": "Bài mẫu Cách 2 (Ban hành luật phân loại rác tại nguồn và chế tài xử phạt)",
                         "text": "In addition to educational efforts, the government has recently enacted environmental protection laws that require households to categorize waste at source. Implementing monetary penalties for non-compliance encourages citizens to take waste management more seriously.",
-                        "formatted": "→ <u>In addition to educational campaigns, authorities have enacted</u> <span class=\"sub-hl\">stringent environmental protection regulations</span>. Enforcing strict fines for illegal dumping ensures that individuals <span class=\"sub-hl\">categorize domestic waste responsibly and preserve civic cleanliness</span>."
+                        "formatted": "→ <u>In addition to educational campaigns, authorities have enacted</u> <span class=\"sub-hl\">strict environmental protection regulations</span>. Enforcing strict fines for illegal dumping ensures that individuals <span class=\"sub-hl\">categorize domestic waste responsibly and preserve civic cleanliness</span>."
                     }
                 ]
             }
@@ -55421,7 +55411,7 @@ const practiceTopicsData = [
                                 "vn": "sự tích cực, hy vọng và kiên định"
                             },
                             {
-                                "en": "purity and resilience in Vietnamese culture",
+                                "en": "purity and inner strength in Vietnamese culture",
                                 "vn": "sự thuần khiết và kiên cường trong văn hóa Việt"
                             },
                             {
@@ -55485,8 +55475,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Thích hoa sen tượng trưng cho sự thuần khiết)",
-                        "text": "My absolute favorite flower is the lotus flower, which symbolizes purity and resilience in Vietnamese culture. Having it in my room allows me to reduce stress and enjoy a gentle natural scent.",
-                        "formatted": "→ <u>My absolute favorite flower is</u> <span class=\"sub-hl\">the lotus flower</span>, <u>which symbolizes</u> <span class=\"sub-hl\">purity and resilience in Vietnamese culture</span>. <u>Having it in my room allows me to</u> <span class=\"sub-hl\">reduce stress</span> <u>and</u> <span class=\"sub-hl\">enjoy a gentle natural scent</span>."
+                        "text": "My absolute favorite flower is the lotus flower, which symbolizes purity and inner strength in Vietnamese culture. Having it in my room allows me to reduce stress and enjoy a gentle natural scent.",
+                        "formatted": "→ <u>My absolute favorite flower is</u> <span class=\"sub-hl\">the lotus flower</span>, <u>which symbolizes</u> <span class=\"sub-hl\">purity and inner strength in Vietnamese culture</span>. <u>Having it in my room allows me to</u> <span class=\"sub-hl\">reduce stress</span> <u>and</u> <span class=\"sub-hl\">enjoy a gentle natural scent</span>."
                     }
                 ]
             },
@@ -55530,11 +55520,11 @@ const practiceTopicsData = [
                                 "vn": "may mắn, thịnh vượng và khởi đầu mới"
                             },
                             {
-                                "en": "purity, resilience, and national pride",
+                                "en": "purity, inner strength, and national pride",
                                 "vn": "sự thuần khiết, kiên cường và niềm tự hào dân tộc"
                             },
                             {
-                                "en": "longevity and respect for ancestors",
+                                "en": "a long life and respect for ancestors",
                                 "vn": "sự trường thọ và lòng kính trọng tổ tiên"
                             },
                             {
@@ -55755,7 +55745,7 @@ const practiceTopicsData = [
                                 "vn": "Hoa hướng dương"
                             },
                             {
-                                "en": "purity, resilience, and elegance",
+                                "en": "purity, inner strength, and beauty",
                                 "vn": "sự thuần khiết, kiên cường và thanh tao"
                             },
                             {
@@ -55789,8 +55779,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Hoa sen - Phổ biến và giàu ý nghĩa văn hóa)",
-                        "text": "Certainly. The lotus is hugely popular across Vietnam because it symbolizes purity, resilience, and elegance. You can easily see it at traditional temples, cultural festivals, and family altars, especially during festive seasons.",
-                        "formatted": "→ <u>Certainly.</u> <span class=\"sub-hl\">The lotus</span> <u>is hugely popular across Vietnam because it symbolizes</u> <span class=\"sub-hl\">purity, resilience, and elegance</span>. <u>You can easily see it</u> <span class=\"sub-hl\">at traditional temples, cultural festivals, and family altars</span>, <u>especially during festive seasons.</u>"
+                        "text": "Certainly. The lotus is hugely popular across Vietnam because it symbolizes purity, inner strength, and beauty. You can easily see it at traditional temples, cultural festivals, and family altars, especially during festive seasons.",
+                        "formatted": "→ <u>Certainly.</u> <span class=\"sub-hl\">The lotus</span> <u>is hugely popular across Vietnam because it symbolizes</u> <span class=\"sub-hl\">purity, inner strength, and beauty</span>. <u>You can easily see it</u> <span class=\"sub-hl\">at traditional temples, cultural festivals, and family altars</span>, <u>especially during festive seasons.</u>"
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Hoa hướng dương - Được giới trẻ ưa chuộng)",
@@ -55826,7 +55816,7 @@ const practiceTopicsData = [
                                 "vn": "nhiều ánh nắng trực tiếp và tưới nước đều đặn"
                             },
                             {
-                                "en": "nutrient-rich soil and proper drainage",
+                                "en": "rich, fertile soil and proper drainage",
                                 "vn": "đất giàu dinh dưỡng và thoát nước tốt"
                             }
                         ]
@@ -55840,8 +55830,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Trồng được nhưng cần kiên nhẫn chăm sóc)",
-                        "text": "Yes, we can, though it takes a bit of patience because it requires nutrient-rich soil and proper drainage. Still, if you care for it properly, gardening helps you clear your mind and build good habits.",
-                        "formatted": "→ <u>Yes, we can, though it takes a bit of patience because it requires</u> <span class=\"sub-hl\">nutrient-rich soil and proper drainage</span>. <u>Still, if you care for it properly, gardening helps you</u> <span class=\"sub-hl\">clear your mind</span> <u>and</u> <span class=\"sub-hl\">build good habits</span>."
+                        "text": "Yes, we can, though it takes a bit of patience because it requires rich, fertile soil and proper drainage. Still, if you care for it properly, gardening helps you clear your mind and build good habits.",
+                        "formatted": "→ <u>Yes, we can, though it takes a bit of patience because it requires</u> <span class=\"sub-hl\">rich, fertile soil and proper drainage</span>. <u>Still, if you care for it properly, gardening helps you</u> <span class=\"sub-hl\">clear your mind</span> <u>and</u> <span class=\"sub-hl\">build good habits</span>."
                     }
                 ]
             }
@@ -55986,7 +55976,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "What is the significance of birds in your country?",
                 "qType": "Wh-question: What is the significance of [noun] in your country?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Ý nghĩa văn hóa & biểu tượng dân gian):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Birds hold deep cultural symbolism in Vietnam. For instance,</u> <span class=\"formula-bracket-hl\">[biểu tượng văn hóa 1]</span>, <u>while</u> <span class=\"formula-bracket-hl\">[biểu tượng văn hóa 2]</span>, <u>appearing frequently in folk songs and art.</u>\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Ý nghĩa sinh thái & nông nghiệp):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Beyond cultural traditions, birds play an indispensable ecological role. They help</u> <span class=\"formula-bracket-hl\">[vai trò sinh thái 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[vai trò sinh thái 2 - Vo]</span>, <u>which keeps our ecosystem balanced.</u>\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Ý nghĩa văn hóa & biểu tượng dân gian):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Birds hold deep cultural symbolism in Vietnam. For instance,</u> <span class=\"formula-bracket-hl\">[biểu tượng văn hóa 1]</span>, <u>while</u> <span class=\"formula-bracket-hl\">[biểu tượng văn hóa 2]</span>, <u>appearing frequently in folk songs and art.</u>\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Ý nghĩa sinh thái & nông nghiệp):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Beyond cultural traditions, birds play an essential role in nature. They help</u> <span class=\"formula-bracket-hl\">[vai trò sinh thái 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[vai trò sinh thái 2 - Vo]</span>, <u>which keeps our ecosystem balanced.</u>\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "title": "🎨 [Biểu tượng văn hóa]:",
@@ -56039,14 +56029,15 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Vai trò sinh thái đối với nông nghiệp và tự nhiên)",
-                        "text": "Beyond cultural traditions, birds play an indispensable ecological role. They help control crop pests naturally for local farmers and pollinate flowers and disperse plant seeds, which keeps our ecosystem balanced.",
-                        "formatted": "→ <u>Beyond cultural traditions, birds play an indispensable ecological role. They help</u> <span class=\"sub-hl\">control crop pests naturally for local farmers</span> <u>and</u> <span class=\"sub-hl\">pollinate flowers and disperse plant seeds</span>, <u>which keeps our ecosystem balanced.</u>"
+                        "text": "Beyond cultural traditions, birds play an essential role in nature. They help control crop pests naturally for local farmers and pollinate flowers and disperse plant seeds, which keeps our ecosystem balanced.",
+                        "formatted": "→ <u>Beyond cultural traditions, birds play an essential role in nature. They help</u> <span class=\"sub-hl\">control crop pests naturally for local farmers</span> <u>and</u> <span class=\"sub-hl\">pollinate flowers and disperse plant seeds</span>, <u>which keeps our ecosystem balanced.</u>"
                     }
                 ]
             }
         ]
     }
 ];
+
 window.practiceTopicsData = practiceTopicsData;
 
 // ==========================================================================
