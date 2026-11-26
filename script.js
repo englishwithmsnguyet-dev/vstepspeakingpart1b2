@@ -2192,11 +2192,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.updateProgressUI = () => {
         const totalCompleted = (window._studentProgress.completedTopics || []).length;
-        const percent = Math.round((totalCompleted / 159) * 100);
+        const percent = Math.round((totalCompleted / 169) * 100);
 
         // Header pill
         const headerCount = document.getElementById('header-progress-count');
-        if (headerCount) headerCount.textContent = `${totalCompleted}/159`;
+        if (headerCount) headerCount.textContent = `${totalCompleted}/169`;
 
         // Sidebar widget
         const sidePercent = document.getElementById('sidebar-progress-percent');
@@ -2204,7 +2204,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const sideTopics = document.getElementById('sidebar-progress-topics');
         if (sidePercent) sidePercent.textContent = `${percent}%`;
         if (sideBar) sideBar.style.width = `${percent}%`;
-        if (sideTopics) sideTopics.textContent = `${totalCompleted} / 159 chủ đề`;
+        if (sideTopics) sideTopics.textContent = `${totalCompleted} / 169 chủ đề`;
 
         // Modal stats
         const modalName = document.getElementById('progress-modal-student-name');
@@ -2228,7 +2228,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const statRank = document.getElementById('stat-student-rank');
         const statLvl = document.getElementById('stat-student-level');
 
-        if (statComp) statComp.textContent = `${totalCompleted} / 159`;
+        if (statComp) statComp.textContent = `${totalCompleted} / 169`;
         if (statPercent) statPercent.textContent = `${percent}% giáo trình`;
         if (statRec) statRec.textContent = window._studentProgress.stats.totalRecordings || 0;
         if (statEx) statEx.textContent = window._studentProgress.stats.totalExams || 0;
@@ -2459,7 +2459,7 @@ document.addEventListener('DOMContentLoaded', () => {
             } catch(e) {}
         }
 
-        window.showProgressToast(`🎉 Đã khôi phục thành công! Đã hoàn thành ${compTopics.length}/159 chủ đề.`, 'fa-solid fa-cloud-arrow-down');
+        window.showProgressToast(`🎉 Đã khôi phục thành công! Đã hoàn thành ${compTopics.length}/169 chủ đề.`, 'fa-solid fa-cloud-arrow-down');
         window.updateProgressUI();
     };
 
@@ -56035,6 +56035,1466 @@ const practiceTopicsData = [
                 ]
             }
         ]
+    },
+    {
+        "id": 160,
+        "title": "Chủ đề 160: Let's talk about friends (part 2)",
+        "topicName": "Friends (Part 2)",
+        "introText": "Let’s talk about friends.",
+        "questions": [
+            {
+                "qNum": 1,
+                "question": "Do you have many close friends?",
+                "qType": "Yes/No Question: Do you have many close friends?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (KHÔNG NHIỀU - Chỉ có một nhóm nhỏ vài người bạn thân thiết và đáng tin cậy):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Honestly, I don't have a huge circle of close friends; I just have</u> <span class=\"formula-bracket-hl\">[3-4 người bạn cực kỳ thân]</span>. <u>I value quality over quantity because they always</u> <span class=\"formula-bracket-hl\">[sự lắng nghe / ủng hộ]</span> <u>and help me</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (CÓ KHÁ NHIỀU - Là người hòa đồng, có bạn thân từ thời đi học đến chỗ làm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I feel really lucky to have quite a few close friends from</u> <span class=\"formula-bracket-hl\">[trường cấp 3, đại học và chỗ làm]</span>. <u>Being surrounded by supportive people allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🤝 [Tình bạn thân thiết & Sự gắn kết]:",
+                        "items": [
+                            {
+                                "en": "value quality over quantity in friendship",
+                                "vn": "coi trọng chất lượng hơn số lượng trong tình bạn"
+                            },
+                            {
+                                "en": "a small circle of trustworthy friends",
+                                "vn": "một nhóm nhỏ những người bạn đáng tin cậy"
+                            },
+                            {
+                                "en": "support me through ups and downs",
+                                "vn": "ủng hộ tôi qua mọi thăng trầm"
+                            },
+                            {
+                                "en": "share my real thoughts without fear of judgment",
+                                "vn": "chia sẻ suy nghĩ thật mà không sợ bị phán xét"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Ít bạn thân nhưng rất chất lượng và đáng tin)",
+                        "text": "Honestly, I don't have a huge circle of close friends; I just have three best friends from high school. I value quality over quantity because they always support me through ups and downs and help me reduce stress whenever life gets tough.",
+                        "formatted": "→ <u>Honestly, I don't have a huge circle of close friends; I just have</u> <span class=\"sub-hl\">three best friends from high school</span>. <u>I value quality over quantity because they always</u> <span class=\"sub-hl\">support me through ups and downs</span> <u>and help me</u> <span class=\"sub-hl\">reduce stress whenever life gets tough</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Có nhiều bạn thân từ đại học và nơi làm việc)",
+                        "text": "Yes, I feel really lucky to have quite a few close friends from university and my workplace. Being surrounded by supportive people allows me to share my real feelings openly and stay positive every single day.",
+                        "formatted": "→ <u>Yes, I feel really lucky to have quite a few close friends from</u> <span class=\"sub-hl\">university and my workplace</span>. <u>Being surrounded by supportive people allows me to</u> <span class=\"sub-hl\">share my real feelings openly</span> <u>and</u> <span class=\"sub-hl\">stay positive every single day</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 2,
+                "question": "What activities do you usually do with your friends?",
+                "qType": "Wh-Question: What activities do you usually do with your friends?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Đi cà phê trò chuyện, ăn uống & xem phim cuối tuần):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Whenever we have free time together, we usually</u> <span class=\"formula-bracket-hl\">[đi quán cà phê / ăn lẩu / xem phim]</span>. <u>Catching up over good food and drinks allows us to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Hoạt động năng động: chơi thể thao, đi phượt ngắn ngày):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>My friends and I are quite active, so we often</u> <span class=\"formula-bracket-hl\">[chơi cầu lông / đạp xe / đi dã ngoại]</span> <u>on weekends</u>. <u>Doing outdoor activities together helps us</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and creates</u> <span class=\"formula-bracket-hl\">[kỷ niệm đẹp]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🎉 [Hoạt động cùng bạn bè]:",
+                        "items": [
+                            {
+                                "en": "grab a cup of coffee and catch up",
+                                "vn": "đi uống cà phê và trò chuyện cập nhật tình hình"
+                            },
+                            {
+                                "en": "try new street food stalls or hotpot places",
+                                "vn": "thử các quán ăn vặt mới hoặc quán lẩu"
+                            },
+                            {
+                                "en": "play badminton or go jogging in the park",
+                                "vn": "chơi cầu lông hoặc chạy bộ trong công viên"
+                            },
+                            {
+                                "en": "take short weekend road trips together",
+                                "vn": "đi du lịch ngắn ngày bằng xe cùng nhau vào cuối tuần"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Đi cà phê, ăn uống và tâm sự)",
+                        "text": "Whenever we have free time together, we usually grab a cup of coffee, try new hotpot places, and watch movies. Catching up over good food and drinks allows us to unwind after a busy week and create unforgettable memories.",
+                        "formatted": "→ <u>Whenever we have free time together, we usually</u> <span class=\"sub-hl\">grab a cup of coffee, try new hotpot places, and watch movies</span>. <u>Catching up over good food and drinks allows us to</u> <span class=\"sub-hl\">unwind after a busy week</span> <u>and</u> <span class=\"sub-hl\">create unforgettable memories</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Chơi thể thao và đi dã ngoại cuối tuần)",
+                        "text": "My friends and I are quite active, so we often play badminton or take short weekend trips to nearby beaches. Doing outdoor activities together helps us stay healthy and energetic and creates a stronger bond among us.",
+                        "formatted": "→ <u>My friends and I are quite active, so we often</u> <span class=\"sub-hl\">play badminton or take short weekend trips to nearby beaches</span>. <u>Doing outdoor activities together helps us</u> <span class=\"sub-hl\">stay healthy and energetic</span> <u>and creates</u> <span class=\"sub-hl\">a stronger bond among us</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 3,
+                "question": "Do you prefer hanging out with a big group of friends or just one or two close friends? Why?",
+                "qType": "Choice Question: Big group vs one or two close friends?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (1–2 BẠN THÂN - Dễ tâm sự sâu sắc, thoải mái và không ồn ào):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>If I had to choose, I'd much prefer hanging out with</u> <span class=\"formula-bracket-hl\">[chỉ 1 hoặc 2 người bạn thân]</span>. <u>It's much easier to</u> <span class=\"formula-bracket-hl\">[trò chuyện sâu sắc / chọn quán ăn]</span>, <u>which allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (NHÓM ĐÔNG - Không khí vui nhộn, sôi nổi và có nhiều góc nhìn thú vị):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Personally, I really enjoy meeting up with</u> <span class=\"formula-bracket-hl\">[một nhóm bạn đông vui]</span>, <u>especially on weekends</u>. <u>A bigger group creates a lively atmosphere, which helps me</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "⚖️ [So sánh đi nhóm nhỏ vs nhóm đông]:",
+                        "items": [
+                            {
+                                "en": "have deep and meaningful conversations",
+                                "vn": "có những cuộc trò chuyện sâu sắc và ý nghĩa"
+                            },
+                            {
+                                "en": "agree on plans and places easily",
+                                "vn": "dễ dàng thống nhất kế hoạch và địa điểm"
+                            },
+                            {
+                                "en": "enjoy a lively and cheerful atmosphere",
+                                "vn": "tận hưởng bầu không khí sôi nổi và vui tươi"
+                            },
+                            {
+                                "en": "hear funny stories from different people",
+                                "vn": "nghe những câu chuyện hài hước từ nhiều người"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Thích đi với 1–2 bạn thân để dễ tâm sự)",
+                        "text": "If I had to choose, I'd much prefer hanging out with just one or two close friends. It's much easier to have deep and meaningful conversations without noisy distractions, which allows me to feel truly heard and relaxed.",
+                        "formatted": "→ <u>If I had to choose, I'd much prefer hanging out with</u> <span class=\"sub-hl\">just one or two close friends</span>. <u>It's much easier to</u> <span class=\"sub-hl\">have deep and meaningful conversations without noisy distractions</span>, <u>which allows me to</u> <span class=\"sub-hl\">feel truly heard and relaxed</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Thích đi nhóm đông cho vui và sôi động)",
+                        "text": "Personally, I really enjoy meeting up with a big group of friends, especially on weekends. A bigger group creates a lively atmosphere, which helps me laugh out loud and forget about my daily worries.",
+                        "formatted": "→ <u>Personally, I really enjoy meeting up with</u> <span class=\"sub-hl\">a big group of friends</span>, <u>especially on weekends</u>. <u>A bigger group creates a lively atmosphere, which helps me</u> <span class=\"sub-hl\">laugh out loud</span> <u>and</u> <span class=\"sub-hl\">forget about my daily worries</span>."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 161,
+        "title": "Chủ đề 161: Let's talk about organizing parties",
+        "topicName": "Organizing parties",
+        "introText": "Let’s talk about parties and organizing parties.",
+        "questions": [
+            {
+                "qNum": 1,
+                "question": "Do you enjoy attending parties?",
+                "qType": "Yes/No Question: Do you enjoy attending parties?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (CÓ - Rất thích tiệc ấm cúng cùng bạn bè/gia đình để giải trí và kết nối):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, definitely! I really enjoy attending</u> <span class=\"formula-bracket-hl\">[tiệc sinh nhật / họp mặt ấm cúng]</span> <u>with my friends and family</u>. <u>It gives me a great chance to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (KHÔNG HẲN - Hơi hướng nội, thích tụ tập nhẹ nhàng hơn là tiệc đông ồn ào):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To be honest, it depends on the size of the party</u>. <u>I'm not a big fan of noisy, crowded parties because they make me feel</u> <span class=\"formula-bracket-hl\">[mệt mỏi]</span>, <u>so I prefer</u> <span class=\"formula-bracket-hl\">[buổi gặp mặt nhỏ]</span> <u>where I can</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🎈 [Đi dự tiệc & Cảm xúc]:",
+                        "items": [
+                            {
+                                "en": "cozy birthday parties and family gatherings",
+                                "vn": "các bữa tiệc sinh nhật ấm cúng và buổi sum họp gia đình"
+                            },
+                            {
+                                "en": "socialize and expand my social circle",
+                                "vn": "giao lưu và mở rộng vòng bạn bè"
+                            },
+                            {
+                                "en": "noisy and overcrowded venues",
+                                "vn": "những địa điểm ồn ào và quá đông đúc"
+                            },
+                            {
+                                "en": "dress up and enjoy tasty food",
+                                "vn": "ăn mặc đẹp và thưởng thức đồ ăn ngon"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Rất thích tiệc ấm cúng để xả stress và kết bạn)",
+                        "text": "Yes, definitely! I really enjoy attending cozy birthday parties and weekend gatherings with my friends and family. It gives me a great chance to unwind after stressful workdays and expand my social circle naturally.",
+                        "formatted": "→ <u>Yes, definitely! I really enjoy attending</u> <span class=\"sub-hl\">cozy birthday parties and weekend gatherings</span> <u>with my friends and family</u>. <u>It gives me a great chance to</u> <span class=\"sub-hl\">unwind after stressful workdays</span> <u>and</u> <span class=\"sub-hl\">expand my social circle naturally</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Chỉ thích tiệc nhỏ ấm cúng, ngại chỗ quá ồn ào)",
+                        "text": "To be honest, it depends on the size of the party. I'm not a big fan of noisy, crowded parties because they make me feel tired quickly, so I prefer small home dinners where I can chat comfortably with close friends.",
+                        "formatted": "→ <u>To be honest, it depends on the size of the party</u>. <u>I'm not a big fan of noisy, crowded parties because they make me feel</u> <span class=\"sub-hl\">tired quickly</span>, <u>so I prefer</u> <span class=\"sub-hl\">small home dinners</span> <u>where I can</u> <span class=\"sub-hl\">chat comfortably with close friends</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 2,
+                "question": "Have you ever organized a party by yourself?",
+                "qType": "Yes/No Question: Have you ever organized a party by yourself?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (ĐÃ TỪNG - Tự tổ chức tiệc sinh nhật bất ngờ cho mẹ hoặc bạn thân):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I have. Last year, I organized</u> <span class=\"formula-bracket-hl\">[tiệc sinh nhật bất ngờ cho mẹ / bạn thân]</span> <u>at home</u>. <u>I handled everything from</u> <span class=\"formula-bracket-hl\">[chuẩn bị đồ ăn, trang trí]</span>, <u>which was tiring at first but made me feel</u> <span class=\"formula-bracket-hl\">[cảm giác tự hào / vui]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (CHƯA TỪNG TỰ LÀM 1 MÌNH - Thường phối hợp chia việc cùng bạn bè/gia đình):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Not completely by myself, to be honest</u>. <u>Planning a party takes a lot of effort, so I usually</u> <span class=\"formula-bracket-hl\">[chia việc cùng bạn bè / anh chị em]</span>. <u>Working as a team helps us</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and avoid</u> <span class=\"formula-bracket-hl\">[sai sót / căng thẳng]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🎂 [Tổ chức tiệc]:",
+                        "items": [
+                            {
+                                "en": "throw a surprise birthday party",
+                                "vn": "tổ chức một bữa tiệc sinh nhật bất ngờ"
+                            },
+                            {
+                                "en": "decorate the living room with balloons and lights",
+                                "vn": "trang trí phòng khách bằng bóng bay và đèn dây"
+                            },
+                            {
+                                "en": "prepare snacks, drinks, and a playlist",
+                                "vn": "chuẩn bị đồ ăn nhẹ, nước uống và danh sách nhạc"
+                            },
+                            {
+                                "en": "split the tasks and share the budget",
+                                "vn": "chia nhau công việc và góp chung chi phí"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Từng tự tay chuẩn bị tiệc sinh nhật bất ngờ cho mẹ)",
+                        "text": "Yes, I have. Last year, I organized a surprise birthday party for my mother at home. I handled everything from ordering the cake to decorating the room with balloons, which was tiring at first but made me feel super proud when she smiled.",
+                        "formatted": "→ <u>Yes, I have. Last year, I organized</u> <span class=\"sub-hl\">a surprise birthday party for my mother</span> <u>at home</u>. <u>I handled everything from</u> <span class=\"sub-hl\">ordering the cake to decorating the room with balloons</span>, <u>which was tiring at first but made me feel</u> <span class=\"sub-hl\">super proud when she smiled</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Chưa làm một mình mà hay cùng bạn bè chia việc)",
+                        "text": "Not completely by myself, to be honest. Planning a party takes a lot of effort, so I usually split the tasks with my close friends. Working as a team helps us save time and stay within budget and avoid unnecessary last-minute stress.",
+                        "formatted": "→ <u>Not completely by myself, to be honest</u>. <u>Planning a party takes a lot of effort, so I usually</u> <span class=\"sub-hl\">split the tasks with my close friends</span>. <u>Working as a team helps us</u> <span class=\"sub-hl\">save time and stay within budget</span> <u>and avoid</u> <span class=\"sub-hl\">unnecessary last-minute stress</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 3,
+                "question": "What makes a good party in your opinion?",
+                "qType": "Wh-Question: What makes a good party?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Khách mời hợp gu, đồ ăn ngon và âm nhạc vui tươi):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>In my opinion, the most important ingredient of a great party is</u> <span class=\"formula-bracket-hl\">[những vị khách thân thiện và hợp gu]</span>. <u>When you combine good company with</u> <span class=\"formula-bracket-hl\">[đồ ăn ngon và âm nhạc hay]</span>, <u>everyone can easily</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Không gian thoải mái và các trò chơi tập thể gắn kết):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I think a memorable party needs</u> <span class=\"formula-bracket-hl\">[không gian ấm cúng và vài trò chơi vui]</span> <u>so nobody feels left out</u>. <u>Fun group games break the ice quickly and allow guests to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "✨ [Yếu tố tạo nên bữa tiệc thành công]:",
+                        "items": [
+                            {
+                                "en": "good company and warm energy",
+                                "vn": "những người bạn hợp gu và năng lượng ấm áp"
+                            },
+                            {
+                                "en": "tasty finger food and upbeat background music",
+                                "vn": "đồ ăn nhẹ ngon miệng và nhạc nền vui tươi"
+                            },
+                            {
+                                "en": "break the ice with fun party games",
+                                "vn": "phá tan sự ngại ngùng bằng các trò chơi tập thể vui"
+                            },
+                            {
+                                "en": "make every guest feel welcome and comfortable",
+                                "vn": "khiến mọi vị khách đều cảm thấy được chào đón và thoải mái"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Bạn bè hợp gu, đồ ăn ngon và nhạc vui)",
+                        "text": "In my opinion, the most important ingredient of a great party is good company and warm energy. When you combine friendly guests with tasty finger food and upbeat music, everyone can easily relax and enjoy themselves all night.",
+                        "formatted": "→ <u>In my opinion, the most important ingredient of a great party is</u> <span class=\"sub-hl\">good company and warm energy</span>. <u>When you combine friendly guests with</u> <span class=\"sub-hl\">tasty finger food and upbeat music</span>, <u>everyone can easily</u> <span class=\"sub-hl\">relax and enjoy themselves all night</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Không gian thoải mái và trò chơi gắn kết mọi người)",
+                        "text": "I think a memorable party needs a comfortable space and a few fun group games so nobody feels left out. Fun group games break the ice quickly and allow guests to laugh together and make new friends naturally.",
+                        "formatted": "→ <u>I think a memorable party needs</u> <span class=\"sub-hl\">a comfortable space and a few fun group games</span> <u>so nobody feels left out</u>. <u>Fun group games break the ice quickly and allow guests to</u> <span class=\"sub-hl\">laugh together</span> <u>and</u> <span class=\"sub-hl\">make new friends naturally</span>."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 162,
+        "title": "Chủ đề 162: Let's talk about artificial intelligence (AI)",
+        "topicName": "Artificial Intelligence (AI)",
+        "introText": "Let’s talk about Artificial Intelligence.",
+        "questions": [
+            {
+                "qNum": 1,
+                "question": "Do you often use AI applications in your study or work?",
+                "qType": "Yes/No Question: Do you often use AI applications?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (CÓ - Dùng thường xuyên để tìm ý tưởng, sửa ngữ pháp và tóm tắt bài đọc):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, almost every day. I regularly use AI apps like</u> <span class=\"formula-bracket-hl\">[ChatGPT / Grammarly / Gemini]</span> <u>for my study and work</u>. <u>They help me</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and allow me to</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span> <u>much faster</u>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (DÙNG CÓ CHỪNG MỰC - Chỉ dùng khi bí ý tưởng hoặc tra cứu nhanh):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I do, though I try not to rely on them too much</u>. <u>I mainly use AI apps when I need to</u> <span class=\"formula-bracket-hl\">[dịch tài liệu / kiểm tra lỗi sai]</span>, <u>which helps me</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> <u>while still keeping my own thinking sharp</u>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🤖 [Ứng dụng AI trong học tập & công việc]:",
+                        "items": [
+                            {
+                                "en": "brainstorm fresh ideas and outlines",
+                                "vn": "tìm ý tưởng mới và lập dàn ý"
+                            },
+                            {
+                                "en": "summarize long articles and lecture notes",
+                                "vn": "tóm tắt các bài đọc dài và ghi chú bài giảng"
+                            },
+                            {
+                                "en": "check my grammar and natural wording",
+                                "vn": "kiểm tra ngữ pháp và cách diễn đạt tự nhiên"
+                            },
+                            {
+                                "en": "translate foreign documents quickly",
+                                "vn": "dịch tài liệu nước ngoài nhanh chóng"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Dùng hằng ngày để tìm ý tưởng và kiểm tra lỗi ngữ pháp)",
+                        "text": "Yes, almost every day. I regularly use AI apps like ChatGPT and Grammarly for my study and work. They help me brainstorm fresh ideas and check my grammar and allow me to finish daily tasks much faster.",
+                        "formatted": "→ <u>Yes, almost every day. I regularly use AI apps like</u> <span class=\"sub-hl\">ChatGPT and Grammarly</span> <u>for my study and work</u>. <u>They help me</u> <span class=\"sub-hl\">brainstorm fresh ideas and check my grammar</span> <u>and allow me to</u> <span class=\"sub-hl\">finish daily tasks</span> <u>much faster</u>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Dùng vừa phải để tra cứu và tóm tắt tài liệu)",
+                        "text": "Yes, I do, though I try not to rely on them too much. I mainly use AI apps when I need to summarize long articles or translate tough terms, which helps me save a lot of time while still keeping my own thinking sharp.",
+                        "formatted": "→ <u>Yes, I do, though I try not to rely on them too much</u>. <u>I mainly use AI apps when I need to</u> <span class=\"sub-hl\">summarize long articles or translate tough terms</span>, <u>which helps me</u> <span class=\"sub-hl\">save a lot of time</span> <u>while still keeping my own thinking sharp</u>."
+                    }
+                ]
+            },
+            {
+                "qNum": 2,
+                "question": "What benefits does AI bring to daily life?",
+                "qType": "Wh-Question: What benefits does AI bring to daily life?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Tiết kiệm thời gian nhờ tự động hóa & cá nhân hóa trải nghiệm hằng ngày):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>AI brings huge convenience to our everyday routines</u>. <u>For example, smart apps can</u> <span class=\"formula-bracket-hl\">[chỉ đường tránh kẹt xe / gợi ý nội dung phù hợp]</span>, <u>which helps people</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Hỗ trợ học tập, dịch thuật tức thì và chăm sóc sức khỏe thông minh):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>One major benefit of AI is making information and services much more accessible</u>. <u>From</u> <span class=\"formula-bracket-hl\">[ứng dụng dịch thuật tức thì đến đồng hồ theo dõi sức khỏe]</span>, <u>AI allows us to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and live more efficiently</u>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🌟 [Lợi ích của AI trong đời sống hằng ngày]:",
+                        "items": [
+                            {
+                                "en": "find the fastest route and avoid traffic jams",
+                                "vn": "tìm tuyến đường nhanh nhất và tránh kẹt xe"
+                            },
+                            {
+                                "en": "automate boring, repetitive daily tasks",
+                                "vn": "tự động hóa các việc hằng ngày lặp đi lặp lại"
+                            },
+                            {
+                                "en": "instant translation apps and voice assistants",
+                                "vn": "ứng dụng dịch tức thì và trợ lý giọng nói"
+                            },
+                            {
+                                "en": "track daily health habits and sleep quality",
+                                "vn": "theo dõi thói quen sức khỏe và chất lượng giấc ngủ hằng ngày"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Giúp di chuyển thông minh và tự động hóa việc nhàm chán)",
+                        "text": "AI brings huge convenience to our everyday routines. For example, smart apps can find the fastest route and automate boring daily tasks, which helps people save valuable time and focus on more creative work.",
+                        "formatted": "→ <u>AI brings huge convenience to our everyday routines</u>. <u>For example, smart apps can</u> <span class=\"sub-hl\">find the fastest route and automate boring daily tasks</span>, <u>which helps people</u> <span class=\"sub-hl\">save valuable time</span> <u>and</u> <span class=\"sub-hl\">focus on more creative work</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Hỗ trợ dịch thuật và theo dõi sức khỏe tiện lợi)",
+                        "text": "One major benefit of AI is making information and services much more accessible. From instant translation apps to smart health trackers, AI allows us to communicate across languages and stay healthy and live more efficiently.",
+                        "formatted": "→ <u>One major benefit of AI is making information and services much more accessible</u>. <u>From</u> <span class=\"sub-hl\">instant translation apps to smart health trackers</span>, <u>AI allows us to</u> <span class=\"sub-hl\">communicate across languages and stay healthy</span> <u>and live more efficiently</u>."
+                    }
+                ]
+            },
+            {
+                "qNum": 3,
+                "question": "Do you think people are becoming too dependent on AI nowadays? Why or why not?",
+                "qType": "Yes/No + Why Question: Too dependent on AI?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (ĐỒNG Ý - Nhiều người lười tự suy nghĩ và sao chép nguyên văn từ AI):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, to some extent, I think so</u>. <u>Many students and workers rely on AI even for simple tasks like</u> <span class=\"formula-bracket-hl\">[viết email ngắn / giải bài tập cơ bản]</span>, <u>which can gradually weaken their</u> <span class=\"formula-bracket-hl\">[tư duy phản biện / sự sáng tạo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (KHÔNG HẲN - Tùy vào cách mỗi người sử dụng AI như một trợ lý thông minh):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Not necessarily; it really depends on how we use it</u>. <u>If people treat AI as a helpful assistant to</u> <span class=\"formula-bracket-hl\">[kiểm tra lại bài / mở rộng kiến thức]</span> <u>instead of doing everything for them, it will actually help them</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "⚖️ [Phụ thuộc vào AI vs Dùng thông minh]:",
+                        "items": [
+                            {
+                                "en": "copy answers without thinking carefully",
+                                "vn": "chép đáp án mà không suy nghĩ kỹ"
+                            },
+                            {
+                                "en": "weaken critical thinking and writing skills",
+                                "vn": "làm yếu đi tư duy phản biện và kỹ năng viết"
+                            },
+                            {
+                                "en": "treat AI as a smart learning assistant",
+                                "vn": "xem AI như một trợ lý học tập thông minh"
+                            },
+                            {
+                                "en": "double-check facts and keep independent judgment",
+                                "vn": "kiểm tra lại thông tin và giữ sự đánh giá độc lập"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Có, nhiều người đang hơi ỷ lại vào AI)",
+                        "text": "Yes, to some extent, I think so. Many students and workers rely on AI even for simple tasks like writing short emails or doing basic homework, which can gradually weaken their critical thinking and problem-solving skills.",
+                        "formatted": "→ <u>Yes, to some extent, I think so</u>. <u>Many students and workers rely on AI even for simple tasks like</u> <span class=\"sub-hl\">writing short emails or doing basic homework</span>, <u>which can gradually weaken their</u> <span class=\"sub-hl\">critical thinking and problem-solving skills</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Không hẳn, quan trọng là biết dùng AI như trợ lý)",
+                        "text": "Not necessarily; it really depends on how we use it. If people treat AI as a helpful assistant to check mistakes and widen their knowledge instead of doing everything for them, it will actually help them learn faster and work smarter.",
+                        "formatted": "→ <u>Not necessarily; it really depends on how we use it</u>. <u>If people treat AI as a helpful assistant to</u> <span class=\"sub-hl\">check mistakes and widen their knowledge</span> <u>instead of doing everything for them, it will actually help them</u> <span class=\"sub-hl\">learn faster and work smarter</span>."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 163,
+        "title": "Chủ đề 163: Let's talk about foreign languages",
+        "topicName": "Foreign languages",
+        "introText": "Let’s talk about foreign languages.",
+        "questions": [
+            {
+                "qNum": 1,
+                "question": "How many languages can you speak?",
+                "qType": "Wh-Question: How many languages can you speak?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Nói được 2 ngôn ngữ: Tiếng Việt và Tiếng Anh):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Currently, I can speak two languages:</u> <span class=\"formula-bracket-hl\">[tiếng Việt là tiếng mẹ đẻ và tiếng Anh]</span>. <u>I've been learning English for</u> <span class=\"formula-bracket-hl\">[nhiều năm]</span>, <u>and I'm working hard to speak it more</u> <span class=\"formula-bracket-hl\">[trôi chảy và tự tin]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Nói được 2 ngôn ngữ và đang học thêm ngoại ngữ thứ 3 như tiếng Trung/Nhật/Hàn):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Right now, I speak Vietnamese and English quite comfortably, and I'm also picking up</u> <span class=\"formula-bracket-hl\">[tiếng Trung / tiếng Hàn cơ bản]</span>. <u>Learning an extra language allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🗣️ [Ngoại ngữ & Trình độ giao tiếp]:",
+                        "items": [
+                            {
+                                "en": "Vietnamese as my mother tongue and English",
+                                "vn": "tiếng Việt là tiếng mẹ đẻ và tiếng Anh"
+                            },
+                            {
+                                "en": "communicate fluently and confidently",
+                                "vn": "giao tiếp trôi chảy và tự tin"
+                            },
+                            {
+                                "en": "pick up basic Chinese / Korean / Japanese",
+                                "vn": "học thêm tiếng Trung / Hàn / Nhật cơ bản"
+                            },
+                            {
+                                "en": "enjoy foreign movies without subtitles",
+                                "vn": "xem phim nước ngoài mà không cần phụ đề"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Nói tiếng Việt và tiếng Anh, đang luyện trôi chảy hơn)",
+                        "text": "Currently, I can speak two languages: Vietnamese as my mother tongue and English. I've been learning English for over eight years, and I'm working hard to speak it more fluently and confidently in daily situations.",
+                        "formatted": "→ <u>Currently, I can speak two languages:</u> <span class=\"sub-hl\">Vietnamese as my mother tongue and English</span>. <u>I've been learning English for</u> <span class=\"sub-hl\">over eight years</span>, <u>and I'm working hard to speak it more</u> <span class=\"sub-hl\">fluently and confidently in daily situations</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Nói 2 ngôn ngữ và đang học thêm tiếng Hàn cơ bản)",
+                        "text": "Right now, I speak Vietnamese and English quite comfortably, and I'm also picking up basic Korean in my free time. Learning an extra language allows me to understand foreign cultures better and widen my career choices.",
+                        "formatted": "→ <u>Right now, I speak Vietnamese and English quite comfortably, and I'm also picking up</u> <span class=\"sub-hl\">basic Korean in my free time</span>. <u>Learning an extra language allows me to</u> <span class=\"sub-hl\">understand foreign cultures better</span> <u>and</u> <span class=\"sub-hl\">widen my career choices</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 2,
+                "question": "Why is learning a foreign language essential today?",
+                "qType": "Wh-Question: Why is learning a foreign language essential?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Mở rộng cơ hội việc làm, thu nhập tốt & kết nối toàn cầu):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>In today's globalized world, knowing a foreign language is essential because it opens up</u> <span class=\"formula-bracket-hl\">[nhiều cơ hội việc làm tốt và học bổng]</span>. <u>It also allows people to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Tiếp cận kho tài liệu quốc tế và tự tin du lịch khắp nơi):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>First and foremost, speaking another language gives you direct access to</u> <span class=\"formula-bracket-hl\">[kiến thức và tài liệu quốc tế phong phú]</span>. <u>Besides, it makes traveling abroad much easier and helps you</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🌍 [Tầm quan trọng của Ngoại ngữ]:",
+                        "items": [
+                            {
+                                "en": "better job opportunities and higher salaries",
+                                "vn": "cơ hội việc làm tốt hơn và mức lương cao hơn"
+                            },
+                            {
+                                "en": "work for international companies",
+                                "vn": "làm việc cho các công ty quốc tế"
+                            },
+                            {
+                                "en": "access global knowledge and study materials",
+                                "vn": "tiếp cận kho kiến thức và tài liệu học tập toàn cầu"
+                            },
+                            {
+                                "en": "travel abroad independently and make foreign friends",
+                                "vn": "đi du lịch nước ngoài tự túc và kết bạn quốc tế"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Mở rộng cơ hội nghề nghiệp và làm việc quốc tế)",
+                        "text": "In today's globalized world, knowing a foreign language is essential because it opens up better job opportunities and higher salaries. It also allows people to work with international partners and build a more successful career.",
+                        "formatted": "→ <u>In today's globalized world, knowing a foreign language is essential because it opens up</u> <span class=\"sub-hl\">better job opportunities and higher salaries</span>. <u>It also allows people to</u> <span class=\"sub-hl\">work with international partners</span> <u>and</u> <span class=\"sub-hl\">build a more successful career</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Tiếp cận kiến thức toàn cầu và tự tin du lịch)",
+                        "text": "First and foremost, speaking another language gives you direct access to global books, courses, and online information. Besides, it makes traveling abroad much easier and helps you make international friends and broaden your horizons.",
+                        "formatted": "→ <u>First and foremost, speaking another language gives you direct access to</u> <span class=\"sub-hl\">global books, courses, and online information</span>. <u>Besides, it makes traveling abroad much easier and helps you</u> <span class=\"sub-hl\">make international friends and broaden your horizons</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 3,
+                "question": "What is the best way to learn a foreign language in your opinion?",
+                "qType": "Wh-Question: Best way to learn a foreign language?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Luyện nói thực tế hằng ngày kết hợp xem phim/nghe podcast):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>In my opinion, the most effective way is practicing a little bit every day through</u> <span class=\"formula-bracket-hl\">[xem phim, nghe podcast và nói chuyện thực tế]</span>. <u>Using the language in real situations helps learners</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Tham gia câu lạc bộ nói chuyện với bạn bè hoặc giáo viên bản xứ):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I believe joining a speaking club or practicing with a partner works best</u>. <u>Speaking out loud regularly helps you</u> <span class=\"formula-bracket-hl\">[vượt qua nỗi sợ sai]</span> <u>and build natural pronunciation much faster than just memorizing grammar rules</u>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "📚 [Cách học ngoại ngữ hiệu quả]:",
+                        "items": [
+                            {
+                                "en": "watch movies with subtitles and listen to podcasts",
+                                "vn": "xem phim có phụ đề và nghe podcast"
+                            },
+                            {
+                                "en": "practice speaking out loud every day",
+                                "vn": "luyện nói thành tiếng mỗi ngày"
+                            },
+                            {
+                                "en": "join an English speaking club",
+                                "vn": "tham gia câu lạc bộ nói tiếng Anh"
+                            },
+                            {
+                                "en": "overcome the fear of making mistakes",
+                                "vn": "vượt qua nỗi sợ mắc lỗi"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Tiếp xúc hằng ngày qua phim ảnh và podcast)",
+                        "text": "In my opinion, the most effective way is practicing a little bit every day through watching movies with subtitles and listening to daily podcasts. Using the language in real situations helps learners remember new words naturally and improve their listening skills fast.",
+                        "formatted": "→ <u>In my opinion, the most effective way is practicing a little bit every day through</u> <span class=\"sub-hl\">watching movies with subtitles and listening to daily podcasts</span>. <u>Using the language in real situations helps learners</u> <span class=\"sub-hl\">remember new words naturally</span> <u>and</u> <span class=\"sub-hl\">improve their listening skills fast</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Tham gia câu lạc bộ nói chuyện để phản xạ tự nhiên)",
+                        "text": "I believe joining a speaking club or practicing with a partner works best. Speaking out loud regularly helps you overcome the fear of making mistakes and build natural pronunciation much faster than just memorizing grammar rules.",
+                        "formatted": "→ <u>I believe joining a speaking club or practicing with a partner works best</u>. <u>Speaking out loud regularly helps you</u> <span class=\"sub-hl\">overcome the fear of making mistakes</span> <u>and build natural pronunciation much faster than just memorizing grammar rules</u>."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 164,
+        "title": "Chủ đề 164: Let's talk about types of dance",
+        "topicName": "Types of dance",
+        "introText": "Let’s talk about types of dance.",
+        "questions": [
+            {
+                "qNum": 1,
+                "question": "Do you enjoy dancing?",
+                "qType": "Yes/No Question: Do you enjoy dancing?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (CÓ - Rất thích nhảy nhót theo nhạc vì vui và giúp giữ dáng, xả stress):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I really enjoy dancing, even though I'm not a professional dancer</u>. <u>Moving to upbeat music allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and gives me a fun way to</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (KHÔNG GIỎI NHẢY - Hơi ngại khi nhảy trước đám đông, thích xem biểu diễn hơn):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To be honest, I'm not really into dancing myself because I feel</u> <span class=\"formula-bracket-hl\">[khá ngại ngùng / vụng về]</span>. <u>However, I love watching dance performances on TV or TikTok because they are</u> <span class=\"formula-bracket-hl\">[năng động và cuốn hút]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "💃 [Cảm nhận về nhảy múa]:",
+                        "items": [
+                            {
+                                "en": "move to upbeat and catchy music",
+                                "vn": "nhún nhảy theo nhạc sôi động và bắt tai"
+                            },
+                            {
+                                "en": "burn calories and stay in good shape",
+                                "vn": "đốt calo và giữ vóc dáng cân đối"
+                            },
+                            {
+                                "en": "feel shy and a bit clumsy on the dance floor",
+                                "vn": "cảm thấy ngại ngùng và hơi vụng về khi nhảy"
+                            },
+                            {
+                                "en": "watch energetic dance performances",
+                                "vn": "xem các màn biểu diễn nhảy đầy năng lượng"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Thích nhảy để giải trí và rèn luyện sức khỏe)",
+                        "text": "Yes, I really enjoy dancing, even though I'm not a professional dancer. Moving to upbeat music allows me to release stress and boost my mood and gives me a fun way to burn calories and stay in good shape.",
+                        "formatted": "→ <u>Yes, I really enjoy dancing, even though I'm not a professional dancer</u>. <u>Moving to upbeat music allows me to</u> <span class=\"sub-hl\">release stress and boost my mood</span> <u>and gives me a fun way to</u> <span class=\"sub-hl\">burn calories and stay in good shape</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Không hay nhảy nhưng thích xem các tiết mục nhảy)",
+                        "text": "To be honest, I'm not really into dancing myself because I feel quite shy and a bit clumsy. However, I love watching dance performances on TV or TikTok because they are energetic, creative, and super entertaining.",
+                        "formatted": "→ <u>To be honest, I'm not really into dancing myself because I feel</u> <span class=\"sub-hl\">quite shy and a bit clumsy</span>. <u>However, I love watching dance performances on TV or TikTok because they are</u> <span class=\"sub-hl\">energetic, creative, and super entertaining</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 2,
+                "question": "What types of dance are popular in your country?",
+                "qType": "Wh-Question: Popular types of dance in your country?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Kết hợp giữa nhảy hiện đại của giới trẻ và múa truyền thống dân gian):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>In Vietnam, there's a great mix of modern and traditional styles</u>. <u>Young people love</u> <span class=\"formula-bracket-hl\">[nhảy hiện đại, K-pop, hip-hop]</span>, <u>while traditional dances like</u> <span class=\"formula-bracket-hl\">[múa sạp / múa nón / múa lân]</span> <u>are still loved at cultural events</u>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Nhấn mạnh khiêu vũ thể thao/dân vũ của người trung niên & Zumba trong phòng tập):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Besides trendy hip-hop and K-pop covers among teenagers,</u> <span class=\"formula-bracket-hl\">[nhảy Zumba và khiêu vũ dưỡng sinh ngoài công viên]</span> <u>are also hugely popular with adults and seniors</u>. <u>They help people</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🕺 [Các thể loại nhảy múa phổ biến ở Việt Nam]:",
+                        "items": [
+                            {
+                                "en": "hip-hop, street dance, and K-pop dance covers",
+                                "vn": "nhảy hip-hop, nhảy đường phố và nhảy cover K-pop"
+                            },
+                            {
+                                "en": "traditional bamboo dancing and conical hat dancing",
+                                "vn": "múa sạp truyền thống và múa nón lá"
+                            },
+                            {
+                                "en": "Zumba fitness classes and aerobic dancing",
+                                "vn": "lớp nhảy Zumba và nhảy thể dục nhịp điệu"
+                            },
+                            {
+                                "en": "ballroom dancing in local parks",
+                                "vn": "khiêu vũ giao tiếp tại các công viên địa phương"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Nhảy hiện đại K-pop/hip-hop và múa truyền thống)",
+                        "text": "In Vietnam, there's a great mix of modern and traditional styles. Young people love hip-hop and K-pop dance covers, while traditional dances like bamboo dancing and conical hat dancing are still loved at cultural events.",
+                        "formatted": "→ <u>In Vietnam, there's a great mix of modern and traditional styles</u>. <u>Young people love</u> <span class=\"sub-hl\">hip-hop and K-pop dance covers</span>, <u>while traditional dances like</u> <span class=\"sub-hl\">bamboo dancing and conical hat dancing</span> <u>are still loved at cultural events</u>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Nhảy Zumba và khiêu vũ buổi sáng ở công viên)",
+                        "text": "Besides trendy hip-hop and K-pop covers among teenagers, Zumba classes and morning park dancing are also hugely popular with adults and seniors. They help people stay fit and active and socialize with neighbors.",
+                        "formatted": "→ <u>Besides trendy hip-hop and K-pop covers among teenagers,</u> <span class=\"sub-hl\">Zumba classes and morning park dancing</span> <u>are also hugely popular with adults and seniors</u>. <u>They help people</u> <span class=\"sub-hl\">stay fit and active</span> <u>and</u> <span class=\"sub-hl\">socialize with neighbors</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 3,
+                "question": "On what occasions do people in your country usually dance?",
+                "qType": "Wh-Question: On what occasions do people usually dance?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Lễ hội truyền thống, dịp Tết và đám cưới vui vẻ):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>People in Vietnam usually dance during joyful celebrations like</u> <span class=\"formula-bracket-hl\">[lễ hội Tết, đám cưới và lễ hội làng]</span>. <u>Dancing on these special days brings</u> <span class=\"formula-bracket-hl\">[không khí tưng bừng]</span> <u>and helps everyone</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Văn nghệ ở trường học, tiệc công ty cuối năm và buổi tập thể dục hằng ngày):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Apart from big cultural festivals, dancing is very common at</u> <span class=\"formula-bracket-hl\">[sự kiện trường học và tiệc tất niên công ty]</span>. <u>Preparing a group dance performance allows students and coworkers to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🎊 [Các dịp thường nhảy múa]:",
+                        "items": [
+                            {
+                                "en": "Tet festivals, weddings, and village celebrations",
+                                "vn": "lễ Tết, đám cưới và lễ hội truyền thống"
+                            },
+                            {
+                                "en": "school talent shows and year-end company parties",
+                                "vn": "hội diễn văn nghệ trường học và tiệc tất niên công ty"
+                            },
+                            {
+                                "en": "create a joyful and festive atmosphere",
+                                "vn": "tạo nên bầu không khí vui tươi và rộn ràng"
+                            },
+                            {
+                                "en": "strengthen teamwork and bring people closer",
+                                "vn": "tăng tinh thần đồng đội và gắn kết mọi người"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Lễ Tết, đám cưới và lễ hội văn hóa)",
+                        "text": "People in Vietnam usually dance during joyful celebrations like Tet festivals, weddings, and local cultural events. Dancing on these special days brings a warm, festive atmosphere and helps everyone share happy moments together.",
+                        "formatted": "→ <u>People in Vietnam usually dance during joyful celebrations like</u> <span class=\"sub-hl\">Tet festivals, weddings, and local cultural events</span>. <u>Dancing on these special days brings</u> <span class=\"sub-hl\">a warm, festive atmosphere</span> <u>and helps everyone</u> <span class=\"sub-hl\">share happy moments together</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Văn nghệ trường học và tiệc tất niên công ty)",
+                        "text": "Apart from big cultural festivals, dancing is very common at school talent shows and year-end company parties. Preparing a group dance performance allows students and coworkers to build stronger teamwork and have a lot of fun together.",
+                        "formatted": "→ <u>Apart from big cultural festivals, dancing is very common at</u> <span class=\"sub-hl\">school talent shows and year-end company parties</span>. <u>Preparing a group dance performance allows students and coworkers to</u> <span class=\"sub-hl\">build stronger teamwork</span> <u>and</u> <span class=\"sub-hl\">have a lot of fun together</span>."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 165,
+        "title": "Chủ đề 165: Let's talk about body care and personal care",
+        "topicName": "Body care / Personal care",
+        "introText": "Let’s talk about body care and personal care.",
+        "questions": [
+            {
+                "qNum": 1,
+                "question": "How do you take care of your body and health on a daily basis?",
+                "qType": "Wh-Question: How do you take care of your body and health?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Uống đủ nước, ăn nhiều rau xanh và tập thể dục nhẹ mỗi ngày):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To take good care of my body every day, I try to stick to simple habits like</u> <span class=\"formula-bracket-hl\">[uống nhiều nước, ăn rau xanh và đi bộ 30 phút]</span>. <u>This daily routine allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Kết hợp tập gym/yoga, ngủ sớm và hạn chế đồ uống nhiều đường):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I focus on both exercise and a balanced diet</u>. <u>I usually</u> <span class=\"formula-bracket-hl\">[tập yoga / tập gym và cắt giảm trà sữa, đồ ngọt]</span>, <u>which helps me</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and avoid feeling tired during the day</u>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "💪 [Thói quen chăm sóc cơ thể hằng ngày]:",
+                        "items": [
+                            {
+                                "en": "drink plenty of water and eat fresh vegetables",
+                                "vn": "uống nhiều nước và ăn rau củ tươi"
+                            },
+                            {
+                                "en": "go for a 30-minute walk or stretch every morning",
+                                "vn": "đi bộ 30 phút hoặc giãn cơ mỗi sáng"
+                            },
+                            {
+                                "en": "cut down on sugary drinks and oily fast food",
+                                "vn": "cắt giảm đồ uống nhiều đường và đồ ăn nhanh nhiều dầu mỡ"
+                            },
+                            {
+                                "en": "keep my energy level stable all day",
+                                "vn": "giữ mức năng lượng ổn định suốt cả ngày"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Uống đủ nước, ăn uống lành mạnh và đi bộ mỗi ngày)",
+                        "text": "To take good care of my body every day, I try to stick to simple habits like drinking two liters of water, eating fresh vegetables, and walking for 30 minutes. This daily routine allows me to stay in good shape and boost my daily energy.",
+                        "formatted": "→ <u>To take good care of my body every day, I try to stick to simple habits like</u> <span class=\"sub-hl\">drinking two liters of water, eating fresh vegetables, and walking for 30 minutes</span>. <u>This daily routine allows me to</u> <span class=\"sub-hl\">stay in good shape</span> <u>and</u> <span class=\"sub-hl\">boost my daily energy</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Tập yoga và hạn chế đồ ngọt, thức ăn nhanh)",
+                        "text": "I focus on both exercise and a balanced diet. I usually practice morning yoga and cut down on sugary drinks, which helps me strengthen my immune system and avoid feeling tired during the day.",
+                        "formatted": "→ <u>I focus on both exercise and a balanced diet</u>. <u>I usually</u> <span class=\"sub-hl\">practice morning yoga and cut down on sugary drinks</span>, <u>which helps me</u> <span class=\"sub-hl\">strengthen my immune system</span> <u>and avoid feeling tired during the day</u>."
+                    }
+                ]
+            },
+            {
+                "qNum": 2,
+                "question": "Do you spend much time on personal care, like skincare or grooming? Why or why not?",
+                "qType": "Yes/No + Why Question: Spend time on personal care?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (KHÔNG QUÁ NHIỀU NHƯNG ĐỀU ĐẶN - Quy trình tối giản 10 phút sáng tối để gọn gàng, tự tin):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I don't spend hours on it, but I follow a quick, basic routine every morning and night, such as</u> <span class=\"formula-bracket-hl\">[rửa mặt, bôi kem chống nắng và dưỡng ẩm]</span>. <u>Looking neat and clean helps me</u> <span class=\"formula-bracket-hl\">[tự tin hơn khi giao tiếp]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (CÓ DÀNH THỜI GIAN - Xem chăm sóc bản thân là cách thư giãn cuối ngày):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I do set aside about 20 minutes each evening for skincare and relaxation</u>. <u>Taking care of my skin after a dusty day outside allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and makes me feel</u> <span class=\"formula-bracket-hl\">[cảm giác tươi mới]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🧴 [Chăm sóc cá nhân & Chăm sóc da]:",
+                        "items": [
+                            {
+                                "en": "wash my face, use sunscreen, and moisturize",
+                                "vn": "rửa mặt, bôi kem chống nắng và dưỡng ẩm"
+                            },
+                            {
+                                "en": "keep my hair neat and wear clean clothes",
+                                "vn": "giữ tóc gọn gàng và mặc quần áo sạch sẽ"
+                            },
+                            {
+                                "en": "protect my skin from sunlight and air pollution",
+                                "vn": "bảo vệ da khỏi ánh nắng và bụi bẩn"
+                            },
+                            {
+                                "en": "feel fresh, confident, and ready for the day",
+                                "vn": "cảm thấy tươi mới, tự tin và sẵn sàng cho ngày mới"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Chăm sóc cơ bản 10 phút mỗi ngày để gọn gàng và tự tin)",
+                        "text": "I don't spend hours on it, but I follow a quick, basic routine every morning and night, such as washing my face, putting on sunscreen, and moisturizing. Looking neat and clean helps me feel much more confident when meeting people.",
+                        "formatted": "→ <u>I don't spend hours on it, but I follow a quick, basic routine every morning and night, such as</u> <span class=\"sub-hl\">washing my face, putting on sunscreen, and moisturizing</span>. <u>Looking neat and clean helps me</u> <span class=\"sub-hl\">feel much more confident when meeting people</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Dành 20 phút buổi tối chăm sóc da để thư giãn)",
+                        "text": "Yes, I do set aside about 20 minutes each evening for skincare and relaxation. Taking care of my skin after a dusty day outside allows me to unwind and clear my mind and makes me feel fresh and well cared for.",
+                        "formatted": "→ <u>Yes, I do set aside about 20 minutes each evening for skincare and relaxation</u>. <u>Taking care of my skin after a dusty day outside allows me to</u> <span class=\"sub-hl\">unwind and clear my mind</span> <u>and makes me feel</u> <span class=\"sub-hl\">fresh and well cared for</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 3,
+                "question": "Do you think getting enough sleep is important for body care? Why?",
+                "qType": "Yes/No + Why Question: Importance of enough sleep?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (CỰC KỲ QUAN TRỌNG - Giúp cơ thể phục hồi năng lượng và làn da khỏe đẹp):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, absolutely! Getting seven to eight hours of sleep is the foundation of good body care</u>. <u>Quality rest allows our body to</u> <span class=\"formula-bracket-hl\">[phục hồi năng lượng và tái tạo da]</span> <u>and helps us</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> <u>the next day</u>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (RẤT CẦN THIẾT - Thiếu ngủ gây mệt mỏi, giảm tập trung và dễ cáu gắt):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Definitely yes. Without enough sleep, no amount of skincare or coffee can make you look and feel good</u>. <u>Sleeping on time prevents</u> <span class=\"formula-bracket-hl\">[quầng thâm mắt và uể oải]</span> <u>and keeps both our body and mood healthy</u>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "😴 [Lợi ích của giấc ngủ đối với cơ thể]:",
+                        "items": [
+                            {
+                                "en": "recharge our energy and repair muscles",
+                                "vn": "nạp lại năng lượng và phục hồi cơ bắp"
+                            },
+                            {
+                                "en": "keep our skin healthy and avoid dark circles",
+                                "vn": "giữ làn da khỏe mạnh và tránh quầng thâm mắt"
+                            },
+                            {
+                                "en": "stay focused and productive the next morning",
+                                "vn": "giữ sự tập trung và làm việc hiệu quả sáng hôm sau"
+                            },
+                            {
+                                "en": "keep our mood calm and positive",
+                                "vn": "giữ tâm trạng bình tĩnh và tích cực"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Ngủ đủ 7–8 tiếng giúp phục hồi cơ thể và tập trung tốt)",
+                        "text": "Yes, absolutely! Getting seven to eight hours of sleep is the foundation of good body care. Quality rest allows our body to recharge energy and keep our skin healthy and helps us stay focused and productive the next day.",
+                        "formatted": "→ <u>Yes, absolutely! Getting seven to eight hours of sleep is the foundation of good body care</u>. <u>Quality rest allows our body to</u> <span class=\"sub-hl\">recharge energy and keep our skin healthy</span> <u>and helps us</u> <span class=\"sub-hl\">stay focused and productive</span> <u>the next day</u>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Thiếu ngủ ảnh hưởng trực tiếp đến ngoại hình và tâm trạng)",
+                        "text": "Definitely yes. Without enough sleep, no amount of skincare or coffee can make you look and feel good. Sleeping on time prevents dark circles and daytime tiredness and keeps both our body and mood healthy.",
+                        "formatted": "→ <u>Definitely yes. Without enough sleep, no amount of skincare or coffee can make you look and feel good</u>. <u>Sleeping on time prevents</u> <span class=\"sub-hl\">dark circles and daytime tiredness</span> <u>and keeps both our body and mood healthy</u>."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 166,
+        "title": "Chủ đề 166: Let's talk about spending and saving money",
+        "topicName": "Spending & Saving money",
+        "introText": "Let’s talk about spending and saving money.",
+        "questions": [
+            {
+                "qNum": 1,
+                "question": "Do you usually save money?",
+                "qType": "Yes/No Question: Do you usually save money?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (CÓ - Trích cố định một khoản tiết kiệm mỗi tháng cho dự phòng và mục tiêu lớn):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I definitely try to save money regularly</u>. <u>Every month, I set aside about</u> <span class=\"formula-bracket-hl\">[20% thu nhập / tiền sinh hoạt]</span> <u>into a separate savings account</u>. <u>This habit gives me</u> <span class=\"formula-bracket-hl\">[sự yên tâm tài chính]</span> <u>and helps me</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (ĐANG CỐ GẮNG - Trước kia hay tiêu theo cảm xúc, giờ đang tập ghi chép chi tiêu):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Honestly, I used to spend quite freely, but lately I've been trying much harder to save</u>. <u>By</u> <span class=\"formula-bracket-hl\">[nấu ăn ở nhà và ghi chép chi tiêu qua app]</span>, <u>I can cut down on unnecessary shopping and</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "💰 [Thói quen tiết kiệm & Chi tiêu]:",
+                        "items": [
+                            {
+                                "en": "set aside 20 percent of my monthly income",
+                                "vn": "trích riêng 20% thu nhập hằng tháng"
+                            },
+                            {
+                                "en": "build an emergency fund for unexpected expenses",
+                                "vn": "xây dựng quỹ dự phòng cho các khoản chi bất ngờ"
+                            },
+                            {
+                                "en": "track my daily spending on a mobile app",
+                                "vn": "theo dõi chi tiêu hằng ngày trên ứng dụng điện thoại"
+                            },
+                            {
+                                "en": "cut down on impulse online shopping",
+                                "vn": "cắt giảm việc mua sắm online theo cảm xúc"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Tiết kiệm đều đặn 20% mỗi tháng để dự phòng)",
+                        "text": "Yes, I definitely try to save money regularly. Every month, I set aside about 20 percent of my income into a separate savings account. This habit gives me peace of mind for emergencies and helps me reach my long-term goals.",
+                        "formatted": "→ <u>Yes, I definitely try to save money regularly</u>. <u>Every month, I set aside about</u> <span class=\"sub-hl\">20 percent of my income</span> <u>into a separate savings account</u>. <u>This habit gives me</u> <span class=\"sub-hl\">peace of mind for emergencies</span> <u>and helps me</u> <span class=\"sub-hl\">reach my long-term goals</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Đang tập tiết kiệm bằng cách ghi chép chi tiêu và nấu ăn ở nhà)",
+                        "text": "Honestly, I used to spend quite freely, but lately I've been trying much harder to save. By cooking at home and tracking daily expenses on an app, I can cut down on unnecessary shopping and build good financial habits.",
+                        "formatted": "→ <u>Honestly, I used to spend quite freely, but lately I've been trying much harder to save</u>. <u>By</u> <span class=\"sub-hl\">cooking at home and tracking daily expenses on an app</span>, <u>I can cut down on unnecessary shopping and</u> <span class=\"sub-hl\">build good financial habits</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 2,
+                "question": "What is the most expensive item you have ever saved up to buy?",
+                "qType": "Wh-Question: Most expensive item you saved up to buy?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Laptop hoặc điện thoại phục vụ học tập và công việc):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>The priciest thing I've ever saved up for was</u> <span class=\"formula-bracket-hl\">[một chiếc laptop / điện thoại mới]</span> <u>for my study and work</u>. <u>It took me nearly</u> <span class=\"formula-bracket-hl\">[6 tháng / 1 năm]</span> <u>of careful budgeting, and buying it with my own money made me feel</u> <span class=\"formula-bracket-hl\">[cực kỳ tự hào]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Một chiếc xe máy để chủ động đi học/đi làm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>So far, the most expensive item I saved up to buy is</u> <span class=\"formula-bracket-hl\">[chiếc xe máy hiện tại của tôi]</span>. <u>I worked part-time and saved carefully for months because having my own bike allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "💻 [Món đồ giá trị đã tiết kiệm để mua]:",
+                        "items": [
+                            {
+                                "en": "a reliable laptop for my university study",
+                                "vn": "một chiếc laptop bền bỉ cho việc học đại học"
+                            },
+                            {
+                                "en": "a brand-new smartphone with a great camera",
+                                "vn": "một chiếc điện thoại mới có camera đẹp"
+                            },
+                            {
+                                "en": "my own motorbike for daily commuting",
+                                "vn": "chiếc xe máy riêng để đi lại hằng ngày"
+                            },
+                            {
+                                "en": "feel a strong sense of pride and independence",
+                                "vn": "cảm thấy rất tự hào và tự lập"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Tiết kiệm mua laptop phục vụ học tập & công việc)",
+                        "text": "The priciest thing I've ever saved up for was a lightweight laptop for my study and work. It took me nearly eight months of careful budgeting, and buying it with my own money made me feel really proud and independent.",
+                        "formatted": "→ <u>The priciest thing I've ever saved up for was</u> <span class=\"sub-hl\">a lightweight laptop</span> <u>for my study and work</u>. <u>It took me nearly</u> <span class=\"sub-hl\">eight months</span> <u>of careful budgeting, and buying it with my own money made me feel</u> <span class=\"sub-hl\">really proud and independent</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Tiết kiệm từ việc làm thêm để mua xe máy)",
+                        "text": "So far, the most expensive item I saved up to buy is my own motorbike. I worked part-time and saved carefully for a year because having my own bike allows me to travel flexibly and save a lot of time every day.",
+                        "formatted": "→ <u>So far, the most expensive item I saved up to buy is</u> <span class=\"sub-hl\">my own motorbike</span>. <u>I worked part-time and saved carefully for a year because having my own bike allows me to</u> <span class=\"sub-hl\">travel flexibly</span> <u>and</u> <span class=\"sub-hl\">save a lot of time every day</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 3,
+                "question": "Do you think children should be taught the importance of saving money?",
+                "qType": "Yes/No Question: Should children be taught to save money?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (HOÀN TOÀN ĐỒNG Ý - Giúp trẻ hiểu giá trị của tiền và hình thành thói quen tài chính sớm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, absolutely! Teaching kids about saving money early is a crucial life skill</u>. <u>When children learn to save their pocket money in a piggy bank, they learn to</u> <span class=\"formula-bracket-hl\">[trân trọng đồng tiền / phân biệt cần và muốn]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích tương lai - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (RẤT NÊN - Dạy nhẹ nhàng, thực tế để con tự lập và có trách nhiệm khi lớn lên):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Definitely yes. Learning how to manage money from a young age prepares children well for adulthood</u>. <u>Even small habits like saving lucky money help them</u> <span class=\"formula-bracket-hl\">[rèn tính kiên nhẫn]</span> <u>and avoid wasting money as adults</u>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🐷 [Dạy trẻ em tiết kiệm tiền]:",
+                        "items": [
+                            {
+                                "en": "put pocket money into a piggy bank",
+                                "vn": "bỏ tiền tiêu vặt vào ống heo"
+                            },
+                            {
+                                "en": "understand the real value of hard-earned money",
+                                "vn": "hiểu giá trị thực của đồng tiền vất vả kiếm được"
+                            },
+                            {
+                                "en": "tell the difference between needs and wants",
+                                "vn": "phân biệt giữa thứ cần thiết và thứ chỉ muốn mua"
+                            },
+                            {
+                                "en": "become financially responsible adults",
+                                "vn": "trở thành người lớn có trách nhiệm về tài chính"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Dạy sớm giúp trẻ hiểu giá trị đồng tiền và tiêu dùng thông minh)",
+                        "text": "Yes, absolutely! Teaching kids about saving money early is a crucial life skill. When children learn to save their pocket money in a piggy bank, they learn to understand the real value of money and spend wisely when they grow up.",
+                        "formatted": "→ <u>Yes, absolutely! Teaching kids about saving money early is a crucial life skill</u>. <u>When children learn to save their pocket money in a piggy bank, they learn to</u> <span class=\"sub-hl\">understand the real value of money</span> <u>and</u> <span class=\"sub-hl\">spend wisely when they grow up</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Rèn tính kiên nhẫn và trách nhiệm tài chính cho tương lai)",
+                        "text": "Definitely yes. Learning how to manage money from a young age prepares children well for adulthood. Even small habits like saving lucky money help them build patience and self-control and avoid wasting money as adults.",
+                        "formatted": "→ <u>Definitely yes. Learning how to manage money from a young age prepares children well for adulthood</u>. <u>Even small habits like saving lucky money help them</u> <span class=\"sub-hl\">build patience and self-control</span> <u>and avoid wasting money as adults</u>."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 167,
+        "title": "Chủ đề 167: Let's talk about healthy habits and breakfast",
+        "topicName": "Healthy habits / Breakfast",
+        "introText": "Let’s talk about healthy habits and breakfast.",
+        "questions": [
+            {
+                "qNum": 1,
+                "question": "Do you regularly eat breakfast?",
+                "qType": "Yes/No Question: Do you regularly eat breakfast?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (CÓ - Ăn sáng đều đặn mỗi ngày vì giúp tỉnh táo và bảo vệ dạ dày):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I almost never skip breakfast because I consider it the most important meal of the day</u>. <u>Eating a light meal every morning allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (KHÔNG ĐỀU LẮM - Thỉnh thoảng dậy muộn nên bỏ bữa, nhưng đang cố sửa thói quen):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>To be honest, not as regularly as I should</u>. <u>On busy weekdays when I wake up late, I sometimes grab just</u> <span class=\"formula-bracket-hl\">[một hộp sữa hoặc ổ bánh mì nhanh]</span>, <u>though I'm trying to eat proper breakfasts to</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🍳 [Thói quen ăn sáng]:",
+                        "items": [
+                            {
+                                "en": "never skip breakfast on weekdays",
+                                "vn": "không bao giờ bỏ bữa sáng vào các ngày trong tuần"
+                            },
+                            {
+                                "en": "kick-start my morning with steady energy",
+                                "vn": "khởi động buổi sáng với nguồn năng lượng ổn định"
+                            },
+                            {
+                                "en": "protect my stomach and avoid feeling dizzy",
+                                "vn": "bảo vệ dạ dày và tránh bị chóng mặt"
+                            },
+                            {
+                                "en": "grab a quick bite on the way to work",
+                                "vn": "mua vội đồ ăn nhanh trên đường đi làm"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Ăn sáng đều đặn mỗi ngày để có năng lượng học tập/làm việc)",
+                        "text": "Yes, I almost never skip breakfast because I consider it the most important meal of the day. Eating a light meal every morning allows me to kick-start my day with steady energy and stay focused during morning classes.",
+                        "formatted": "→ <u>Yes, I almost never skip breakfast because I consider it the most important meal of the day</u>. <u>Eating a light meal every morning allows me to</u> <span class=\"sub-hl\">kick-start my day with steady energy</span> <u>and</u> <span class=\"sub-hl\">stay focused during morning classes</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Ngày bận hay ăn vội nhưng đang tập ăn sáng đều đặn hơn)",
+                        "text": "To be honest, not as regularly as I should. On busy weekdays when I wake up late, I sometimes grab just a carton of milk or a quick banana, though I'm trying to eat proper breakfasts to protect my stomach and stay healthy.",
+                        "formatted": "→ <u>To be honest, not as regularly as I should</u>. <u>On busy weekdays when I wake up late, I sometimes grab just</u> <span class=\"sub-hl\">a carton of milk or a quick banana</span>, <u>though I'm trying to eat proper breakfasts to</u> <span class=\"sub-hl\">protect my stomach and stay healthy</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 2,
+                "question": "What do you usually have for breakfast?",
+                "qType": "Wh-Question: What do you usually have for breakfast?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Đồ ăn sáng truyền thống Việt Nam: phở, bánh mì, xôi):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I usually go for traditional Vietnamese breakfast dishes like</u> <span class=\"formula-bracket-hl\">[bánh mì trứng, phở bò hoặc xôi]</span>. <u>They are warm, tasty, and filling, which gives me enough energy to</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> <u>until lunchtime</u>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Bữa sáng nhanh gọn và lành mạnh tự làm tại nhà: trứng, yến mạch, trái cây):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>When I have time to prepare food at home, I prefer a simple, healthy breakfast such as</u> <span class=\"formula-bracket-hl\">[trứng luộc, bánh mì nguyên cám và sữa chua trái cây]</span>. <u>Making it myself allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🥖 [Các món ăn sáng quen thuộc]:",
+                        "items": [
+                            {
+                                "en": "a crispy banh mi with fried eggs",
+                                "vn": "một ổ bánh mì giòn kẹp trứng ốp la"
+                            },
+                            {
+                                "en": "a hot bowl of beef noodle soup (pho)",
+                                "vn": "một bát phở bò nóng hổi"
+                            },
+                            {
+                                "en": "oatmeal with fresh fruit and yogurt",
+                                "vn": "yến mạch ăn kèm trái cây tươi và sữa chua"
+                            },
+                            {
+                                "en": "boiled eggs and a glass of warm soy milk",
+                                "vn": "trứng luộc và một ly sữa đậu nành ấm"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Ăn món sáng truyền thống như bánh mì trứng hoặc phở)",
+                        "text": "I usually go for traditional Vietnamese breakfast dishes like a crispy banh mi with fried eggs or a hot bowl of pho. They are warm, tasty, and filling, which gives me enough energy to work effectively until lunchtime.",
+                        "formatted": "→ <u>I usually go for traditional Vietnamese breakfast dishes like</u> <span class=\"sub-hl\">a crispy banh mi with fried eggs or a hot bowl of pho</span>. <u>They are warm, tasty, and filling, which gives me enough energy to</u> <span class=\"sub-hl\">work effectively</span> <u>until lunchtime</u>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Tự làm bữa sáng lành mạnh với yến mạch, trứng và trái cây)",
+                        "text": "When I have time to prepare food at home, I prefer a simple, healthy breakfast such as boiled eggs, oatmeal, and fresh fruit. Making it myself allows me to control nutrition and save money every month.",
+                        "formatted": "→ <u>When I have time to prepare food at home, I prefer a simple, healthy breakfast such as</u> <span class=\"sub-hl\">boiled eggs, oatmeal, and fresh fruit</span>. <u>Making it myself allows me to</u> <span class=\"sub-hl\">control nutrition</span> <u>and</u> <span class=\"sub-hl\">save money every month</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 3,
+                "question": "Why do you think eating breakfast is important for our health?",
+                "qType": "Wh-Question: Why is eating breakfast important?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Cung cấp năng lượng cho não bộ sau giấc ngủ dài & tăng khả năng tập trung):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>After sleeping for seven or eight hours, our body really needs fuel to get going</u>. <u>Eating a balanced breakfast helps</u> <span class=\"formula-bracket-hl\">[tăng cường tập trung và trí nhớ]</span> <u>and prevents us from</u> <span class=\"formula-bracket-hl\">[mệt mỏi / đau dạ dày]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Giúp kiểm soát cân nặng tốt hơn và tránh ăn vặt quá nhiều vào trưa/tối):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>From a health point of view, having breakfast keeps our eating routine balanced</u>. <u>People who eat in the morning are less likely to</u> <span class=\"formula-bracket-hl\">[ăn quá no vào bữa trưa hoặc thèm đồ ăn vặt]</span>, <u>which helps them</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "❤️ [Lợi ích sức khỏe của bữa sáng]:",
+                        "items": [
+                            {
+                                "en": "refuel our brain and improve concentration",
+                                "vn": "tiếp năng lượng cho não bộ và tăng sự tập trung"
+                            },
+                            {
+                                "en": "prevent stomachaches and low energy",
+                                "vn": "ngăn ngừa đau dạ dày và tụt năng lượng"
+                            },
+                            {
+                                "en": "avoid overeating junk food later in the day",
+                                "vn": "tránh ăn quá nhiều đồ ăn vặt vào cuối ngày"
+                            },
+                            {
+                                "en": "maintain a healthy weight and good mood",
+                                "vn": "duy trì cân nặng lành mạnh và tâm trạng tốt"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Tiếp năng lượng cho não bộ và bảo vệ dạ dày)",
+                        "text": "After sleeping for seven or eight hours, our body really needs fuel to get going. Eating a balanced breakfast helps refuel our brain and improve concentration and prevents us from feeling tired or getting stomachaches.",
+                        "formatted": "→ <u>After sleeping for seven or eight hours, our body really needs fuel to get going</u>. <u>Eating a balanced breakfast helps</u> <span class=\"sub-hl\">refuel our brain and improve concentration</span> <u>and prevents us from</u> <span class=\"sub-hl\">feeling tired or getting stomachaches</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Kiểm soát cân nặng và hạn chế ăn vặt)",
+                        "text": "From a health point of view, having breakfast keeps our eating routine balanced. People who eat in the morning are less likely to overeat junk food later in the day, which helps them maintain a healthy weight and stay fit.",
+                        "formatted": "→ <u>From a health point of view, having breakfast keeps our eating routine balanced</u>. <u>People who eat in the morning are less likely to</u> <span class=\"sub-hl\">overeat junk food later in the day</span>, <u>which helps them</u> <span class=\"sub-hl\">maintain a healthy weight and stay fit</span>."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 168,
+        "title": "Chủ đề 168: Let's talk about work and career",
+        "topicName": "Work / Career",
+        "introText": "Let’s talk about work and career.",
+        "questions": [
+            {
+                "qNum": 1,
+                "question": "What do you do for a living?",
+                "qType": "Wh-Question: What do you do for a living?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Người đi làm - Nêu nghề nghiệp hiện tại và công việc chính hằng ngày):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Right now, I work as a</u> <span class=\"formula-bracket-hl\">[giáo viên / nhân viên văn phòng / nhân viên marketing]</span> <u>at a company in my city</u>. <u>My daily job involves</u> <span class=\"formula-bracket-hl\">[nhiệm vụ chính]</span>, <u>which allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Sinh viên - Đang học đại học và có thể đi làm thêm bán thời gian):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>At the moment, I'm a full-time university student majoring in</u> <span class=\"formula-bracket-hl\">[chuyên ngành học]</span>. <u>I also work part-time as a</u> <span class=\"formula-bracket-hl\">[gia sư / nhân viên bán thời gian]</span> <u>to gain practical experience and</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "💼 [Nghề nghiệp & Công việc hằng ngày]:",
+                        "items": [
+                            {
+                                "en": "an office worker / a marketing executive / a teacher",
+                                "vn": "nhân viên văn phòng / chuyên viên marketing / giáo viên"
+                            },
+                            {
+                                "en": "manage daily projects and support clients",
+                                "vn": "quản lý dự án hằng ngày và hỗ trợ khách hàng"
+                            },
+                            {
+                                "en": "a university student majoring in Business Administration",
+                                "vn": "sinh viên đại học chuyên ngành Quản trị Kinh doanh"
+                            },
+                            {
+                                "en": "work part-time as an English tutor",
+                                "vn": "đi làm thêm làm gia sư tiếng Anh"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Người đi làm - Nhân viên văn phòng / Marketing)",
+                        "text": "Right now, I work as a marketing executive at a company in my city. My daily job involves planning social media campaigns and working with clients, which allows me to develop my creativity and communication skills.",
+                        "formatted": "→ <u>Right now, I work as a</u> <span class=\"sub-hl\">marketing executive</span> <u>at a company in my city</u>. <u>My daily job involves</u> <span class=\"sub-hl\">planning social media campaigns and working with clients</span>, <u>which allows me to</u> <span class=\"sub-hl\">develop my creativity and communication skills</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Sinh viên đại học có đi làm thêm gia sư)",
+                        "text": "At the moment, I'm a full-time university student majoring in Business Administration. I also work part-time as a tutor for high school students to gain practical experience and cover my monthly living expenses.",
+                        "formatted": "→ <u>At the moment, I'm a full-time university student majoring in</u> <span class=\"sub-hl\">Business Administration</span>. <u>I also work part-time as a</u> <span class=\"sub-hl\">tutor for high school students</span> <u>to gain practical experience and</u> <span class=\"sub-hl\">cover my monthly living expenses</span>."
+                    }
+                ]
+            },
+            {
+                "qNum": 2,
+                "question": "What do you find most interesting about your job?",
+                "qType": "Wh-Question: Most interesting thing about your job?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Gặp gỡ nhiều người, đồng nghiệp thân thiện và học thêm điều mới mỗi ngày):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>What I enjoy most about my job is</u> <span class=\"formula-bracket-hl\">[gặp gỡ nhiều người và học hỏi kỹ năng mới mỗi ngày]</span>. <u>Working with supportive teammates allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and keeps every workday exciting</u>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Cảm giác ý nghĩa khi thấy thành quả công việc giúp ích cho khách hàng/học sinh):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>The most rewarding part for me is</u> <span class=\"formula-bracket-hl\">[nhìn thấy kết quả thực tế từ nỗ lực của mình]</span>. <u>Knowing that my work helps others solve problems gives me</u> <span class=\"formula-bracket-hl\">[động lực lớn]</span> <u>and makes me proud of my career</u>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "✨ [Điểm thú vị của công việc]:",
+                        "items": [
+                            {
+                                "en": "meet interesting people from different backgrounds",
+                                "vn": "gặp gỡ những người thú vị từ nhiều lĩnh vực khác nhau"
+                            },
+                            {
+                                "en": "learn practical new skills every single week",
+                                "vn": "học thêm các kỹ năng thực tế mới mỗi tuần"
+                            },
+                            {
+                                "en": "see positive results from my hard work",
+                                "vn": "nhìn thấy kết quả tích cực từ sự cố gắng của mình"
+                            },
+                            {
+                                "en": "work in a friendly and creative team",
+                                "vn": "làm việc trong một tập thể thân thiện và sáng tạo"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Được học cái mới mỗi ngày cùng đồng nghiệp thân thiện)",
+                        "text": "What I enjoy most about my job is meeting different people and learning fresh skills every week. Working with supportive teammates allows me to expand my social network and grow professionally and keeps every workday exciting.",
+                        "formatted": "→ <u>What I enjoy most about my job is</u> <span class=\"sub-hl\">meeting different people and learning fresh skills every week</span>. <u>Working with supportive teammates allows me to</u> <span class=\"sub-hl\">expand my social network and grow professionally</span> <u>and keeps every workday exciting</u>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Cảm giác ý nghĩa khi công việc mang lại giá trị cho người khác)",
+                        "text": "The most rewarding part for me is seeing real, positive results from my efforts. Knowing that my work helps others solve problems gives me a strong sense of motivation and makes me proud of my career.",
+                        "formatted": "→ <u>The most rewarding part for me is</u> <span class=\"sub-hl\">seeing real, positive results from my efforts</span>. <u>Knowing that my work helps others solve problems gives me</u> <span class=\"sub-hl\">a strong sense of motivation</span> <u>and makes me proud of my career</u>."
+                    }
+                ]
+            },
+            {
+                "qNum": 3,
+                "question": "Would you like to change your job in the future? Why or why not?",
+                "qType": "Yes/No + Why Question: Would you change your job?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (KHÔNG ĐỔI NGÀNH - Muốn gắn bó và phát triển lên vị trí cao hơn trong nghề hiện tại):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Not really, because I'm quite happy with my current career path</u>. <u>Instead of switching to a completely new field, I'd love to</u> <span class=\"formula-bracket-hl\">[nâng cao chuyên môn và thăng tiến lên vị trí quản lý]</span> <u>so I can</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (CÓ THỂ - Muốn thử sức ở công ty quốc tế hoặc tự khởi nghiệp khi đủ kinh nghiệm):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, maybe in a few years once I gain enough experience</u>. <u>I'd love to try</u> <span class=\"formula-bracket-hl\">[làm ở công ty nước ngoài / tự mở kinh doanh nhỏ]</span> <u>because it would challenge me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🚀 [Định hướng nghề nghiệp tương lai]:",
+                        "items": [
+                            {
+                                "en": "get promoted to a senior or team-leader role",
+                                "vn": "được thăng chức lên vị trí cấp cao hoặc trưởng nhóm"
+                            },
+                            {
+                                "en": "work for an international company",
+                                "vn": "làm việc cho một công ty quốc tế"
+                            },
+                            {
+                                "en": "run my own small business one day",
+                                "vn": "một ngày nào đó tự mở việc kinh doanh nhỏ"
+                            },
+                            {
+                                "en": "achieve a better work-life balance and income",
+                                "vn": "đạt được sự cân bằng công việc-cuộc sống và thu nhập tốt hơn"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Gắn bó với nghề hiện tại và phấn đấu thăng tiến)",
+                        "text": "Not really, because I'm quite happy with my current career path. Instead of switching to a completely new field, I'd love to upgrade my skills and get promoted to a team-leader role so I can earn a better income and guide younger staff.",
+                        "formatted": "→ <u>Not really, because I'm quite happy with my current career path</u>. <u>Instead of switching to a completely new field, I'd love to</u> <span class=\"sub-hl\">upgrade my skills and get promoted to a team-leader role</span> <u>so I can</u> <span class=\"sub-hl\">earn a better income and guide younger staff</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Muốn thử sức mở kinh doanh nhỏ khi có đủ kinh nghiệm)",
+                        "text": "Yes, maybe in a few years once I gain enough experience. I'd love to try running my own small coffee shop or online business because it would challenge me to step out of my comfort zone and enjoy more freedom.",
+                        "formatted": "→ <u>Yes, maybe in a few years once I gain enough experience</u>. <u>I'd love to try</u> <span class=\"sub-hl\">running my own small coffee shop or online business</span> <u>because it would challenge me to</u> <span class=\"sub-hl\">step out of my comfort zone</span> <u>and</u> <span class=\"sub-hl\">enjoy more freedom</span>."
+                    }
+                ]
+            }
+        ]
+    },
+    {
+        "id": 169,
+        "title": "Chủ đề 169: Let's talk about weekends",
+        "topicName": "Weekends",
+        "introText": "Let’s talk about weekends.",
+        "questions": [
+            {
+                "qNum": 1,
+                "question": "How do you usually spend your weekend?",
+                "qType": "Wh-Question: How do you usually spend your weekend?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Ngủ bù sáng thứ 7, dọn dẹp nhà cửa và dành thời gian cho gia đình/bạn bè):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>On weekends, I usually sleep in a bit on Saturday morning and then</u> <span class=\"formula-bracket-hl\">[dọn phòng, nấu cơm gia đình hoặc đi cà phê với bạn]</span>. <u>Taking a break from work allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and</u> <span class=\"formula-bracket-hl\">[lợi ích 2 - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Kết hợp thư giãn cá nhân và chuẩn bị kế hoạch nhẹ cho tuần mới):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>I like to keep my weekends balanced between rest and light hobbies</u>. <u>I often</u> <span class=\"formula-bracket-hl\">[tập thể dục, đọc sách hoặc xem một bộ phim hay]</span>, <u>which helps me</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> <u>before Monday comes</u>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🗓️ [Hoạt động cuối tuần]:",
+                        "items": [
+                            {
+                                "en": "sleep in and enjoy a slow morning coffee",
+                                "vn": "ngủ nướng và nhâm nhi cà phê sáng thảnh thơi"
+                            },
+                            {
+                                "en": "cook a nice meal with my family",
+                                "vn": "nấu một bữa cơm ngon cùng gia đình"
+                            },
+                            {
+                                "en": "hang out with close friends at a cozy cafe",
+                                "vn": "đi chơi với bạn thân ở một quán cà phê ấm cúng"
+                            },
+                            {
+                                "en": "recharge my batteries for the upcoming week",
+                                "vn": "nạp lại năng lượng cho tuần mới sắp tới"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Ngủ bù, ăn cơm gia đình và đi cà phê với bạn)",
+                        "text": "On weekends, I usually sleep in a bit on Saturday morning and then cook a nice meal with my family or hang out with friends at a cafe. Taking a break from work allows me to reduce stress and recharge my batteries for Monday.",
+                        "formatted": "→ <u>On weekends, I usually sleep in a bit on Saturday morning and then</u> <span class=\"sub-hl\">cook a nice meal with my family or hang out with friends at a cafe</span>. <u>Taking a break from work allows me to</u> <span class=\"sub-hl\">reduce stress</span> <u>and</u> <span class=\"sub-hl\">recharge my batteries for Monday</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Chơi thể thao nhẹ, xem phim và đọc sách tại nhà)",
+                        "text": "I like to keep my weekends balanced between rest and light hobbies. I often go jogging in the park, read a good novel, and watch movies, which helps me clear my mind and stay refreshed before Monday comes.",
+                        "formatted": "→ <u>I like to keep my weekends balanced between rest and light hobbies</u>. <u>I often</u> <span class=\"sub-hl\">go jogging in the park, read a good novel, and watch movies</span>, <u>which helps me</u> <span class=\"sub-hl\">clear my mind and stay refreshed</span> <u>before Monday comes</u>."
+                    }
+                ]
+            },
+            {
+                "qNum": 2,
+                "question": "Do you prefer relaxing at home or going out?",
+                "qType": "Choice Question: Relaxing at home vs going out?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (THÍCH Ở NHÀ - Yên tĩnh, thoải mái, tiết kiệm tiền và không kẹt xe):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Most of the time, I prefer relaxing at home because</u> <span class=\"formula-bracket-hl\">[tuần làm việc đã quá bận rộn và mệt mỏi]</span>. <u>Staying in lets me</u> <span class=\"formula-bracket-hl\">[xem phim / nghỉ ngơi theo nhịp riêng]</span> <u>while helping me</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (THÍCH RA NGOÀI - Đổi không khí, gặp gỡ bạn bè và khám phá chỗ mới):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>If I have enough energy, I'd rather go out and get some fresh air</u>. <u>Visiting</u> <span class=\"formula-bracket-hl\">[công viên, rạp chiếu phim hoặc quán ăn mới]</span> <u>allows me to</u> <span class=\"formula-bracket-hl\">[lợi ích 1 - Vo]</span> <u>and avoid feeling bored indoors</u>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "🏠 [Ở nhà thư giãn vs Đi ra ngoài]:",
+                        "items": [
+                            {
+                                "en": "enjoy peace and quiet without traffic jams",
+                                "vn": "tận hưởng sự yên tĩnh mà không bị kẹt xe"
+                            },
+                            {
+                                "en": "watch movies in comfortable clothes",
+                                "vn": "mặc đồ thoải mái nằm xem phim"
+                            },
+                            {
+                                "en": "get a change of scenery and fresh air",
+                                "vn": "đổi gió thay đổi không khí và hít thở khí trời"
+                            },
+                            {
+                                "en": "explore new cafes and lively shopping malls",
+                                "vn": "khám phá các quán cà phê mới và trung tâm thương mại sôi động"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Thích ở nhà thư giãn cho thoải mái và tiết kiệm)",
+                        "text": "Most of the time, I prefer relaxing at home because my weekdays are already super busy and tiring. Staying in lets me watch movies and rest at my own pace while helping me save money and avoid weekend traffic.",
+                        "formatted": "→ <u>Most of the time, I prefer relaxing at home because</u> <span class=\"sub-hl\">my weekdays are already super busy and tiring</span>. <u>Staying in lets me</u> <span class=\"sub-hl\">watch movies and rest at my own pace</span> <u>while helping me</u> <span class=\"sub-hl\">save money and avoid weekend traffic</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Thích ra ngoài đổi gió và gặp bạn bè)",
+                        "text": "If I have enough energy, I'd rather go out and get some fresh air. Visiting a green park, the cinema, or a cozy new cafe allows me to get a change of scenery and boost my mood and avoid feeling bored indoors.",
+                        "formatted": "→ <u>If I have enough energy, I'd rather go out and get some fresh air</u>. <u>Visiting</u> <span class=\"sub-hl\">a green park, the cinema, or a cozy new cafe</span> <u>allows me to</u> <span class=\"sub-hl\">get a change of scenery and boost my mood</span> <u>and avoid feeling bored indoors</u>."
+                    }
+                ]
+            },
+            {
+                "qNum": 3,
+                "question": "Do you think weekends are long enough for people to rest? Why or why not?",
+                "qType": "Yes/No + Why Question: Are weekends long enough?",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (KHÔNG ĐỦ LẮM - 2 ngày trôi quá nhanh, còn phải làm việc nhà và chuẩn bị tuần mới):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Honestly, two days always feel a bit too short for me</u>. <u>Between</u> <span class=\"formula-bracket-hl\">[dọn nhà, giặt đồ và làm nốt việc tồn đọng]</span>, <u>Saturday and Sunday fly by quickly, so a three-day weekend would help people</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span>.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (VỪA ĐỦ - Nếu biết sắp xếp thời gian hợp lý và không mang việc về nhà):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>Yes, I think two full days are enough if we manage our time well</u>. <u>When people truly disconnect from work emails and</u> <span class=\"formula-bracket-hl\">[dành thời gian nghỉ ngơi chất lượng]</span>, <u>they can easily</u> <span class=\"formula-bracket-hl\">[lợi ích - Vo]</span> <u>and stay motivated</u>.\n                    </div>\n                </div>",
+                "vocabGroups": [
+                    {
+                        "type": "note",
+                        "title": "⭐ [Cụm Lợi ích B2]:",
+                        "note": "Sử dụng các cụm từ trong <button type=\"button\" onclick=\"switchTab('benefits')\" style=\"background: none; border: none; padding: 0; color: #d946ef; font-weight: 800; text-decoration: underline; cursor: pointer; font-size: 0.95rem; font-family: inherit;\"><i class=\"fa-solid fa-arrow-up-right-from-square\"></i> BẢNG LỢI ÍCH B2</button> để điền vào vị trí <em>[lợi ích]</em>."
+                    },
+                    {
+                        "title": "⏰ [Thời gian nghỉ cuối tuần]:",
+                        "items": [
+                            {
+                                "en": "do household chores and run weekly errands",
+                                "vn": "làm việc nhà và chạy các việc vặt hằng tuần"
+                            },
+                            {
+                                "en": "fly by in the blink of an eye",
+                                "vn": "trôi qua nhanh trong chớp mắt"
+                            },
+                            {
+                                "en": "disconnect completely from work messages",
+                                "vn": "ngắt kết nối hoàn toàn với tin nhắn công việc"
+                            },
+                            {
+                                "en": "get quality rest and feel ready for Monday",
+                                "vn": "nghỉ ngơi chất lượng và sẵn sàng cho thứ Hai"
+                            }
+                        ]
+                    }
+                ],
+                "samples": [
+                    {
+                        "label": "Bài mẫu Cách 1 (Thấy 2 ngày hơi ngắn vì còn bận việc nhà)",
+                        "text": "Honestly, two days always feel a bit too short for me. Between doing household chores, running errands, and catching up on sleep, Saturday and Sunday fly by quickly, so a three-day weekend would help people truly relax and spend more time with family.",
+                        "formatted": "→ <u>Honestly, two days always feel a bit too short for me</u>. <u>Between</u> <span class=\"sub-hl\">doing household chores, running errands, and catching up on sleep</span>, <u>Saturday and Sunday fly by quickly, so a three-day weekend would help people</u> <span class=\"sub-hl\">truly relax and spend more time with family</span>."
+                    },
+                    {
+                        "label": "Bài mẫu Cách 2 (Thấy 2 ngày là đủ nếu biết ngắt việc và nghỉ ngơi đúng cách)",
+                        "text": "Yes, I think two full days are enough if we manage our time well. When people truly disconnect from work emails and spend quality time on hobbies and rest, they can easily recharge their energy and stay motivated.",
+                        "formatted": "→ <u>Yes, I think two full days are enough if we manage our time well</u>. <u>When people truly disconnect from work emails and</u> <span class=\"sub-hl\">spend quality time on hobbies and rest</span>, <u>they can easily</u> <span class=\"sub-hl\">recharge their energy</span> <u>and stay motivated</u>."
+                    }
+                ]
+            }
+        ]
     }
 ];
 
@@ -56089,16 +57549,16 @@ window.isTopicUnlocked = (topicId) => {
     if (window._currentUserRole === 'teacher') {
         return practiceTopicsData.some(t => t.id === tid);
     }
-    // Unlocked topics 1 to 159
-    return tid >= 1 && tid <= 90;
+    // Unlocked topics 1 to 169
+    return tid >= 1 && tid <= 169;
 };
 
 window.getAllowedTopicIds = () => {
     if (window._currentUserRole === 'teacher') {
         return practiceTopicsData.map(t => t.id);
     }
-    // Unlocked topics 1 to 159
-    return Array.from({ length: 159 }, (_, i) => i + 1);
+    // Unlocked topics 1 to 169
+    return Array.from({ length: 169 }, (_, i) => i + 1);
 };
 
 window.getAllowedTopicsData = () => {
@@ -56512,7 +57972,7 @@ function renderPracticeTopic(topicId) {
     if (!topic) return;
 
     const labelEl = document.getElementById('current-topic-label');
-    if (labelEl) labelEl.textContent = `Topic ${String(topic.id).padStart(2, '0')} / 159`;
+    if (labelEl) labelEl.textContent = `Topic ${String(topic.id).padStart(2, '0')} / 169`;
 
     const randomDisplayEl = document.getElementById('random-topic-title-display');
     if (randomDisplayEl) randomDisplayEl.textContent = topic.title;
