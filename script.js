@@ -7937,7 +7937,7 @@ const practiceTopicsData = [
                         "title": "😊 [Tính từ cảm xúc B2]:",
                         "items": [
                             {
-                                "en": "rejuvenated / refreshed",
+                                "en": "refreshed / refreshed",
                                 "vn": "sảng khoái / tươi mới"
                             },
                             {
@@ -7950,8 +7950,8 @@ const practiceTopicsData = [
                 "samples": [
                     {
                         "label": "Bài mẫu Cách 1 (Dành 1 tiếng tập yoga mỗi ngày - Giảm stress & Tươi mới)",
-                        "text": "Although I have a hectic schedule, I still try to dedicate about an hour to practicing yoga every day because it allows me to release stress and maintain a healthy lifestyle. It also makes me feel rejuvenated.",
-                        "formatted": "→ Although I have a hectic schedule, I still try to dedicate about <span class=\"sub-hl\">an hour</span> to <span class=\"sub-hl\">practicing yoga</span> every day because it allows me to <span class=\"sub-hl\">release stress</span> and <span class=\"sub-hl\">maintain a healthy lifestyle</span>. It also makes me feel <span class=\"sub-hl\">rejuvenated</span>."
+                        "text": "Although I have a hectic schedule, I still try to dedicate about an hour to practicing yoga every day because it allows me to release stress and maintain a healthy lifestyle. It also makes me feel refreshed.",
+                        "formatted": "→ Although I have a hectic schedule, I still try to dedicate about <span class=\"sub-hl\">an hour</span> to <span class=\"sub-hl\">practicing yoga</span> every day because it allows me to <span class=\"sub-hl\">release stress</span> and <span class=\"sub-hl\">maintain a healthy lifestyle</span>. It also makes me feel <span class=\"sub-hl\">refreshed</span>."
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Ngày thường 30 phút, cuối tuần dành nhiều thời gian đọc sách)",
@@ -14025,7 +14025,7 @@ const practiceTopicsData = [
                 "qNum": 3,
                 "question": "Can you describe him/her?",
                 "qType": "Description: Can you describe him/her?",
-                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Ngoại hình lịch thiệp, phong thái đĩnh đạc và cuốn hút):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>In terms of physical appearance, he/she has a very</u> <span class=\"formula-bracket-hl\">[đặc điểm ngoại hình]</span>. He/She always dresses in <span class=\"formula-bracket-hl\">[phong cách thời trang]</span>, which reflects an aura of <span class=\"formula-bracket-hl\">[thần thái]</span> on stage.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Nét đẹp thanh lịch, nụ cười rạng rỡ và phong cách gần gũi):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>He/She possesses a captivating charm characterized by a</u> <span class=\"formula-bracket-hl\">[nét mặt / nụ cười]</span>. His/Her stage presence is both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>, leaving an indelible impression on fans.\n                    </div>\n                </div>",
+                "formula": "<div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 1 (Ngoại hình lịch thiệp, phong thái đĩnh đạc và cuốn hút):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>In terms of physical appearance, he/she has a very</u> <span class=\"formula-bracket-hl\">[đặc điểm ngoại hình]</span>. He/She always dresses in <span class=\"formula-bracket-hl\">[phong cách thời trang]</span>, which reflects an aura of <span class=\"formula-bracket-hl\">[thần thái]</span> on stage.\n                    </div>\n                </div>\n                <div class=\"topic-formula-row\">\n                    <div class=\"topic-formula-title\">- Cách 2 (Nét đẹp thanh lịch, nụ cười rạng rỡ và phong cách gần gũi):</div>\n                    <div class=\"topic-formula-text\">\n                        → <u>He/She has a lovely charm characterized by a</u> <span class=\"formula-bracket-hl\">[nét mặt / nụ cười]</span>. His/Her stage presence is both <span class=\"formula-bracket-hl\">[tính từ 1]</span> and <span class=\"formula-bracket-hl\">[tính từ 2]</span>, leaving an lasting impression on fans.\n                    </div>\n                </div>",
                 "vocabGroups": [
                     {
                         "type": "note",
@@ -14062,8 +14062,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Nụ cười rạng rỡ cùng thần thái trình diễn đỉnh cao)",
-                        "text": "She possesses a captivating charm characterized by an athletic figure, bright blue eyes, and an infectious smile. Her stage presence is both dynamic and graceful, leaving an indelible impression on millions of concertgoers.",
-                        "formatted": "→ <u>She possesses a captivating charm characterized by</u> <span class=\"sub-hl\">an athletic figure, bright blue eyes, and an infectious smile</span>. Her stage presence is both <span class=\"sub-hl\">dynamic and graceful</span>, leaving an indelible impression on millions of concertgoers."
+                        "text": "She has a lovely charm with a fit figure, bright blue eyes, and a warm smile. Her stage presence is both lively and graceful, leaving a lasting impression on millions of fans.",
+                        "formatted": "→ <u>She has a lovely charm characterized by</u> <span class=\"sub-hl\">an athletic figure, bright blue eyes, and a warm smile</span>. Her stage presence is both <span class=\"sub-hl\">dynamic and graceful</span>, leaving a lasting impression on millions of fans."
                     }
                 ]
             }
@@ -16275,8 +16275,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Diễn viên Ninh Dương Lan Ngọc - Năng động và cuốn hút)",
-                        "text": "When it comes to the Vietnamese cinema scene, I have great admiration for Ninh Duong Lan Ngoc. Her natural on-screen charisma and emotional delivery allow viewers to genuinely empathize with the characters she portrays.",
-                        "formatted": "→ <u>When it comes to the Vietnamese cinema scene, I have great admiration for</u> <span class=\"sub-hl\">Ninh Duong Lan Ngoc</span>. Her <span class=\"sub-hl\">natural on-screen charisma and emotional delivery</span> allow viewers to <span class=\"sub-hl\">genuinely empathize with the characters she portrays</span>."
+                        "text": "When it comes to the Vietnamese cinema scene, I have great admiration for Ninh Duong Lan Ngoc. Her natural on-screen charisma and emotional delivery allow viewers to really connect with the characters she plays.",
+                        "formatted": "→ <u>When it comes to the Vietnamese cinema scene, I have great admiration for</u> <span class=\"sub-hl\">Ninh Duong Lan Ngoc</span>. Her <span class=\"sub-hl\">natural on-screen charisma and emotional delivery</span> allow viewers to <span class=\"sub-hl\">really connect with the characters she plays</span>."
                     }
                 ]
             },
@@ -33525,7 +33525,7 @@ const practiceTopicsData = [
                                 "vn": "tiếp xúc và hòa nhập với bạn bè từ nhiều tầng lớp xã hội phong phú"
                             },
                             {
-                                "en": "receive personalized mentorship and flourish academically",
+                                "en": "receive close guidance and do very well in their studies",
                                 "vn": "được quan tâm kèm cặp sát sao và phát triển vượt bậc trong học tập"
                             },
                             {
@@ -33543,8 +33543,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Thích trường tư thục - Sĩ số nhỏ, phòng học hiện đại, được thầy cô kèm cặp sát sao và tiến bộ nhanh)",
-                        "text": "Without doubt, I have a strong preference for private institutions because of their student-centered approach. They maintain smaller class sizes and advanced multimedia classrooms, so students can receive personalized mentorship and flourish academically.",
-                        "formatted": "→ Without doubt, <u>I have a strong preference for private institutions</u> because of their student-centered approach. They maintain <span class=\"sub-hl\">smaller class sizes and advanced multimedia classrooms</span>, so students can <span class=\"sub-hl\">receive personalized mentorship and flourish academically</span>."
+                        "text": "Without doubt, I have a strong preference for private institutions because of their student-centered approach. They maintain smaller class sizes and advanced multimedia classrooms, so students can receive close guidance and do very well in their studies.",
+                        "formatted": "→ Without doubt, <u>I have a strong preference for private institutions</u> because of their student-centered approach. They maintain <span class=\"sub-hl\">smaller class sizes and advanced multimedia classrooms</span>, so students can <span class=\"sub-hl\">receive close guidance and do very well in their studies</span>."
                     }
                 ]
             },
@@ -34443,7 +34443,7 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Bài thi viết khách quan hơn, tránh gian lận)",
-                        "text": "Although home assignments help students learn to work independently, I still think written tests are more objective and reliable. They prevent academic dishonesty or plagiarism and accurately measure what students truly understand.",
+                        "text": "Although home assignments help students learn to work independently, I still think written tests are more objective and reliable. They prevent cheating or copying and accurately measure what students truly understand.",
                         "formatted": "→ <u>Although home assignments help students</u> <span class=\"sub-hl\">learn to work independently</span><u>, I still think written tests are</u> <span class=\"sub-hl\">more objective and reliable</span><u>. They prevent</u> <span class=\"sub-hl\">academic dishonesty or plagiarism</span> <u>and accurately measure</u> <span class=\"sub-hl\">what students truly understand</span><u>.</u>"
                     }
                 ]
@@ -50120,8 +50120,8 @@ const practiceTopicsData = [
                     },
                     {
                         "label": "Bài mẫu Cách 2 (Quên một buổi họp nhóm trực tuyến do mải mê làm bài tập)",
-                        "text": "To my deep embarrassment, there was a time when I accidentally missed a crucial team project meeting due to an overloaded schedule. Although I managed to apologize and submit my contribution early the next morning, it motivated me to manage my commitments far more rigorously.",
-                        "formatted": "→ <u>To my deep embarrassment, there was a time when I accidentally missed</u> <span class=\"sub-hl\">a crucial team project meeting due to an overloaded schedule</span>. Although I managed to <span class=\"sub-hl\">apologize and submit my contribution early the next morning</span>, it motivated me to <span class=\"sub-hl\">manage my commitments far more rigorously</span>."
+                        "text": "To my deep embarrassment, there was a time when I accidentally missed a crucial team project meeting due to an overloaded schedule. Although I managed to apologize and submit my contribution early the next morning, it motivated me to manage my schedule much more carefully.",
+                        "formatted": "→ <u>To my deep embarrassment, there was a time when I accidentally missed</u> <span class=\"sub-hl\">a crucial team project meeting due to an overloaded schedule</span>. Although I managed to <span class=\"sub-hl\">apologize and submit my contribution early the next morning</span>, it motivated me to <span class=\"sub-hl\">manage my schedule much more carefully</span>."
                     }
                 ]
             },
