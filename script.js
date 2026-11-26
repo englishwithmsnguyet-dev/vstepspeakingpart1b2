@@ -34417,7 +34417,7 @@ const practiceTopicsData = [
                         "title": "⚠️ [Vấn đề tiêu cực & Năng lực thực tế]:",
                         "items": [
                             {
-                                "en": "academic dishonesty or plagiarism",
+                                "en": "cheating or copying",
                                 "vn": "gian lận học thuật hoặc đạo văn"
                             },
                             {
@@ -34444,7 +34444,7 @@ const practiceTopicsData = [
                     {
                         "label": "Bài mẫu Cách 2 (Bài thi viết khách quan hơn, tránh gian lận)",
                         "text": "Although home assignments help students learn to work independently, I still think written tests are more objective and reliable. They prevent cheating or copying and accurately measure what students truly understand.",
-                        "formatted": "→ <u>Although home assignments help students</u> <span class=\"sub-hl\">learn to work independently</span><u>, I still think written tests are</u> <span class=\"sub-hl\">more objective and reliable</span><u>. They prevent</u> <span class=\"sub-hl\">academic dishonesty or plagiarism</span> <u>and accurately measure</u> <span class=\"sub-hl\">what students truly understand</span><u>.</u>"
+                        "formatted": "→ <u>Although home assignments help students</u> <span class=\"sub-hl\">learn to work independently</span><u>, I still think written tests are</u> <span class=\"sub-hl\">more objective and reliable</span><u>. They prevent</u> <span class=\"sub-hl\">cheating or copying</span> <u>and accurately measure</u> <span class=\"sub-hl\">what students truly understand</span><u>.</u>"
                     }
                 ]
             }
